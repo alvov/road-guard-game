@@ -1,0 +1,55 @@
+class Road {
+    constructor({ game, length, lanes, laneWidth }) {
+        this.game = game;
+        this.length = length;
+        this.lanes = lanes;
+        this.laneWidth = laneWidth;
+        this.width = this.laneWidth * this.lanes;
+
+        this.group = this.game.add.group();
+
+        this.groundHeight = this.game.height * 4 / 5;
+        this.groundGraphics = this.game.add.graphics(0, 0, this.group);
+        this.groundGraphics.beginFill(0x517F30);
+        this.groundGraphics.drawRect(
+            0,
+            this.game.height - this.groundHeight,
+            this.game.width,
+            this.groundHeight
+        );
+        this.groundGraphics.endFill();
+
+        this.roadWidthTop = this.game.width / 2;
+        const roadOffsetLeft = (this.game.width - this.roadWidthTop) / 2;
+        this.roadWidthBottom = this.game.width;
+        this.mainRatio = this.roadWidthBottom / this.roadWidthTop;
+
+        this.topLeft = new Phaser.Point(roadOffsetLeft, this.game.height - this.groundHeight);
+
+        this.roadGraphics = this.game.add.graphics(0, 0, this.group);
+        this.roadGraphics.beginFill(0x45454A);
+        this.roadGraphics.drawPolygon([
+            this.topLeft,
+            { x: roadOffsetLeft + this.roadWidthTop, y: this.topLeft.y },
+            { x: roadOffsetLeft + this.roadWidthBottom, y: this.game.height },
+            { x: roadOffsetLeft, y: this.game.height },
+        ]);
+        this.roadGraphics.endFill();
+    }
+
+    getProjection({ x, y }) {
+        const ratioX = x / this.length;
+        const relativeY = (this.roadWidthTop - y / this.width * this.roadWidthTop);
+        return {
+            x: this.topLeft.x + relativeY * (1 + ratioX * (this.mainRatio - 1)),
+            y: this.topLeft.y + Math.abs(ratioX) * this.groundHeight,
+            scale: Math.max(0, (this.mainRatio - 1) / this.length * x + 1),
+        };
+    }
+
+    getLaneCenter(index) {
+        return this.laneWidth * (0.5 + index);
+    }
+}
+
+export default Road;
