@@ -1,5 +1,16 @@
 import Car from '../classes/Car';
 import Road from '../classes/Road';
+import GameInterface from '../classes/GameInterface';
+import RadarMonitor from '../classes/RadarMonitor';
+import {
+    CAR_MODE_FINED,
+    RADAR_MODE_COMPUTING,
+    RADAR_MODE_FINE,
+    RADAR_MODE_ALREADY_FINED,
+    RADAR_MODE_EMPTY, UI_OFFSET, RADAR_MODE_ROGUE, RADAR_MODE_FINED,
+} from '../constants';
+import RoadSign from '../classes/RoadSign';
+import Score from '../classes/Score';
 
 class Game {
     init(level) {
@@ -11,6 +22,10 @@ class Game {
             },
             objects: {
                 road: null,
+                roadSign: null,
+                interface: null,
+                score: null,
+                radar: null,
             },
             arrays: {
                 cars: [],
@@ -38,6 +53,15 @@ class Game {
             ...this.rg.level.road,
         });
 
+        this.rg.objects.roadSign = new RoadSign({
+            game: this.game,
+            ...this.rg.objects.road.getProjection({
+                x: this.rg.objects.road.length / 2,
+                y: -UI_OFFSET,
+            }),
+            speedLimit: this.rg.level.speed.limit,
+        });
+
         // cars
         this.rg.timers.reviveCar = this.game.time.create(false);
         this.resetCarTimer();
@@ -46,6 +70,32 @@ class Game {
         this.createCars(this.rg.cars.count);
 
         // ui
+        this.rg.objects.interface = new GameInterface({
+            game: this.game
+        });
+
+        this.rg.objects.score = new Score({
+            game: this.game,
+            x: UI_OFFSET,
+            y: UI_OFFSET,
+            goal: this.rg.level.money.goal,
+        });
+
+        const radarHeight = 100;
+        this.rg.objects.radar = new RadarMonitor({
+            game: this.game,
+            x: UI_OFFSET,
+            y: this.game.height - radarHeight - UI_OFFSET,
+            width: this.rg.objects.road.roadOffsetLeft - UI_OFFSET * 2,
+            height: radarHeight,
+            ...this.rg.level.radar,
+            fines: this.rg.level.money.fines,
+            speedLimit: this.rg.level.speed.limit,
+            onFine: this.handleFine.bind(this)
+        });
+
+        // events
+        this.game.input.onDown.add(this.handleTap, this);
     }
 
     update() {
@@ -81,12 +131,14 @@ class Game {
         if (this.rg.cars.revive) {
             this.rg.cars.revive = !this.reviveCar();
         }
+
+        // update radar
+        this.rg.objects.radar.update();
     }
 
     updateCar(carSprite) {
         const car = carSprite.rg;
         const bestRoadLane = this.getClearestRoadLaneByCar(car);
-        // console.log(car.sprite.name, bestRoadLane, car.roadLane);
         if (bestRoadLane !== car.roadLane) {
             car.moveToY(
                 this.rg.objects.road.getLaneCenter(bestRoadLane),
@@ -103,7 +155,56 @@ class Game {
         // this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");
         // this.game.debug.cameraInfo(this.game.camera, 32, 32);
         // this.game.debug.body(this.mz.objects.player.sprite);
+        // this.game.debug.spriteBounds(this.rg.objects.radar.mainText);
         // this.game.debug.bodyInfo(this.mz.objects.player.sprite, 0, 100);
+    }
+
+    handleTap(pointer) {
+        let handled;
+        if (pointer.targetObject) {
+            if (pointer.targetObject.sprite.name.startsWith('car')) {
+                this.handleClickCar(pointer.targetObject.sprite.rg);
+                handled = true;
+            } else if (pointer.targetObject.sprite.name === 'radar') {
+                if (this.rg.objects.radar.mode === RADAR_MODE_FINE) {
+                    this.handleFine();
+                    handled = true
+                }
+            }
+        }
+        if (!handled) {
+            this.handleClickField();
+        }
+    }
+
+    handleClickField() {
+        this.rg.objects.radar.setMode(RADAR_MODE_EMPTY);
+    }
+
+    handleClickCar(car) {
+        if (car.mode === CAR_MODE_FINED) {
+            this.rg.objects.radar.setMode(car.isRogue ? RADAR_MODE_ROGUE : RADAR_MODE_ALREADY_FINED);
+        } else {
+            this.rg.objects.radar.setMode(RADAR_MODE_COMPUTING, { car });
+        }
+    }
+
+    handleKillCar(car) {
+        if (car === this.rg.objects.radar.currentCar) {
+            this.rg.objects.radar.setMode(RADAR_MODE_EMPTY);
+        }
+    }
+
+    handleFine() {
+        const car = this.rg.objects.radar.currentCar;
+        car.setMode(CAR_MODE_FINED);
+        if (car.isRogue) {
+            this.rg.objects.score.updateValue(-this.rg.objects.radar.currentFine);
+            this.rg.objects.radar.setMode(RADAR_MODE_ROGUE);
+        } else {
+            this.rg.objects.score.updateValue(this.rg.objects.radar.currentFine);
+            this.rg.objects.radar.setMode(RADAR_MODE_FINED);
+        }
     }
 
     resetCarTimer() {
@@ -118,12 +219,13 @@ class Game {
     }
 
     createCars(count) {
-        count = 1;
+        // count = 2;
         for (let i = 0; i < count; i++) {
             const car = new Car({
                 game: this.game,
                 name: `car${i}`,
-                rogueSeries: this.rg.level.cars.series
+                rogueSeries: this.rg.level.cars.series,
+                onKill: this.handleKillCar.bind(this),
             });
             this.rg.arrays.cars.push(car);
         }
@@ -249,7 +351,7 @@ class Game {
         if (isRogue) {
             let minDisallowedSpeed = this.rg.level.money.fines[1][0];
             let maxDisallowedSpeed = this.rg.level.money.fines[this.rg.level.money.fines.length - 1][0];
-            return this.game.rnd.integerInRange(minDisallowedSpeed, maxDisallowedSpeed);
+            return this.game.rnd.integerInRange(minDisallowedSpeed, maxDisallowedSpeed - 1);
         } else {
             const randomNumber = this.game.rnd.integerInRange(1, 100);
             let cummulativeProbability = 0;

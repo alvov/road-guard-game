@@ -1,3 +1,5 @@
+import { CAR_RELATIVE_WIDTH } from '../constants';
+
 class Road {
     constructor({ game, length, lanes, laneWidth }) {
         this.game = game;
@@ -19,20 +21,20 @@ class Road {
         );
         this.groundGraphics.endFill();
 
-        this.roadWidthTop = this.game.width / 2;
-        const roadOffsetLeft = (this.game.width - this.roadWidthTop) / 2;
-        this.roadWidthBottom = this.game.width;
+        this.roadWidthTop = this.game.width / 3;
+        this.roadOffsetLeft = (this.game.width - this.roadWidthTop) / 2;
+        this.roadWidthBottom = (this.game.width - this.roadOffsetLeft) / (this.lanes * 2 - 1) * (this.lanes * 2);
         this.mainRatio = this.roadWidthBottom / this.roadWidthTop;
 
-        this.topLeft = new Phaser.Point(roadOffsetLeft, this.game.height - this.groundHeight);
+        this.topLeft = new Phaser.Point(this.roadOffsetLeft, this.game.height - this.groundHeight);
 
         this.roadGraphics = this.game.add.graphics(0, 0, this.group);
         this.roadGraphics.beginFill(0x45454A);
         this.roadGraphics.drawPolygon([
             this.topLeft,
-            { x: roadOffsetLeft + this.roadWidthTop, y: this.topLeft.y },
-            { x: roadOffsetLeft + this.roadWidthBottom, y: this.game.height },
-            { x: roadOffsetLeft, y: this.game.height },
+            { x: this.roadOffsetLeft + this.roadWidthTop, y: this.topLeft.y },
+            { x: this.roadOffsetLeft + this.roadWidthBottom, y: this.game.height },
+            { x: this.roadOffsetLeft, y: this.game.height },
         ]);
         this.roadGraphics.endFill();
     }
@@ -43,7 +45,8 @@ class Road {
         return {
             x: this.topLeft.x + relativeY * (1 + ratioX * (this.mainRatio - 1)),
             y: this.topLeft.y + Math.abs(ratioX) * this.groundHeight,
-            scale: Math.max(0, (this.mainRatio - 1) / this.length * x + 1),
+            scale: (this.roadWidthTop + ratioX * (this.roadWidthBottom - this.roadWidthTop))
+                / this.lanes / CAR_RELATIVE_WIDTH,
         };
     }
 

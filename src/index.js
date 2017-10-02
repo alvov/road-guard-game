@@ -1,6 +1,3 @@
-import levels from './levels';
-import pack from './assets/pack';
-
 import Boot from './states/Boot';
 import Loading from './states/Loading';
 import StartMenu from './states/StartMenu';
@@ -13,8 +10,21 @@ import {
     STATE_GAME,
 } from './constants';
 
+window.WebFontConfig = {
+    google: {
+        families: ['Press Start 2P:400:latin,cyrillic']
+    },
+    active() {
+        initGame();
+    },
+};
+
+const script = document.createElement('script');
+script.src = 'dist/webfontloader.js';
+document.head.appendChild(script);
+
 // this fixes mobile browser 100% height issue with address bar and tabs
-setTimeout(() => {
+function initGame() {
     const windowInnerHeight = window.innerHeight;
     if (document.body.clientHeight > windowInnerHeight) {
         document.body.style.height = windowInnerHeight + 'px';
@@ -37,4 +47,4 @@ setTimeout(() => {
     game.state.add(STATE_GAME, Game);
 
     game.state.start(STATE_BOOT);
-}, 50);
+}

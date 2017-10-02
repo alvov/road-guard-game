@@ -7,6 +7,7 @@ import {
     LANG_EN,
     I18N_GAME_TITLE,
     I18N_MENU_START, STATE_LOADING, STATE_GAME,
+    UI_OFFSET,
 } from '../constants';
 
 class StartMenu {
@@ -16,6 +17,8 @@ class StartMenu {
 
     create() {
         this.game.world.resize(this.game.width, this.game.height);
+
+        const offsetLeft = 40;
 
         this.title = this.game.rg.i18n.createText(
             this.game.width / 2,
@@ -34,11 +37,11 @@ class StartMenu {
         ].map(([itemTitle, callback], i) => {
             return [
                 this.game.rg.i18n.createText(
-                    40,
+                    offsetLeft,
                     i * menuVerticalSpacing + menuOffset,
                     itemTitle,
                     {
-                        font: '22px Arial',
+                        font: '18px "Press Start 2P", Arial',
                         fill: '#fff'
                     }
                 ),
@@ -47,7 +50,7 @@ class StartMenu {
         });
 
         this.langButton = this.game.add.button(
-            this.game.world.width - 10,
+            this.game.world.width - UI_OFFSET,
             0,
             'langButtons',
             this.handleClickLang.bind(this)

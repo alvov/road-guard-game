@@ -3,20 +3,26 @@ import {
     CAR_COLORS,
     CAR_SPRITE_KEYS,
     CAR_ALLOWED_PLATE_LETTERS,
+    CAR_MODE_NORMAL, CAR_MODE_FINED,
 } from '../constants';
 
 const CAR_STEERING_SPEED_COEFF = 1.5;
+const CAR_ROGUE_FINED_COLOR = 0xF23B3B;
+const CAR_ROGUE_FINED_BLINK_DURATION = 400;
+const CAR_ROGUE_FINED_BLINK_REPEAT = 4;
 
 class Car {
-    constructor({ game, name, rogueSeries }) {
+    constructor({ game, name, rogueSeries, onKill, }) {
         this.game = game;
         this.rogueSeries = rogueSeries;
+        this.onKill = onKill;
 
         const spriteKey = this.game.rnd.pick(CAR_SPRITE_KEYS);
         this.sprite = this.game.add.sprite(0, 0, spriteKey, 0);
         this.sprite.anchor.set(0.5, 1);
         this.sprite.name = name;
         this.sprite.rg = this;
+        this.sprite.inputEnabled = true;
         // initially dead
         this.sprite.kill();
 
@@ -28,19 +34,20 @@ class Car {
         this.moveTargetY = 0;
 
         this.roadLane = null;
+        this.color = null;
         this.isRogue = false;
+
+        this.rogueFinedTimer = this.game.time.create(false);
 
         this.plateNumber = new PlateNumber({
             game: this.game,
             x: 0,
-            y: -7,
+            y: -13,
             ...this.plateNumber,
         });
         this.sprite.addChild(this.plateNumber.group);
-    }
 
-    get isSteering() {
-        return this.velocity.y !== 0;
+        this.mode = CAR_MODE_NORMAL;
     }
 
     preUpdate() {
@@ -64,6 +71,33 @@ class Car {
     update({ x, y, scale }) {
         this.sprite.position.set(x, y);
         this.sprite.scale.set(scale);
+        if (this.rogueFinedTimer.running) {
+            this.sprite.tint = Math.floor(this.rogueFinedTimer.ms / CAR_ROGUE_FINED_BLINK_DURATION) % 2 ?
+                this.color :
+                CAR_ROGUE_FINED_COLOR;
+        }
+    }
+
+    handleRogueFinedTimerComplete() {
+        this.rogueFinedTimer.stop();
+        this.sprite.tint = this.color;
+    }
+
+    setMode(mode) {
+        switch (mode) {
+            case CAR_MODE_FINED: {
+                if (this.isRogue) {
+                    this.rogueFinedTimer.add(
+                        CAR_ROGUE_FINED_BLINK_DURATION * 2 * CAR_ROGUE_FINED_BLINK_REPEAT,
+                        this.handleRogueFinedTimerComplete,
+                        this
+                    );
+                    this.rogueFinedTimer.start();
+                }
+                break;
+            }
+        }
+        this.mode = mode;
     }
 
     moveToY(y, roadLane = this.roadLane) {
@@ -96,7 +130,8 @@ class Car {
     }
 
     revive({ x, y, roadLane, speed, isRogue }) {
-        console.log(this.sprite.name, speed);
+        this.setMode(CAR_MODE_NORMAL);
+
         this.isRogue = isRogue;
 
         this.plateNumber.setText(this.generatePlateNumber());
@@ -104,12 +139,14 @@ class Car {
         this.position.set(x, y);
         this.moveToY(y, roadLane);
         this.velocity.x = speed;
-        this.sprite.tint = this.generateBodyColor();
+        this.color = this.generateBodyColor();
+        this.sprite.tint = this.color;
         this.sprite.revive();
     }
 
     kill() {
         this.sprite.kill();
+        this.onKill(this);
     }
 }
 

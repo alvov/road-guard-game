@@ -9,8 +9,9 @@
   },
   "scripts": {
     "start": "http-server -c-1",
-    "build": "webpack && cp node_modules/phaser-ce/build/custom/phaser-no-physics.min.js dist/phaser.js",
-    "build:assets": "rm -rf dist/assets && npm run build",
+    "build": "npm run build:assets && npm run build:vendor",
+    "build:assets": "rm -rf dist/assets && webpack",
+    "build:vendor": "cp node_modules/phaser-ce/build/custom/phaser-no-physics.min.js dist/phaser.js && cp node_modules/webfontloader/webfontloader.js dist/webfontloader.js",
     "watch": "webpack --watch"
   },
   "author": "alvov",
@@ -24,6 +25,7 @@
     "file-loader": "^0.11.2",
     "http-server": "^0.10.0",
     "phaser-ce": "^2.8.8",
+    "webfontloader": "^1.6.28",
     "webpack": "^3.6.0"
   }
 }

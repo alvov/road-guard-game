@@ -1,5 +1,5 @@
-const PLATE_NUMBER_WIDTH = 21;
-const PLATE_NUMBER_HEIGHT = 6;
+const PLATE_NUMBER_WIDTH = 54;
+const PLATE_NUMBER_HEIGHT = 14;
 
 class PlateNumber {
     constructor({ game, x, y, width = PLATE_NUMBER_WIDTH, height = PLATE_NUMBER_HEIGHT, }) {
@@ -18,38 +18,13 @@ class PlateNumber {
             -height,
             width,
             height,
-            1,
+            2,
         );
         this.plateGraphics.endFill();
         this.group.add(this.plateGraphics);
 
-        this.leftLetter = this.game.add.text(
-            1,
-            -height + 1,
-            '',
-            {
-                font: `${height - 2}px Arial`,
-                fill: '#000'
-            }
-        );
-        this.leftLetter.lineSpacing = 0;
-        this.group.add(this.leftLetter);
-
-        this.rightLetters = this.game.add.text(
-            width - 1,
-            -height + 1,
-            '',
-            {
-                font: `${height - 2}px Arial`,
-                fill: '#000'
-            }
-        );
-        this.rightLetters.anchor.set(1, 0);
-        this.leftLetter.lineSpacing = 0;
-        this.group.add(this.rightLetters);
-
-        this.numbersText = this.game.add.text(
-            height - 1,
+        this.text = this.game.add.text(
+            width / 2,
             -height,
             '',
             {
@@ -57,17 +32,26 @@ class PlateNumber {
                 fill: '#000'
             }
         );
-        this.group.add(this.numbersText);
+        this.text.fontVariant = 'small-caps';
+        this.text.anchor.set(0.5, 0);
+        this.text.cacheAsBitmap = true;
+        this.group.add(this.text);
     }
 
     setText({ letters, numbers, }) {
-        console.log(letters, numbers);
         this.letters = letters;
         this.numbers = numbers;
 
-        this.leftLetter.setText(this.letters[0]);
-        this.rightLetters.setText(this.letters.substr(1));
-        this.numbersText.setText(this.numbers);
+        this.text.setText([
+            this.letters[0].toLowerCase(),
+            this.numbers,
+            this.letters.substr(1).toLowerCase()
+        ].join('.'));
+        this.text.addColor('#fff', 1);
+        this.text.addColor('#000', 2);
+        this.text.addColor('#fff', 5);
+        this.text.addColor('#000', 6);
+        this.text.updateCache();
     }
 }
 

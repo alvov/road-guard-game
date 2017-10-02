@@ -1,16 +1,21 @@
-? M registration number (amp, aaa, ekx)
 ? M graphics cars
-? M graphics speed limit
-? M graphics radar monitor
 ? M time limit
 ? M mobile
+? M pre-level screen
+? M graphics score
+?   fine on space key
 ?   graphics road lines
-?   graphics points
+?   graphics day times / weather
+?   graphics rogue car signs
 ?   acceleration for changing lanes
 ?   orientation screen
 ?   pause screen
 ?   end screen
-?   story screen
+?   how to play screen
+?   controls screen
 ?   sound
 ?   music
++   registration number (amp, aaa, ekx)
++   graphics speed limit
++   graphics radar monitor
 +   graphics car colors

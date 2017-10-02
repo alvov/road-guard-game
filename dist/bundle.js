@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -68,22 +68,45 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return COLOR_MAIN_BG; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return STATE_BOOT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return STATE_LOADING; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return STATE_MENU; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return STATE_GAME; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return LANG_RU; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return LANG_EN; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return I18N_GAME_TITLE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return I18N_MENU_BACK; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return I18N_MENU_START; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return I18N_UI_LOADING; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return I18N_UI_PAUSE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return CAR_SPRITE_KEYS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "I", function() { return UI_OFFSET; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return COLOR_MAIN_BG; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return COLOR_DARK_RED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "E", function() { return STATE_BOOT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G", function() { return STATE_LOADING; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "H", function() { return STATE_MENU; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return STATE_GAME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return LANG_RU; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return LANG_EN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return CAR_MODE_NORMAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return CAR_MODE_FINED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "A", function() { return RADAR_MODE_EMPTY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return RADAR_MODE_COMPUTING; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "B", function() { return RADAR_MODE_FINE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "z", function() { return RADAR_MODE_DISMISS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return RADAR_MODE_FINED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "D", function() { return RADAR_MODE_ROGUE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return RADAR_MODE_ALREADY_FINED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return I18N_GAME_TITLE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return I18N_MENU_BACK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return I18N_MENU_START; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return I18N_UI_LOADING; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return I18N_UI_PAUSE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return I18N_CURRENCY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return I18N_RADAR_EMPTY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return I18N_RADAR_METRICS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return I18N_RADAR_WAIT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return I18N_RADAR_FINED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return I18N_RADAR_ROGUE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return I18N_RADAR_ALREADY_FINED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return I18N_RADAR_PRESS_TO_FINE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return CAR_RELATIVE_WIDTH; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return CAR_SPRITE_KEYS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return CAR_COLORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CAR_ALLOWED_PLATE_LETTERS; });
+var UI_OFFSET = 10;
+
 var COLOR_MAIN_BG = '#312162';
+var COLOR_DARK_RED = '#BD0E0E';
 
 var STATE_BOOT = 'boot';
 var STATE_LOADING = 'loading';
@@ -93,14 +116,34 @@ var STATE_GAME = 'game';
 var LANG_RU = 'ru';
 var LANG_EN = 'en';
 
+var CAR_MODE_NORMAL = 'normal';
+var CAR_MODE_FINED = 'fined';
+
+var RADAR_MODE_EMPTY = 'empty';
+var RADAR_MODE_COMPUTING = 'computing';
+var RADAR_MODE_FINE = 'fine';
+var RADAR_MODE_DISMISS = 'dismiss';
+var RADAR_MODE_FINED = 'fined';
+var RADAR_MODE_ROGUE = 'rogue';
+var RADAR_MODE_ALREADY_FINED = 'alreadyFined';
+
 var I18N_GAME_TITLE = 'gameTitle';
 var I18N_MENU_BACK = 'menuBack';
 var I18N_MENU_START = 'menuStart';
 var I18N_UI_LOADING = 'uiLoading';
 var I18N_UI_PAUSE = 'uiPause';
+var I18N_CURRENCY = 'currency';
+var I18N_RADAR_EMPTY = 'radarEmpty';
+var I18N_RADAR_METRICS = 'radarMetrics';
+var I18N_RADAR_WAIT = 'radarWait';
+var I18N_RADAR_FINED = 'radarFined';
+var I18N_RADAR_ROGUE = 'radarRogue';
+var I18N_RADAR_ALREADY_FINED = 'radarAlreadyFined';
+var I18N_RADAR_PRESS_TO_FINE = 'radarPressToFine';
 
+var CAR_RELATIVE_WIDTH = 200;
 var CAR_SPRITE_KEYS = ['car01'];
-var CAR_COLORS = [0x404040, 0xFCF8EE, 0xBB2727, 0xAAB0B6, 0x2A3485];
+var CAR_COLORS = [0x252525, 0xFCF8EE, 0x9A2F2F, 0xAAB0B6, 0x2A3485];
 var CAR_ALLOWED_PLATE_LETTERS = ['A', 'B', 'C', 'E', 'H', 'K', 'M', 'O', 'P', 'T', 'X'];
 
 /***/ }),
@@ -112,21 +155,27 @@ var pack = {
     initial: [{
         type: 'spritesheet',
         key: 'langButtons',
-        url: __webpack_require__(14),
+        url: __webpack_require__(4),
         frameWidth: 50,
         frameHeight: 50
     }],
     game: [{
         type: 'image',
         key: 'ground',
-        url: __webpack_require__(4),
+        url: __webpack_require__(5),
         overwrite: false
     }, {
         type: 'spritesheet',
+        key: 'roadSign',
+        url: __webpack_require__(18),
+        frameWidth: 60,
+        frameHeight: 140
+    }, {
+        type: 'spritesheet',
         key: 'car01',
-        url: __webpack_require__(5),
-        frameWidth: 76,
-        frameHeight: 51
+        url: __webpack_require__(6),
+        frameWidth: 152,
+        frameHeight: 102
     }]
 };
 
@@ -137,45 +186,12 @@ var pack = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony default export */ __webpack_exports__["a"] = ({
-    level1: {
-        id: 'level1',
-        speed: {
-            limit: 40
-        },
-        road: {
-            start: -100,
-            end: 1000,
-            length: 800,
-            lanes: 3,
-            laneWidth: 100
-        },
-        duration: 3 * 60, // s
-        money: {
-            fines: [[20, 0, 50], [40, 500, 30], [60, 1500, 10], [80, 2500, 8], [100, 5000, 2]],
-            goal: 50000
-        },
-        cars: {
-            frequency: 2, // s
-            series: ['AAA', 'AMP', 'EKX'],
-            rogue: 0.1
-        }
-    }
-});
-
-/***/ }),
-/* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__levels__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__assets_pack__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__states_Boot__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__states_Loading__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__states_StartMenu__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__states_Game__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__constants__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__states_Boot__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__states_Loading__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__states_StartMenu__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__states_Game__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__constants__ = __webpack_require__(0);
 
 
 
@@ -183,11 +199,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+window.WebFontConfig = {
+    google: {
+        families: ['Press Start 2P:400:latin,cyrillic']
+    },
+    active: function active() {
+        initGame();
+    }
+};
 
-
+var script = document.createElement('script');
+script.src = 'dist/webfontloader.js';
+document.head.appendChild(script);
 
 // this fixes mobile browser 100% height issue with address bar and tabs
-setTimeout(function () {
+function initGame() {
     var windowInnerHeight = window.innerHeight;
     if (document.body.clientHeight > windowInnerHeight) {
         document.body.style.height = windowInnerHeight + 'px';
@@ -204,28 +230,16 @@ setTimeout(function () {
         renderer: Phaser.CANVAS
     });
 
-    game.state.add(__WEBPACK_IMPORTED_MODULE_6__constants__["l" /* STATE_BOOT */], __WEBPACK_IMPORTED_MODULE_2__states_Boot__["a" /* default */]);
-    game.state.add(__WEBPACK_IMPORTED_MODULE_6__constants__["n" /* STATE_LOADING */], __WEBPACK_IMPORTED_MODULE_3__states_Loading__["a" /* default */]);
-    game.state.add(__WEBPACK_IMPORTED_MODULE_6__constants__["o" /* STATE_MENU */], __WEBPACK_IMPORTED_MODULE_4__states_StartMenu__["a" /* default */]);
-    game.state.add(__WEBPACK_IMPORTED_MODULE_6__constants__["m" /* STATE_GAME */], __WEBPACK_IMPORTED_MODULE_5__states_Game__["a" /* default */]);
+    game.state.add(__WEBPACK_IMPORTED_MODULE_4__constants__["E" /* STATE_BOOT */], __WEBPACK_IMPORTED_MODULE_0__states_Boot__["a" /* default */]);
+    game.state.add(__WEBPACK_IMPORTED_MODULE_4__constants__["G" /* STATE_LOADING */], __WEBPACK_IMPORTED_MODULE_1__states_Loading__["a" /* default */]);
+    game.state.add(__WEBPACK_IMPORTED_MODULE_4__constants__["H" /* STATE_MENU */], __WEBPACK_IMPORTED_MODULE_2__states_StartMenu__["a" /* default */]);
+    game.state.add(__WEBPACK_IMPORTED_MODULE_4__constants__["F" /* STATE_GAME */], __WEBPACK_IMPORTED_MODULE_3__states_Game__["a" /* default */]);
 
-    game.state.start(__WEBPACK_IMPORTED_MODULE_6__constants__["l" /* STATE_BOOT */]);
-}, 50);
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "assets/cea0f9cd29f9b7e3183f04f328253200.png";
+    game.state.start(__WEBPACK_IMPORTED_MODULE_4__constants__["E" /* STATE_BOOT */]);
+}
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "assets/9e9bb4a4c68de73baa25bbcc9332d112.png";
-
-/***/ }),
-/* 6 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -263,9 +277,9 @@ var Boot = function () {
 
             this.state.onStateChange.add(this.handleStateChange, this);
 
-            this.state.start(__WEBPACK_IMPORTED_MODULE_2__constants__["n" /* STATE_LOADING */], true, false, {
+            this.state.start(__WEBPACK_IMPORTED_MODULE_2__constants__["G" /* STATE_LOADING */], true, false, {
                 assets: [['pack', 'initial', null, __WEBPACK_IMPORTED_MODULE_0__assets_pack__["a" /* default */]]],
-                nextState: [__WEBPACK_IMPORTED_MODULE_2__constants__["o" /* STATE_MENU */]]
+                nextState: [__WEBPACK_IMPORTED_MODULE_2__constants__["H" /* STATE_MENU */]]
             });
         }
     }, {
@@ -279,6 +293,24 @@ var Boot = function () {
 }();
 
 /* harmony default export */ __webpack_exports__["a"] = (Boot);
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/66dd3dd498c059b331146e5fe01f17dd.png";
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/cea0f9cd29f9b7e3183f04f328253200.png";
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/36087b23846a93778075af2ed030812c.png";
 
 /***/ }),
 /* 7 */
@@ -302,7 +334,7 @@ var i18n = function () {
 
         this.game = game;
         this.textObjects = [];
-        this.currentLang = navigator.language === __WEBPACK_IMPORTED_MODULE_1__constants__["k" /* LANG_RU */] ? __WEBPACK_IMPORTED_MODULE_1__constants__["k" /* LANG_RU */] : __WEBPACK_IMPORTED_MODULE_1__constants__["j" /* LANG_EN */];
+        this.currentLang = navigator.language === __WEBPACK_IMPORTED_MODULE_1__constants__["w" /* LANG_RU */] ? __WEBPACK_IMPORTED_MODULE_1__constants__["w" /* LANG_RU */] : __WEBPACK_IMPORTED_MODULE_1__constants__["v" /* LANG_EN */];
         this.translations = __WEBPACK_IMPORTED_MODULE_0__assets_i18n__["a" /* default */];
     }
 
@@ -358,21 +390,45 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-/* harmony default export */ __webpack_exports__["a"] = (_cnst$I18N_GAME_TITLE = {}, _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["e" /* I18N_GAME_TITLE */], {
+/* harmony default export */ __webpack_exports__["a"] = (_cnst$I18N_GAME_TITLE = {}, _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["j" /* I18N_GAME_TITLE */], {
     en: 'Road Guard',
     ru: 'Дорожный Дозор'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["f" /* I18N_MENU_BACK */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["k" /* I18N_MENU_BACK */], {
     en: '<   Back',
     ru: '<   Назад'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["g" /* I18N_MENU_START */], {
-    en: '> Play',
-    ru: '> Играть'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["h" /* I18N_UI_LOADING */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["l" /* I18N_MENU_START */], {
+    en: 'Play',
+    ru: 'Играть'
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["t" /* I18N_UI_LOADING */], {
     en: 'Loading',
     ru: 'Загрузка'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["i" /* I18N_UI_PAUSE */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["u" /* I18N_UI_PAUSE */], {
     en: 'Paused',
     ru: 'Пауза'
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["i" /* I18N_CURRENCY */], {
+    en: 'rub.',
+    ru: 'руб.'
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["p" /* I18N_RADAR_METRICS */], {
+    en: 'km/h',
+    ru: 'км/ч'
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["n" /* I18N_RADAR_EMPTY */], {
+    en: 'CHOOSE A CAR',
+    ru: 'ВЫБЕРИТЕ МАШИНУ'
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["s" /* I18N_RADAR_WAIT */], {
+    en: 'wait...',
+    ru: 'ждите...'
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["o" /* I18N_RADAR_FINED */], {
+    en: 'Fine',
+    ru: 'Штраф'
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["r" /* I18N_RADAR_ROGUE */], {
+    en: 'CAN NOT!',
+    ru: 'НЕЛЬЗЯ!'
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["m" /* I18N_RADAR_ALREADY_FINED */], {
+    en: 'ALREADY FINED!',
+    ru: 'ШТРАФ ВЫПИСАН!'
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["q" /* I18N_RADAR_PRESS_TO_FINE */], {
+    en: 'tap to fine',
+    ru: 'оштрафовать?'
 }), _cnst$I18N_GAME_TITLE);
 
 /***/ }),
@@ -411,7 +467,7 @@ var Loading = function () {
         value: function preload() {
             var _this = this;
 
-            this.game.stage.backgroundColor = __WEBPACK_IMPORTED_MODULE_0__constants__["d" /* COLOR_MAIN_BG */];
+            this.game.stage.backgroundColor = __WEBPACK_IMPORTED_MODULE_0__constants__["h" /* COLOR_MAIN_BG */];
 
             this.rg.config.assets.forEach(function (_ref) {
                 var _load, _load2, _load3;
@@ -433,7 +489,7 @@ var Loading = function () {
                 }
             });
 
-            this.rg.objects.textLoading = this.game.add.text(this.game.world.centerX - 5, this.game.world.centerY, this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["h" /* I18N_UI_LOADING */]), {
+            this.rg.objects.textLoading = this.game.add.text(this.game.world.centerX - 5, this.game.world.centerY, this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["t" /* I18N_UI_LOADING */]), {
                 font: '26px Arial',
                 fill: '#fff'
             });
@@ -467,7 +523,7 @@ var Loading = function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__levels_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__levels_js__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__assets_pack_js__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants__ = __webpack_require__(0);
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -489,7 +545,7 @@ var StartMenu = function () {
     _createClass(StartMenu, [{
         key: 'preload',
         value: function preload() {
-            this.game.stage.backgroundColor = __WEBPACK_IMPORTED_MODULE_2__constants__["d" /* COLOR_MAIN_BG */];
+            this.game.stage.backgroundColor = __WEBPACK_IMPORTED_MODULE_2__constants__["h" /* COLOR_MAIN_BG */];
         }
     }, {
         key: 'create',
@@ -498,25 +554,27 @@ var StartMenu = function () {
 
             this.game.world.resize(this.game.width, this.game.height);
 
-            this.title = this.game.rg.i18n.createText(this.game.width / 2, this.game.height / 6, __WEBPACK_IMPORTED_MODULE_2__constants__["e" /* I18N_GAME_TITLE */], {
+            var offsetLeft = 40;
+
+            this.title = this.game.rg.i18n.createText(this.game.width / 2, this.game.height / 6, __WEBPACK_IMPORTED_MODULE_2__constants__["j" /* I18N_GAME_TITLE */], {
                 fill: '#fff'
             });
             this.title.anchor.set(0.5);
 
             var menuOffset = this.game.height / 3;
             var menuVerticalSpacing = Math.min(this.game.height / 7, 70);
-            this.menu = [[__WEBPACK_IMPORTED_MODULE_2__constants__["g" /* I18N_MENU_START */], this.handleClickPlay.bind(this)]].map(function (_ref, i) {
+            this.menu = [[__WEBPACK_IMPORTED_MODULE_2__constants__["l" /* I18N_MENU_START */], this.handleClickPlay.bind(this)]].map(function (_ref, i) {
                 var _ref2 = _slicedToArray(_ref, 2),
                     itemTitle = _ref2[0],
                     callback = _ref2[1];
 
-                return [_this.game.rg.i18n.createText(40, i * menuVerticalSpacing + menuOffset, itemTitle, {
-                    font: '22px Arial',
+                return [_this.game.rg.i18n.createText(offsetLeft, i * menuVerticalSpacing + menuOffset, itemTitle, {
+                    font: '18px "Press Start 2P", Arial',
                     fill: '#fff'
                 }), callback];
             });
 
-            this.langButton = this.game.add.button(this.game.world.width - 10, 0, 'langButtons', this.handleClickLang.bind(this));
+            this.langButton = this.game.add.button(this.game.world.width - __WEBPACK_IMPORTED_MODULE_2__constants__["I" /* UI_OFFSET */], 0, 'langButtons', this.handleClickLang.bind(this));
             this.langButton.anchor.set(1, 0);
 
             this.game.input.onDown.add(this.handleClickMenu, this);
@@ -524,20 +582,20 @@ var StartMenu = function () {
     }, {
         key: 'update',
         value: function update() {
-            this.langButton.frame = this.game.rg.i18n.currentLang === __WEBPACK_IMPORTED_MODULE_2__constants__["k" /* LANG_RU */] ? 1 : 0;
+            this.langButton.frame = this.game.rg.i18n.currentLang === __WEBPACK_IMPORTED_MODULE_2__constants__["w" /* LANG_RU */] ? 1 : 0;
         }
     }, {
         key: 'handleClickPlay',
         value: function handleClickPlay() {
-            this.state.start(__WEBPACK_IMPORTED_MODULE_2__constants__["n" /* STATE_LOADING */], true, false, {
+            this.state.start(__WEBPACK_IMPORTED_MODULE_2__constants__["G" /* STATE_LOADING */], true, false, {
                 assets: [['pack', 'game', null, __WEBPACK_IMPORTED_MODULE_1__assets_pack_js__["a" /* default */]]],
-                nextState: [__WEBPACK_IMPORTED_MODULE_2__constants__["m" /* STATE_GAME */], __WEBPACK_IMPORTED_MODULE_0__levels_js__["a" /* default */]['level1']]
+                nextState: [__WEBPACK_IMPORTED_MODULE_2__constants__["F" /* STATE_GAME */], __WEBPACK_IMPORTED_MODULE_0__levels_js__["a" /* default */]['level1']]
             });
         }
     }, {
         key: 'handleClickLang',
         value: function handleClickLang() {
-            this.game.rg.i18n.setLang(this.game.rg.i18n.currentLang === __WEBPACK_IMPORTED_MODULE_2__constants__["k" /* LANG_RU */] ? __WEBPACK_IMPORTED_MODULE_2__constants__["j" /* LANG_EN */] : __WEBPACK_IMPORTED_MODULE_2__constants__["k" /* LANG_RU */]);
+            this.game.rg.i18n.setLang(this.game.rg.i18n.currentLang === __WEBPACK_IMPORTED_MODULE_2__constants__["w" /* LANG_RU */] ? __WEBPACK_IMPORTED_MODULE_2__constants__["v" /* LANG_EN */] : __WEBPACK_IMPORTED_MODULE_2__constants__["w" /* LANG_RU */]);
         }
     }, {
         key: 'handleClickMenu',
@@ -568,8 +626,47 @@ var StartMenu = function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_Car__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__classes_Road__ = __webpack_require__(13);
+/* harmony default export */ __webpack_exports__["a"] = ({
+    level1: {
+        id: 'level1',
+        duration: 3 * 60, // s
+        speed: {
+            limit: 40
+        },
+        road: {
+            start: -100,
+            end: 1200,
+            length: 800,
+            lanes: 3,
+            laneWidth: 100
+        },
+        money: {
+            fines: [[20, 0, 50], [40, 500, 30], [60, 1500, 10], [80, 2500, 8], [100, 5000, 2]],
+            goal: 50000
+        },
+        radar: {
+            computing: 1000 // ms
+        },
+        cars: {
+            frequency: 2, // s
+            series: ['AAA', 'AMP', 'EKX'],
+            rogue: 0.1
+        }
+    }
+});
+
+/***/ }),
+/* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_Car__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__classes_Road__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__classes_GameInterface__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_RadarMonitor__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__constants__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_RoadSign__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_Score__ = __webpack_require__(20);
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -579,6 +676,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+
+
 
 
 
@@ -598,7 +700,11 @@ var Game = function () {
                     count: (level.road.end - level.road.start) / level.speed.limit / level.cars.frequency
                 },
                 objects: {
-                    road: null
+                    road: null,
+                    roadSign: null,
+                    interface: null,
+                    score: null,
+                    radar: null
                 },
                 arrays: {
                     cars: []
@@ -626,6 +732,15 @@ var Game = function () {
                 game: this.game
             }, this.rg.level.road));
 
+            this.rg.objects.roadSign = new __WEBPACK_IMPORTED_MODULE_5__classes_RoadSign__["a" /* default */](_extends({
+                game: this.game
+            }, this.rg.objects.road.getProjection({
+                x: this.rg.objects.road.length / 2,
+                y: -__WEBPACK_IMPORTED_MODULE_4__constants__["I" /* UI_OFFSET */]
+            }), {
+                speedLimit: this.rg.level.speed.limit
+            }));
+
             // cars
             this.rg.timers.reviveCar = this.game.time.create(false);
             this.resetCarTimer();
@@ -634,6 +749,32 @@ var Game = function () {
             this.createCars(this.rg.cars.count);
 
             // ui
+            this.rg.objects.interface = new __WEBPACK_IMPORTED_MODULE_2__classes_GameInterface__["a" /* default */]({
+                game: this.game
+            });
+
+            this.rg.objects.score = new __WEBPACK_IMPORTED_MODULE_6__classes_Score__["a" /* default */]({
+                game: this.game,
+                x: __WEBPACK_IMPORTED_MODULE_4__constants__["I" /* UI_OFFSET */],
+                y: __WEBPACK_IMPORTED_MODULE_4__constants__["I" /* UI_OFFSET */],
+                goal: this.rg.level.money.goal
+            });
+
+            var radarHeight = 100;
+            this.rg.objects.radar = new __WEBPACK_IMPORTED_MODULE_3__classes_RadarMonitor__["a" /* default */](_extends({
+                game: this.game,
+                x: __WEBPACK_IMPORTED_MODULE_4__constants__["I" /* UI_OFFSET */],
+                y: this.game.height - radarHeight - __WEBPACK_IMPORTED_MODULE_4__constants__["I" /* UI_OFFSET */],
+                width: this.rg.objects.road.roadOffsetLeft - __WEBPACK_IMPORTED_MODULE_4__constants__["I" /* UI_OFFSET */] * 2,
+                height: radarHeight
+            }, this.rg.level.radar, {
+                fines: this.rg.level.money.fines,
+                speedLimit: this.rg.level.speed.limit,
+                onFine: this.handleFine.bind(this)
+            }));
+
+            // events
+            this.game.input.onDown.add(this.handleTap, this);
         }
     }, {
         key: 'update',
@@ -670,13 +811,15 @@ var Game = function () {
             if (this.rg.cars.revive) {
                 this.rg.cars.revive = !this.reviveCar();
             }
+
+            // update radar
+            this.rg.objects.radar.update();
         }
     }, {
         key: 'updateCar',
         value: function updateCar(carSprite) {
             var car = carSprite.rg;
             var bestRoadLane = this.getClearestRoadLaneByCar(car);
-            // console.log(car.sprite.name, bestRoadLane, car.roadLane);
             if (bestRoadLane !== car.roadLane) {
                 car.moveToY(this.rg.objects.road.getLaneCenter(bestRoadLane), bestRoadLane);
             }
@@ -691,7 +834,61 @@ var Game = function () {
             // this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");
             // this.game.debug.cameraInfo(this.game.camera, 32, 32);
             // this.game.debug.body(this.mz.objects.player.sprite);
+            // this.game.debug.spriteBounds(this.rg.objects.radar.mainText);
             // this.game.debug.bodyInfo(this.mz.objects.player.sprite, 0, 100);
+        }
+    }, {
+        key: 'handleTap',
+        value: function handleTap(pointer) {
+            var handled = void 0;
+            if (pointer.targetObject) {
+                if (pointer.targetObject.sprite.name.startsWith('car')) {
+                    this.handleClickCar(pointer.targetObject.sprite.rg);
+                    handled = true;
+                } else if (pointer.targetObject.sprite.name === 'radar') {
+                    if (this.rg.objects.radar.mode === __WEBPACK_IMPORTED_MODULE_4__constants__["B" /* RADAR_MODE_FINE */]) {
+                        this.handleFine();
+                        handled = true;
+                    }
+                }
+            }
+            if (!handled) {
+                this.handleClickField();
+            }
+        }
+    }, {
+        key: 'handleClickField',
+        value: function handleClickField() {
+            this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_4__constants__["A" /* RADAR_MODE_EMPTY */]);
+        }
+    }, {
+        key: 'handleClickCar',
+        value: function handleClickCar(car) {
+            if (car.mode === __WEBPACK_IMPORTED_MODULE_4__constants__["c" /* CAR_MODE_FINED */]) {
+                this.rg.objects.radar.setMode(car.isRogue ? __WEBPACK_IMPORTED_MODULE_4__constants__["D" /* RADAR_MODE_ROGUE */] : __WEBPACK_IMPORTED_MODULE_4__constants__["x" /* RADAR_MODE_ALREADY_FINED */]);
+            } else {
+                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_4__constants__["y" /* RADAR_MODE_COMPUTING */], { car: car });
+            }
+        }
+    }, {
+        key: 'handleKillCar',
+        value: function handleKillCar(car) {
+            if (car === this.rg.objects.radar.currentCar) {
+                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_4__constants__["A" /* RADAR_MODE_EMPTY */]);
+            }
+        }
+    }, {
+        key: 'handleFine',
+        value: function handleFine() {
+            var car = this.rg.objects.radar.currentCar;
+            car.setMode(__WEBPACK_IMPORTED_MODULE_4__constants__["c" /* CAR_MODE_FINED */]);
+            if (car.isRogue) {
+                this.rg.objects.score.updateValue(-this.rg.objects.radar.currentFine);
+                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_4__constants__["D" /* RADAR_MODE_ROGUE */]);
+            } else {
+                this.rg.objects.score.updateValue(this.rg.objects.radar.currentFine);
+                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_4__constants__["C" /* RADAR_MODE_FINED */]);
+            }
         }
     }, {
         key: 'resetCarTimer',
@@ -704,12 +901,13 @@ var Game = function () {
     }, {
         key: 'createCars',
         value: function createCars(count) {
-            count = 1;
+            // count = 2;
             for (var i = 0; i < count; i++) {
                 var car = new __WEBPACK_IMPORTED_MODULE_0__classes_Car__["a" /* default */]({
                     game: this.game,
                     name: 'car' + i,
-                    rogueSeries: this.rg.level.cars.series
+                    rogueSeries: this.rg.level.cars.series,
+                    onKill: this.handleKillCar.bind(this)
                 });
                 this.rg.arrays.cars.push(car);
             }
@@ -819,7 +1017,7 @@ var Game = function () {
             if (isRogue) {
                 var minDisallowedSpeed = this.rg.level.money.fines[1][0];
                 var maxDisallowedSpeed = this.rg.level.money.fines[this.rg.level.money.fines.length - 1][0];
-                return this.game.rnd.integerInRange(minDisallowedSpeed, maxDisallowedSpeed);
+                return this.game.rnd.integerInRange(minDisallowedSpeed, maxDisallowedSpeed - 1);
             } else {
                 var randomNumber = this.game.rnd.integerInRange(1, 100);
                 var cummulativeProbability = 0;
@@ -851,11 +1049,11 @@ var Game = function () {
 /* harmony default export */ __webpack_exports__["a"] = (Game);
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PlateNumber__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PlateNumber__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__constants__ = __webpack_require__(0);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -867,23 +1065,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
 var CAR_STEERING_SPEED_COEFF = 1.5;
+var CAR_ROGUE_FINED_COLOR = 0xF23B3B;
+var CAR_ROGUE_FINED_BLINK_DURATION = 400;
+var CAR_ROGUE_FINED_BLINK_REPEAT = 4;
 
 var Car = function () {
     function Car(_ref) {
         var game = _ref.game,
             name = _ref.name,
-            rogueSeries = _ref.rogueSeries;
+            rogueSeries = _ref.rogueSeries,
+            onKill = _ref.onKill;
 
         _classCallCheck(this, Car);
 
         this.game = game;
         this.rogueSeries = rogueSeries;
+        this.onKill = onKill;
 
-        var spriteKey = this.game.rnd.pick(__WEBPACK_IMPORTED_MODULE_1__constants__["c" /* CAR_SPRITE_KEYS */]);
+        var spriteKey = this.game.rnd.pick(__WEBPACK_IMPORTED_MODULE_1__constants__["f" /* CAR_SPRITE_KEYS */]);
         this.sprite = this.game.add.sprite(0, 0, spriteKey, 0);
         this.sprite.anchor.set(0.5, 1);
         this.sprite.name = name;
         this.sprite.rg = this;
+        this.sprite.inputEnabled = true;
         // initially dead
         this.sprite.kill();
 
@@ -895,14 +1099,19 @@ var Car = function () {
         this.moveTargetY = 0;
 
         this.roadLane = null;
+        this.color = null;
         this.isRogue = false;
+
+        this.rogueFinedTimer = this.game.time.create(false);
 
         this.plateNumber = new __WEBPACK_IMPORTED_MODULE_0__PlateNumber__["a" /* default */](_extends({
             game: this.game,
             x: 0,
-            y: -7
+            y: -13
         }, this.plateNumber));
         this.sprite.addChild(this.plateNumber.group);
+
+        this.mode = __WEBPACK_IMPORTED_MODULE_1__constants__["d" /* CAR_MODE_NORMAL */];
     }
 
     _createClass(Car, [{
@@ -927,6 +1136,30 @@ var Car = function () {
 
             this.sprite.position.set(x, y);
             this.sprite.scale.set(scale);
+            if (this.rogueFinedTimer.running) {
+                this.sprite.tint = Math.floor(this.rogueFinedTimer.ms / CAR_ROGUE_FINED_BLINK_DURATION) % 2 ? this.color : CAR_ROGUE_FINED_COLOR;
+            }
+        }
+    }, {
+        key: 'handleRogueFinedTimerComplete',
+        value: function handleRogueFinedTimerComplete() {
+            this.rogueFinedTimer.stop();
+            this.sprite.tint = this.color;
+        }
+    }, {
+        key: 'setMode',
+        value: function setMode(mode) {
+            switch (mode) {
+                case __WEBPACK_IMPORTED_MODULE_1__constants__["c" /* CAR_MODE_FINED */]:
+                    {
+                        if (this.isRogue) {
+                            this.rogueFinedTimer.add(CAR_ROGUE_FINED_BLINK_DURATION * 2 * CAR_ROGUE_FINED_BLINK_REPEAT, this.handleRogueFinedTimerComplete, this);
+                            this.rogueFinedTimer.start();
+                        }
+                        break;
+                    }
+            }
+            this.mode = mode;
         }
     }, {
         key: 'moveToY',
@@ -971,7 +1204,8 @@ var Car = function () {
                 speed = _ref3.speed,
                 isRogue = _ref3.isRogue;
 
-            console.log(this.sprite.name, speed);
+            this.setMode(__WEBPACK_IMPORTED_MODULE_1__constants__["d" /* CAR_MODE_NORMAL */]);
+
             this.isRogue = isRogue;
 
             this.plateNumber.setText(this.generatePlateNumber());
@@ -979,18 +1213,15 @@ var Car = function () {
             this.position.set(x, y);
             this.moveToY(y, roadLane);
             this.velocity.x = speed;
-            this.sprite.tint = this.generateBodyColor();
+            this.color = this.generateBodyColor();
+            this.sprite.tint = this.color;
             this.sprite.revive();
         }
     }, {
         key: 'kill',
         value: function kill() {
             this.sprite.kill();
-        }
-    }, {
-        key: 'isSteering',
-        get: function get() {
-            return this.velocity.y !== 0;
+            this.onKill(this);
         }
     }]);
 
@@ -1000,13 +1231,87 @@ var Car = function () {
 /* harmony default export */ __webpack_exports__["a"] = (Car);
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var PLATE_NUMBER_WIDTH = 54;
+var PLATE_NUMBER_HEIGHT = 14;
+
+var PlateNumber = function () {
+    function PlateNumber(_ref) {
+        var game = _ref.game,
+            x = _ref.x,
+            y = _ref.y,
+            _ref$width = _ref.width,
+            width = _ref$width === undefined ? PLATE_NUMBER_WIDTH : _ref$width,
+            _ref$height = _ref.height,
+            height = _ref$height === undefined ? PLATE_NUMBER_HEIGHT : _ref$height;
+
+        _classCallCheck(this, PlateNumber);
+
+        this.game = game;
+        this.group = this.game.add.group();
+        this.group.x = x - width / 2;
+        this.group.y = y;
+
+        this.letters = '';
+        this.numbers = '';
+
+        this.plateGraphics = this.game.add.graphics();
+        this.plateGraphics.beginFill(0xffffff);
+        this.plateGraphics.drawRoundedRect(0, -height, width, height, 2);
+        this.plateGraphics.endFill();
+        this.group.add(this.plateGraphics);
+
+        this.text = this.game.add.text(width / 2, -height, '', {
+            font: height - 1 + 'px Arial',
+            fill: '#000'
+        });
+        this.text.fontVariant = 'small-caps';
+        this.text.anchor.set(0.5, 0);
+        this.text.cacheAsBitmap = true;
+        this.group.add(this.text);
+    }
+
+    _createClass(PlateNumber, [{
+        key: 'setText',
+        value: function setText(_ref2) {
+            var letters = _ref2.letters,
+                numbers = _ref2.numbers;
+
+            this.letters = letters;
+            this.numbers = numbers;
+
+            this.text.setText([this.letters[0].toLowerCase(), this.numbers, this.letters.substr(1).toLowerCase()].join('.'));
+            this.text.addColor('#fff', 1);
+            this.text.addColor('#000', 2);
+            this.text.addColor('#fff', 5);
+            this.text.addColor('#000', 6);
+            this.text.updateCache();
+        }
+    }]);
+
+    return PlateNumber;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (PlateNumber);
+
+/***/ }),
+/* 15 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__(0);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
 
 var Road = function () {
     function Road(_ref) {
@@ -1031,21 +1336,21 @@ var Road = function () {
         this.groundGraphics.drawRect(0, this.game.height - this.groundHeight, this.game.width, this.groundHeight);
         this.groundGraphics.endFill();
 
-        this.roadWidthTop = this.game.width / 2;
-        var roadOffsetLeft = (this.game.width - this.roadWidthTop) / 2;
-        this.roadWidthBottom = this.game.width;
+        this.roadWidthTop = this.game.width / 3;
+        this.roadOffsetLeft = (this.game.width - this.roadWidthTop) / 2;
+        this.roadWidthBottom = (this.game.width - this.roadOffsetLeft) / (this.lanes * 2 - 1) * (this.lanes * 2);
         this.mainRatio = this.roadWidthBottom / this.roadWidthTop;
 
-        this.topLeft = new Phaser.Point(roadOffsetLeft, this.game.height - this.groundHeight);
+        this.topLeft = new Phaser.Point(this.roadOffsetLeft, this.game.height - this.groundHeight);
 
         this.roadGraphics = this.game.add.graphics(0, 0, this.group);
         this.roadGraphics.beginFill(0x45454A);
-        this.roadGraphics.drawPolygon([this.topLeft, { x: roadOffsetLeft + this.roadWidthTop, y: this.topLeft.y }, { x: roadOffsetLeft + this.roadWidthBottom, y: this.game.height }, { x: roadOffsetLeft, y: this.game.height }]);
+        this.roadGraphics.drawPolygon([this.topLeft, { x: this.roadOffsetLeft + this.roadWidthTop, y: this.topLeft.y }, { x: this.roadOffsetLeft + this.roadWidthBottom, y: this.game.height }, { x: this.roadOffsetLeft, y: this.game.height }]);
         this.roadGraphics.endFill();
     }
 
     _createClass(Road, [{
-        key: "getProjection",
+        key: 'getProjection',
         value: function getProjection(_ref2) {
             var x = _ref2.x,
                 y = _ref2.y;
@@ -1055,11 +1360,11 @@ var Road = function () {
             return {
                 x: this.topLeft.x + relativeY * (1 + ratioX * (this.mainRatio - 1)),
                 y: this.topLeft.y + Math.abs(ratioX) * this.groundHeight,
-                scale: Math.max(0, (this.mainRatio - 1) / this.length * x + 1)
+                scale: (this.roadWidthTop + ratioX * (this.roadWidthBottom - this.roadWidthTop)) / this.lanes / __WEBPACK_IMPORTED_MODULE_0__constants__["e" /* CAR_RELATIVE_WIDTH */]
             };
         }
     }, {
-        key: "getLaneCenter",
+        key: 'getLaneCenter',
         value: function getLaneCenter(index) {
             return this.laneWidth * (0.5 + index);
         }
@@ -1071,92 +1376,392 @@ var Road = function () {
 /* harmony default export */ __webpack_exports__["a"] = (Road);
 
 /***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "assets/66dd3dd498c059b331146e5fe01f17dd.png";
-
-/***/ }),
-/* 15 */,
 /* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var GameInterface = function GameInterface(_ref) {
+    var game = _ref.game;
+
+    _classCallCheck(this, GameInterface);
+
+    this.game = game;
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (GameInterface);
+
+/***/ }),
+/* 17 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils__ = __webpack_require__(21);
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var PLATE_NUMBER_WIDTH = 21;
-var PLATE_NUMBER_HEIGHT = 6;
 
-var PlateNumber = function () {
-    function PlateNumber(_ref) {
+
+
+var TEMPORARY_MODE_DURATION = 2000;
+
+var RadarMonitor = function () {
+    function RadarMonitor(_ref) {
         var game = _ref.game,
             x = _ref.x,
             y = _ref.y,
-            _ref$width = _ref.width,
-            width = _ref$width === undefined ? PLATE_NUMBER_WIDTH : _ref$width,
-            _ref$height = _ref.height,
-            height = _ref$height === undefined ? PLATE_NUMBER_HEIGHT : _ref$height;
+            width = _ref.width,
+            height = _ref.height,
+            computing = _ref.computing,
+            fines = _ref.fines,
+            speedLimit = _ref.speedLimit,
+            onFine = _ref.onFine;
 
-        _classCallCheck(this, PlateNumber);
+        _classCallCheck(this, RadarMonitor);
 
         this.game = game;
+        this.width = width;
+        this.height = height;
+        this.fines = fines;
+        this.speedLimit = speedLimit;
+        this.onFine = onFine;
+
         this.group = this.game.add.group();
-        this.group.x = x - width / 2;
+        this.group.x = x;
         this.group.y = y;
 
-        this.letters = '';
-        this.numbers = '';
+        this.screen = this.game.add.graphics();
+        this.screen.name = 'radar';
+        this.screen.inputEnabled = true;
+        this.group.add(this.screen);
 
-        this.plateGraphics = this.game.add.graphics();
-        this.plateGraphics.beginFill(0xffffff);
-        this.plateGraphics.drawRoundedRect(0, -height, width, height, 1);
-        this.plateGraphics.endFill();
-        this.group.add(this.plateGraphics);
-
-        this.leftLetter = this.game.add.text(1, -height + 1, '', {
-            font: height - 2 + 'px Arial',
-            fill: '#000'
+        this.mainText = this.game.add.text(this.width / 2, this.height / 2 + 5, '', {
+            align: 'center',
+            wordWrap: true,
+            wordWrapWidth: this.width
         });
-        this.leftLetter.lineSpacing = 0;
-        this.group.add(this.leftLetter);
+        this.mainText.font = '"Press Start 2P", Arial';
+        this.mainText.fontSize = 20;
+        this.mainText.anchor.set(0.5, 0.5);
+        this.group.add(this.mainText);
 
-        this.rightLetters = this.game.add.text(width - 1, -height + 1, '', {
-            font: height - 2 + 'px Arial',
-            fill: '#000'
+        this.secondaryText = this.game.add.text(this.width / 2, this.height - 10, '', {
+            align: 'center'
         });
-        this.rightLetters.anchor.set(1, 0);
-        this.leftLetter.lineSpacing = 0;
-        this.group.add(this.rightLetters);
+        this.secondaryText.font = '"Press Start 2P", Arial';
+        this.secondaryText.fontSize = 12;
+        this.secondaryText.anchor.set(0.5, 1);
+        this.group.add(this.secondaryText);
 
-        this.numbersText = this.game.add.text(height - 1, -height, '', {
-            font: height - 1 + 'px Arial',
-            fill: '#000'
-        });
-        this.group.add(this.numbersText);
+        this.progressBar = this.game.add.graphics();
+        this.group.add(this.progressBar);
+
+        this.mode = null;
+
+        this.computingTimer = this.game.time.create(false);
+        this.computingTimerDuration = computing;
+        this.temporaryModeTimer = this.game.time.create(false);
+
+        this.currentCar = null;
+        this.currentFine = 0;
+
+        this.setMode(__WEBPACK_IMPORTED_MODULE_0__constants__["A" /* RADAR_MODE_EMPTY */]);
     }
 
-    _createClass(PlateNumber, [{
-        key: 'setText',
-        value: function setText(_ref2) {
-            var letters = _ref2.letters,
-                numbers = _ref2.numbers;
+    _createClass(RadarMonitor, [{
+        key: 'update',
+        value: function update() {
+            if (this.mode === __WEBPACK_IMPORTED_MODULE_0__constants__["y" /* RADAR_MODE_COMPUTING */]) {
+                if (this.computingTimer.running) {
+                    this.updateProgressBar(this.computingTimer.ms / this.computingTimerDuration);
+                }
+            }
+        }
+    }, {
+        key: 'updateProgressBar',
+        value: function updateProgressBar(percent) {
+            var color = 0;
+            var offset = this.height / 10;
+            var width = this.width - 2 * offset;
+            var height = 10;
+            var y = this.height - 2 * offset - height / 2;
+            this.progressBar.clear();
+            this.progressBar.lineStyle(1, color, 1);
+            this.progressBar.drawRect(offset, y - height / 2, width, height);
+            this.progressBar.lineStyle(height, color, 1);
+            this.progressBar.moveTo(offset, y);
+            this.progressBar.lineTo(width * percent, y);
+        }
+    }, {
+        key: 'handleCompleteComputing',
+        value: function handleCompleteComputing() {
+            this.computingTimer.stop(true);
+            this.currentFine = 0;
+            for (var i = 0; i < this.fines.length; i++) {
+                var _fines$i = _slicedToArray(this.fines[i], 2),
+                    speedExcess = _fines$i[0],
+                    fine = _fines$i[1];
 
-            console.log(letters, numbers);
-            this.letters = letters;
-            this.numbers = numbers;
+                if (this.currentCar.velocity.x < speedExcess + this.speedLimit) {
+                    this.currentFine = fine;
+                    break;
+                }
+            }
+            if (this.currentFine === 0) {
+                this.setMode(__WEBPACK_IMPORTED_MODULE_0__constants__["z" /* RADAR_MODE_DISMISS */], { speed: this.currentCar.velocity.x });
+            } else {
+                this.setMode(__WEBPACK_IMPORTED_MODULE_0__constants__["B" /* RADAR_MODE_FINE */], { speed: this.currentCar.velocity.x });
+            }
+        }
+    }, {
+        key: 'handleCompleteTemporaryMode',
+        value: function handleCompleteTemporaryMode() {
+            this.temporaryModeTimer.stop(true);
+            this.setMode(__WEBPACK_IMPORTED_MODULE_0__constants__["A" /* RADAR_MODE_EMPTY */]);
+        }
+    }, {
+        key: 'setMode',
+        value: function setMode(mode) {
+            var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-            this.leftLetter.setText(this.letters[0]);
-            this.rightLetters.setText(this.letters.substr(1));
-            this.numbersText.setText(this.numbers);
+            this.computingTimer.stop(true);
+            this.temporaryModeTimer.stop(true);
+
+            this.progressBar.visible = false;
+            this.secondaryText.visible = false;
+
+            this.mainText.fill = '#000';
+            this.secondaryText.fill = '#000';
+
+            switch (mode) {
+                case __WEBPACK_IMPORTED_MODULE_0__constants__["A" /* RADAR_MODE_EMPTY */]:
+                    {
+                        this.mainText.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["n" /* I18N_RADAR_EMPTY */]));
+                        this.resetCurrentCar();
+                        break;
+                    }
+                case __WEBPACK_IMPORTED_MODULE_0__constants__["z" /* RADAR_MODE_DISMISS */]:
+                    {
+                        this.mainText.setText(Math.round(props.speed) + ' ' + this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["p" /* I18N_RADAR_METRICS */]));
+                        break;
+                    }
+                case __WEBPACK_IMPORTED_MODULE_0__constants__["B" /* RADAR_MODE_FINE */]:
+                    {
+                        this.mainText.setText(Math.round(props.speed) + ' ' + this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["p" /* I18N_RADAR_METRICS */]));
+                        this.secondaryText.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["q" /* I18N_RADAR_PRESS_TO_FINE */]));
+                        this.secondaryText.visible = true;
+                        break;
+                    }
+                case __WEBPACK_IMPORTED_MODULE_0__constants__["y" /* RADAR_MODE_COMPUTING */]:
+                    {
+                        if (this.mode !== __WEBPACK_IMPORTED_MODULE_0__constants__["y" /* RADAR_MODE_COMPUTING */] || this.currentCar !== props.car) {
+                            this.currentCar = props.car;
+
+                            this.mainText.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["s" /* I18N_RADAR_WAIT */]));
+                            this.progressBar.visible = true;
+
+                            this.computingTimer.add(this.computingTimerDuration, this.handleCompleteComputing, this);
+                            this.computingTimer.start();
+                        }
+                        break;
+                    }
+                case __WEBPACK_IMPORTED_MODULE_0__constants__["C" /* RADAR_MODE_FINED */]:
+                    {
+                        this.mainText.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["o" /* I18N_RADAR_FINED */]) + "\n" + this.currentFine + ' ' + this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["i" /* I18N_CURRENCY */]));
+                        this.resetCurrentCar();
+                        this.startTemporaryModeTimer();
+                        break;
+                    }
+                case __WEBPACK_IMPORTED_MODULE_0__constants__["D" /* RADAR_MODE_ROGUE */]:
+                    {
+                        this.mainText.fill = __WEBPACK_IMPORTED_MODULE_0__constants__["g" /* COLOR_DARK_RED */];
+                        this.mainText.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["r" /* I18N_RADAR_ROGUE */]));
+                        this.secondaryText.setText(Object(__WEBPACK_IMPORTED_MODULE_1__utils__["a" /* getFormattedCurrency */])(-this.currentFine, this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["i" /* I18N_CURRENCY */])));
+                        this.secondaryText.fill = __WEBPACK_IMPORTED_MODULE_0__constants__["g" /* COLOR_DARK_RED */];
+                        this.secondaryText.visible = true;
+                        this.resetCurrentCar();
+                        this.startTemporaryModeTimer();
+                        break;
+                    }
+                case __WEBPACK_IMPORTED_MODULE_0__constants__["x" /* RADAR_MODE_ALREADY_FINED */]:
+                    {
+                        this.mainText.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["m" /* I18N_RADAR_ALREADY_FINED */]));
+                        this.resetCurrentCar();
+                        this.startTemporaryModeTimer();
+                        break;
+                    }
+            }
+
+            this.mode = mode;
+
+            this.drawScreen();
+        }
+    }, {
+        key: 'drawScreen',
+        value: function drawScreen() {
+            var color = void 0;
+            switch (this.mode) {
+                case __WEBPACK_IMPORTED_MODULE_0__constants__["B" /* RADAR_MODE_FINE */]:
+                case __WEBPACK_IMPORTED_MODULE_0__constants__["D" /* RADAR_MODE_ROGUE */]:
+                    color = 0xDDAAAA;
+                    break;
+                default:
+                    color = 0xD1D1D1;
+            }
+            this.screen.clear();
+            this.screen.lineStyle(4, 0);
+            this.screen.beginFill(color);
+            this.screen.drawRoundedRect(0, 0, this.width, this.height, 16);
+            this.screen.endFill();
+        }
+    }, {
+        key: 'startTemporaryModeTimer',
+        value: function startTemporaryModeTimer() {
+            this.temporaryModeTimer.add(TEMPORARY_MODE_DURATION, this.handleCompleteTemporaryMode, this);
+            this.temporaryModeTimer.start();
+        }
+    }, {
+        key: 'resetCurrentCar',
+        value: function resetCurrentCar() {
+            this.currentCar = null;
+            this.currentFine = 0;
         }
     }]);
 
-    return PlateNumber;
+    return RadarMonitor;
 }();
 
-/* harmony default export */ __webpack_exports__["a"] = (PlateNumber);
+/* harmony default export */ __webpack_exports__["a"] = (RadarMonitor);
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/aeaabcbdc856b252e7b2c0806410a328.png";
+
+/***/ }),
+/* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var RoadSign = function RoadSign(_ref) {
+    var game = _ref.game,
+        x = _ref.x,
+        y = _ref.y,
+        speedLimit = _ref.speedLimit;
+
+    _classCallCheck(this, RoadSign);
+
+    this.group = game.add.group();
+    this.group.x = x;
+    this.group.y = y;
+
+    this.signSprite = game.add.sprite(0, 0, 'roadSign');
+    this.signSprite.anchor.set(0.5, 1);
+    this.group.add(this.signSprite);
+
+    this.speedLimitText = game.add.text(0, -this.signSprite.height + this.signSprite.width / 2 + 3, speedLimit, {
+        align: 'center'
+    });
+    this.speedLimitText.font = 'Arial';
+    this.speedLimitText.fontSize = 30;
+    this.speedLimitText.anchor.set(0.5, 0.5);
+    this.group.add(this.speedLimitText);
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (RoadSign);
+
+/***/ }),
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__constants__ = __webpack_require__(0);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+
+var Score = function () {
+    function Score(_ref) {
+        var game = _ref.game,
+            x = _ref.x,
+            y = _ref.y,
+            _ref$score = _ref.score,
+            score = _ref$score === undefined ? 0 : _ref$score,
+            goal = _ref.goal;
+
+        _classCallCheck(this, Score);
+
+        this.game = game;
+
+        this.value = score;
+        this.goal = goal;
+
+        this.group = this.game.add.group();
+        this.group.x = x;
+        this.group.y = y;
+
+        this.scoreText = this.game.add.text(0, 0);
+        this.scoreText.font = '"Press Start 2P", Arial';
+        this.scoreText.fontSize = 16;
+        this.scoreText.fill = '#ffffff';
+        this.group.add(this.scoreText);
+
+        this.updateValue(0);
+        // todo score progress bar
+    }
+
+    _createClass(Score, [{
+        key: 'update',
+        value: function update() {}
+    }, {
+        key: 'updateValue',
+        value: function updateValue(sum) {
+            this.value += sum;
+            this.scoreText.setText(Object(__WEBPACK_IMPORTED_MODULE_0__utils__["a" /* getFormattedCurrency */])(this.value, this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_1__constants__["i" /* I18N_CURRENCY */])));
+            // todo score +- animation
+        }
+    }]);
+
+    return Score;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Score);
+
+/***/ }),
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export getFormattedTime */
+/* harmony export (immutable) */ __webpack_exports__["a"] = getFormattedCurrency;
+function getFormattedTime(seconds) {
+    return String(Math.floor(seconds / 60)).padStart(2, '0') + ':' + String(seconds % 60).padStart(2, '0');
+}
+
+function getFormattedCurrency(value, currency) {
+    var sign = value < 0;
+    value = String(Math.abs(value));
+    var result = '';
+    for (var i = 0; i < value.length; i++) {
+        if (i % 3 === 0) {
+            result = ' ' + result;
+        }
+        result = value.charAt(value.length - i - 1) + result;
+    }
+    return (sign ? '-' : '') + result + currency;
+}
 
 /***/ })
 /******/ ]);

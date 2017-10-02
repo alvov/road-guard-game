@@ -17,10 +17,17 @@ const pack = {
         },
         {
             type: 'spritesheet',
+            key: 'roadSign',
+            url: require('./images/roadSign.png'),
+            frameWidth: 60,
+            frameHeight: 140
+        },
+        {
+            type: 'spritesheet',
             key: 'car01',
             url: require('./images/car01.png'),
-            frameWidth: 76,
-            frameHeight: 51
+            frameWidth: 152,
+            frameHeight: 102
         },
         // {
         //     type: 'spritesheet',
