@@ -1,3 +1,5 @@
+import UIProgressBar from './UIProgressBar';
+import { getFormattedCurrency } from '../utils';
 import {
     COLOR_DARK_RED,
     I18N_CURRENCY,
@@ -8,7 +10,6 @@ import {
     RADAR_MODE_COMPUTING, RADAR_MODE_DISMISS,
     RADAR_MODE_EMPTY, RADAR_MODE_FINE, RADAR_MODE_FINED, RADAR_MODE_ROGUE
 } from '../constants';
-import {getFormattedCurrency} from '../utils';
 
 const TEMPORARY_MODE_DURATION = 2000;
 
@@ -58,8 +59,16 @@ class RadarMonitor {
         this.secondaryText.anchor.set(0.5, 1);
         this.group.add(this.secondaryText);
 
-        this.progressBar = this.game.add.graphics();
-        this.group.add(this.progressBar);
+        const progressBarOffset = this.height / 10;
+        this.progressBar = new UIProgressBar({
+            game: this.game,
+            x: progressBarOffset,
+            y: this.height - 2 * progressBarOffset - 5,
+            width: this.width - 2 * progressBarOffset,
+            height: 10,
+            color: 0,
+        });
+        this.group.add(this.progressBar.graphics);
 
         this.mode = null;
 
@@ -76,35 +85,14 @@ class RadarMonitor {
     update() {
         if (this.mode === RADAR_MODE_COMPUTING) {
             if (this.computingTimer.running) {
-                this.updateProgressBar(this.computingTimer.ms / this.computingTimerDuration);
+                this.progressBar.update({ percent: this.computingTimer.ms / this.computingTimerDuration });
             }
         }
-    }
-
-    updateProgressBar(percent) {
-        const color = 0;
-        const offset = this.height / 10;
-        const width = this.width - 2 * offset;
-        const height = 10;
-        const y = this.height - 2 * offset - height / 2;
-        this.progressBar.clear();
-        this.progressBar.lineStyle(1, color, 1);
-        this.progressBar.drawRect(offset, y - height / 2, width, height);
-        this.progressBar.lineStyle(height, color, 1);
-        this.progressBar.moveTo(offset, y);
-        this.progressBar.lineTo(width * percent, y);
     }
 
     handleCompleteComputing() {
         this.computingTimer.stop(true);
-        this.currentFine = 0;
-        for (let i = 0; i < this.fines.length; i++) {
-            const [speedExcess, fine] = this.fines[i];
-            if (this.currentCar.velocity.x < speedExcess + this.speedLimit) {
-                this.currentFine = fine;
-                break;
-            }
-        }
+        this.currentFine = this.getFine(this.currentCar.velocity.x);
         if (this.currentFine === 0) {
             this.setMode(RADAR_MODE_DISMISS, { speed: this.currentCar.velocity.x });
         } else {
@@ -121,7 +109,7 @@ class RadarMonitor {
         this.computingTimer.stop(true);
         this.temporaryModeTimer.stop(true);
 
-        this.progressBar.visible = false;
+        this.progressBar.graphics.visible = false;
         this.secondaryText.visible = false;
 
         this.mainText.fill = '#000';
@@ -152,7 +140,7 @@ class RadarMonitor {
                     this.currentCar = props.car;
 
                     this.mainText.setText(this.game.rg.i18n.getTranslation(I18N_RADAR_WAIT));
-                    this.progressBar.visible = true;
+                    this.progressBar.graphics.visible = true;
 
                     this.computingTimer.add(this.computingTimerDuration, this.handleCompleteComputing, this);
                     this.computingTimer.start();
@@ -219,6 +207,18 @@ class RadarMonitor {
     startTemporaryModeTimer() {
         this.temporaryModeTimer.add(TEMPORARY_MODE_DURATION, this.handleCompleteTemporaryMode, this);
         this.temporaryModeTimer.start();
+    }
+
+    getFine(speed) {
+        let result = 0;
+        for (let i = 0; i < this.fines.length; i++) {
+            const [speedExcess, fine] = this.fines[i];
+            if (speed < speedExcess + this.speedLimit) {
+                result = fine;
+                break;
+            }
+        }
+        return result;
     }
 
     resetCurrentCar() {

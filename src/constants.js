@@ -1,7 +1,11 @@
 export const UI_OFFSET = 10;
 
 export const COLOR_MAIN_BG = '#312162';
+export const COLOR_RED = '#F23B3B';
 export const COLOR_DARK_RED = '#BD0E0E';
+export const COLOR_DARK_GREY = '#707070';
+export const COLOR_GREEN = '#517F30';
+export const COLOR_YELLOW = '#F9FF77';
 
 export const STATE_BOOT = 'boot';
 export const STATE_LOADING = 'loading';
@@ -10,6 +14,9 @@ export const STATE_GAME = 'game';
 
 export const LANG_RU = 'ru';
 export const LANG_EN = 'en';
+
+export const END_GAME_TIME_OUT = 'timeOut';
+export const END_GAME_WIN = 'win';
 
 export const CAR_MODE_NORMAL = 'normal';
 export const CAR_MODE_FINED = 'fined';
@@ -27,6 +34,9 @@ export const I18N_MENU_BACK = 'menuBack';
 export const I18N_MENU_START = 'menuStart';
 export const I18N_UI_LOADING = 'uiLoading';
 export const I18N_UI_PAUSE = 'uiPause';
+export const I18N_UI_BUTTON_QUIT = 'uiBtnQuit';
+export const I18N_UI_BUTTON_NEXT = 'uiBtnNext';
+export const I18N_UI_BUTTON_REPLAY = 'uiBtnReplay';
 export const I18N_CURRENCY = 'currency';
 export const I18N_RADAR_EMPTY = 'radarEmpty';
 export const I18N_RADAR_METRICS = 'radarMetrics';
@@ -35,6 +45,12 @@ export const I18N_RADAR_FINED = 'radarFined';
 export const I18N_RADAR_ROGUE = 'radarRogue';
 export const I18N_RADAR_ALREADY_FINED = 'radarAlreadyFined';
 export const I18N_RADAR_PRESS_TO_FINE = 'radarPressToFine';
+export const I18N_END_WIN = 'endWin';
+export const I18N_END_LOOSE = 'endLoose';
+export const I18N_STATS_TIME = 'statsTime';
+export const I18N_STATS_FINES = 'statsFines';
+export const I18N_STATS_WRONG = 'statsWrong';
+export const I18N_STATS_MISSED = 'statsMissed';
 
 export const CAR_RELATIVE_WIDTH = 200;
 export const CAR_SPRITE_KEYS = [

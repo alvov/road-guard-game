@@ -15,7 +15,10 @@ window.WebFontConfig = {
         families: ['Press Start 2P:400:latin,cyrillic']
     },
     active() {
-        initGame();
+        // this fixes mobile browser 100% height issue with address bar and tabs
+        setTimeout(() => {
+            initGame();
+        }, 50);
     },
 };
 
@@ -23,7 +26,6 @@ const script = document.createElement('script');
 script.src = 'dist/webfontloader.js';
 document.head.appendChild(script);
 
-// this fixes mobile browser 100% height issue with address bar and tabs
 function initGame() {
     const windowInnerHeight = window.innerHeight;
     if (document.body.clientHeight > windowInnerHeight) {

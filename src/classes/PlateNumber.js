@@ -29,10 +29,10 @@ class PlateNumber {
             '',
             {
                 font: `${height - 1}px Arial`,
-                fill: '#000'
+                fontVariant: 'small-caps',
+                fill: '#000',
             }
         );
-        this.text.fontVariant = 'small-caps';
         this.text.anchor.set(0.5, 0);
         this.text.cacheAsBitmap = true;
         this.group.add(this.text);

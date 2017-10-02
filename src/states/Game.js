@@ -1,21 +1,44 @@
 import Car from '../classes/Car';
 import Road from '../classes/Road';
-import GameInterface from '../classes/GameInterface';
 import RadarMonitor from '../classes/RadarMonitor';
+import RoadSign from '../classes/RoadSign';
+import Score from '../classes/Score';
+import LevelTimer from '../classes/LevelTimer';
+import EndLevel from '../classes/screens/EndLevel';
+import { getLevel, getNextLevelId } from '../utils';
+
 import {
+    UI_OFFSET,
     CAR_MODE_FINED,
     RADAR_MODE_COMPUTING,
     RADAR_MODE_FINE,
     RADAR_MODE_ALREADY_FINED,
-    RADAR_MODE_EMPTY, UI_OFFSET, RADAR_MODE_ROGUE, RADAR_MODE_FINED,
+    RADAR_MODE_EMPTY,
+    RADAR_MODE_ROGUE,
+    RADAR_MODE_FINED,
+    END_GAME_TIME_OUT, END_GAME_WIN, I18N_UI_BUTTON_QUIT, STATE_MENU, STATE_LOADING, I18N_UI_BUTTON_NEXT, STATE_GAME,
+    I18N_UI_BUTTON_REPLAY,
 } from '../constants';
-import RoadSign from '../classes/RoadSign';
-import Score from '../classes/Score';
 
 class Game {
     init(level) {
         this.rg = {
             level,
+            levelEnded: false,
+            stats: {
+                fines: {
+                    count: 0,
+                    sum: 0,
+                },
+                wrong: {
+                    count: 0,
+                    sum: 0,
+                },
+                missed: {
+                    count: 0,
+                    sum: 0,
+                },
+            },
             cars: {
                 revive: false,
                 count: (level.road.end - level.road.start) / level.speed.limit / level.cars.frequency
@@ -25,7 +48,11 @@ class Game {
                 roadSign: null,
                 interface: null,
                 score: null,
+                timer: null,
                 radar: null,
+            },
+            screens: {
+                endLevel: null,
             },
             arrays: {
                 cars: [],
@@ -70,15 +97,16 @@ class Game {
         this.createCars(this.rg.cars.count);
 
         // ui
-        this.rg.objects.interface = new GameInterface({
-            game: this.game
-        });
-
         this.rg.objects.score = new Score({
             game: this.game,
             x: UI_OFFSET,
             y: UI_OFFSET,
             goal: this.rg.level.money.goal,
+        });
+
+        this.rg.objects.timer = new LevelTimer({
+            game: this.game,
+            duration: this.rg.level.duration,
         });
 
         const radarHeight = 100;
@@ -92,6 +120,11 @@ class Game {
             fines: this.rg.level.money.fines,
             speedLimit: this.rg.level.speed.limit,
             onFine: this.handleFine.bind(this)
+        });
+
+        // screens
+        this.rg.screens.endLevel = new EndLevel({
+            game: this.game,
         });
 
         // events
@@ -134,6 +167,14 @@ class Game {
 
         // update radar
         this.rg.objects.radar.update();
+
+        // update score
+        this.rg.objects.score.update();
+
+        // check end game
+        if (!this.rg.levelEnded) {
+            this.checkLevelEnd();
+        }
     }
 
     updateCar(carSprite) {
@@ -161,14 +202,28 @@ class Game {
 
     handleTap(pointer) {
         let handled;
+
         if (pointer.targetObject) {
-            if (pointer.targetObject.sprite.name.startsWith('car')) {
-                this.handleClickCar(pointer.targetObject.sprite.rg);
-                handled = true;
-            } else if (pointer.targetObject.sprite.name === 'radar') {
-                if (this.rg.objects.radar.mode === RADAR_MODE_FINE) {
-                    this.handleFine();
-                    handled = true
+            if (!this.rg.levelEnded) {
+                if (pointer.targetObject.sprite.name.startsWith('car')) {
+                    this.handleClickCar(pointer.targetObject.sprite.rg);
+                    handled = true;
+                } else if (pointer.targetObject.sprite.name === 'radar') {
+                    if (this.rg.objects.radar.mode === RADAR_MODE_FINE) {
+                        this.handleFine();
+                        handled = true
+                    }
+                }
+            } else {
+                if (pointer.targetObject.sprite.name === I18N_UI_BUTTON_QUIT) {
+                    this.handleClickQuit();
+                    handled = true;
+                } else if (pointer.targetObject.sprite.name === I18N_UI_BUTTON_NEXT) {
+                    this.handleClickNext();
+                    handled = true;
+                } else if (pointer.targetObject.sprite.name === I18N_UI_BUTTON_REPLAY) {
+                    this.handleClickReplay();
+                    handled = true;
                 }
             }
         }
@@ -179,6 +234,19 @@ class Game {
 
     handleClickField() {
         this.rg.objects.radar.setMode(RADAR_MODE_EMPTY);
+    }
+
+    handleClickQuit() {
+        this.state.start(STATE_MENU);
+    }
+
+    handleClickNext() {
+        const nextLevel = getNextLevelId(this.rg.level.id);
+        this.state.start(STATE_GAME, true, false, getLevel(nextLevel));
+    }
+
+    handleClickReplay() {
+        this.state.start(STATE_GAME, true, false, getLevel(this.rg.level.id));
     }
 
     handleClickCar(car) {
@@ -193,18 +261,51 @@ class Game {
         if (car === this.rg.objects.radar.currentCar) {
             this.rg.objects.radar.setMode(RADAR_MODE_EMPTY);
         }
+        if (!this.rg.levelEnded && car.mode !== CAR_MODE_FINED && !car.isRogue) {
+            const fine = this.rg.objects.radar.getFine(car.velocity.x);
+            if (fine !== 0) {
+                this.rg.stats.missed.count++;
+                this.rg.stats.missed.sum += fine;
+            }
+        }
     }
 
     handleFine() {
         const car = this.rg.objects.radar.currentCar;
         car.setMode(CAR_MODE_FINED);
         if (car.isRogue) {
+            this.rg.stats.wrong.count++;
+            this.rg.stats.wrong.sum -= this.rg.objects.radar.currentFine;
             this.rg.objects.score.updateValue(-this.rg.objects.radar.currentFine);
             this.rg.objects.radar.setMode(RADAR_MODE_ROGUE);
         } else {
+            this.rg.stats.fines.count++;
+            this.rg.stats.fines.sum += this.rg.objects.radar.currentFine;
             this.rg.objects.score.updateValue(this.rg.objects.radar.currentFine);
             this.rg.objects.radar.setMode(RADAR_MODE_FINED);
         }
+    }
+
+    checkLevelEnd() {
+        if (this.rg.objects.timer.isExpired) {
+            this.endLevel(END_GAME_TIME_OUT);
+        } else if (this.rg.objects.score.reachedGoal) {
+            this.endLevel(END_GAME_WIN);
+        }
+    }
+
+    endLevel(mode) {
+        this.rg.levelEnded = true;
+        this.rg.objects.timer.kill();
+
+        this.rg.screens.endLevel.show({
+            mode,
+            stats: {
+                time: this.rg.objects.timer.secondsElapsed,
+                ...this.rg.stats,
+            },
+            nextLevel: getNextLevelId(this.rg.level.id),
+        });
     }
 
     resetCarTimer() {

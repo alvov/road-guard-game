@@ -21,6 +21,18 @@ export default {
         en: 'Paused',
         ru: 'Пауза'
     },
+    [cnst.I18N_UI_BUTTON_QUIT]: {
+        en: 'Quit',
+        ru: 'Выход'
+    },
+    [cnst.I18N_UI_BUTTON_NEXT]: {
+        en: 'Next',
+        ru: 'Дальше'
+    },
+    [cnst.I18N_UI_BUTTON_REPLAY]: {
+        en: 'Try again',
+        ru: 'Еще раз'
+    },
     [cnst.I18N_CURRENCY]: {
         en: 'rub.',
         ru: 'руб.'
@@ -42,8 +54,8 @@ export default {
         ru: 'Штраф'
     },
     [cnst.I18N_RADAR_ROGUE]: {
-        en: 'CAN NOT!',
-        ru: 'НЕЛЬЗЯ!'
+        en: 'AUTHORITY!',
+        ru: 'БЛАТНОЙ!'
     },
     [cnst.I18N_RADAR_ALREADY_FINED]: {
         en: 'ALREADY FINED!',
@@ -52,5 +64,29 @@ export default {
     [cnst.I18N_RADAR_PRESS_TO_FINE]: {
         en: 'tap to fine',
         ru: 'оштрафовать?'
+    },
+    [cnst.I18N_END_LOOSE]: {
+        en: 'You lost!',
+        ru: 'Вы проиграли!'
+    },
+    [cnst.I18N_END_WIN]: {
+        en: 'You won!',
+        ru: 'Вы выиграли!'
+    },
+    [cnst.I18N_STATS_TIME]: {
+        en: 'Time',
+        ru: 'Время'
+    },
+    [cnst.I18N_STATS_FINES]: {
+        en: 'Fines',
+        ru: 'Штрафов'
+    },
+    [cnst.I18N_STATS_WRONG]: {
+        en: 'Wrong cars',
+        ru: 'Блатных'
+    },
+    [cnst.I18N_STATS_MISSED]: {
+        en: 'Missed',
+        ru: 'Пропущено'
     },
 };

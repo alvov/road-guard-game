@@ -1,7 +1,12 @@
+import UIProgressBar from './UIProgressBar';
 import { getFormattedCurrency } from '../utils';
 import {
-    I18N_CURRENCY
+    I18N_CURRENCY,
+    COLOR_RED,
+    COLOR_YELLOW,
 } from '../constants';
+
+const UPDATE_TEXT_TWEEN_DURATION = 2000;
 
 class Score {
     constructor({ game, x, y, score = 0, goal, }) {
@@ -14,29 +19,72 @@ class Score {
         this.group.x = x;
         this.group.y = y;
 
+        this.progressBar = new UIProgressBar({
+            game: this.game,
+            x: 0,
+            y: 0,
+            width: this.game.width / 3,
+            height: 10,
+            color: 0xffffff,
+            radius: 5,
+        });
+        this.group.add(this.progressBar.graphics);
+
+        this.scoreTextFontStyle = {
+            font: '16px "Press Start 2P", Arial',
+            fill: '#fff',
+        };
         this.scoreText = this.game.add.text(
             0,
-            0
+            this.progressBar.height * 2,
+            '',
+            this.scoreTextFontStyle
         );
-        this.scoreText.font = '"Press Start 2P", Arial';
-        this.scoreText.fontSize = 16;
-        this.scoreText.fill = '#ffffff';
         this.group.add(this.scoreText);
 
+        this.updateText = this.game.add.text(
+            0,
+            this.scoreText.bottom,
+            '',
+            this.scoreTextFontStyle
+        );
+        this.group.add(this.updateText);
+
+        this.updateTextTween = null;
+
         this.updateValue(0);
-        // todo score progress bar
+    }
+
+    get reachedGoal() {
+        return this.value >= this.goal;
     }
 
     update() {
-
+        this.progressBar.update({ percent: this.value / this.goal });
     }
 
     updateValue(sum) {
         this.value += sum;
+
         this.scoreText.setText(
             getFormattedCurrency(this.value, this.game.rg.i18n.getTranslation(I18N_CURRENCY))
         );
-        // todo score +- animation
+
+        if (sum !== 0) {
+            this.updateText.setText(
+                (sum > 0 ? '+ ' : '- ') +
+                getFormattedCurrency(Math.abs(sum), this.game.rg.i18n.getTranslation(I18N_CURRENCY))
+            );
+            this.updateText.fill = sum > 0 ? COLOR_YELLOW : COLOR_RED;
+            this.updateText.alpha = 1;
+
+            if (this.updateTextTween) {
+                this.updateTextTween.stop();
+            }
+            this.updateTextTween = this.game.add.tween(this.updateText)
+                .to({ alpha: 0 }, UPDATE_TEXT_TWEEN_DURATION);
+            this.updateTextTween.start();
+        }
     }
 }
 

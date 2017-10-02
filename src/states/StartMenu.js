@@ -1,4 +1,3 @@
-import levels from '../levels.js';
 import pack from '../assets/pack.js';
 
 import {
@@ -9,6 +8,8 @@ import {
     I18N_MENU_START, STATE_LOADING, STATE_GAME,
     UI_OFFSET,
 } from '../constants';
+
+import { getLevel } from '../utils';
 
 class StartMenu {
     preload() {
@@ -70,7 +71,7 @@ class StartMenu {
                 ['pack', 'game', null, pack],
             ],
             nextState: [
-                STATE_GAME, levels['level1']
+                STATE_GAME, getLevel()
             ]
         });
     }
