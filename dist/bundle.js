@@ -532,6 +532,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__states_StartMenu__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__states_Game__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__constants__ = __webpack_require__(0);
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 
 
 
@@ -557,18 +559,17 @@ var script = document.createElement('script');
 script.src = 'dist/webfontloader.js';
 document.head.appendChild(script);
 
-function initGame() {
-    var windowInnerHeight = window.innerHeight;
-    if (document.body.clientHeight > windowInnerHeight) {
-        document.body.style.height = windowInnerHeight + 'px';
-        document.documentElement.style.height = windowInnerHeight + 'px';
-    }
+var containerNode = document.querySelector('.js-game-container');
 
-    var containerNode = document.querySelector('.js-game-container');
+function initGame() {
+    var _rgResizeBody = rgResizeBody(),
+        _rgResizeBody2 = _slicedToArray(_rgResizeBody, 2),
+        gameWidth = _rgResizeBody2[0],
+        gameHeight = _rgResizeBody2[1];
 
     var game = new Phaser.Game({
-        width: containerNode.clientWidth,
-        height: containerNode.clientHeight,
+        width: gameWidth,
+        height: gameHeight,
         parent: containerNode,
         antialias: true,
         renderer: Phaser.CANVAS
@@ -581,6 +582,16 @@ function initGame() {
 
     game.state.start(__WEBPACK_IMPORTED_MODULE_5__constants__["T" /* STATE_BOOT */]);
 }
+
+window.rgResizeBody = function rgResizeBody() {
+    var windowInnerHeight = window.innerHeight;
+    if (document.body.clientHeight > windowInnerHeight) {
+        document.body.style.height = windowInnerHeight + 'px';
+        document.documentElement.style.height = windowInnerHeight + 'px';
+    }
+
+    return [containerNode.clientWidth, containerNode.clientHeight];
+};
 
 /***/ }),
 /* 7 */
@@ -597,6 +608,8 @@ function initGame() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__classes_i18n__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants__ = __webpack_require__(0);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -621,11 +634,13 @@ var Boot = function () {
     }, {
         key: 'create',
         value: function create() {
+            // events
+            this.state.onStateChange.add(this.handleStateChange, this);
+            this.scale.onOrientationChange.add(this.handleOrientationChange, this);
+
             this.game.rg.i18n = new __WEBPACK_IMPORTED_MODULE_1__classes_i18n__["a" /* default */]({
                 game: this.game
             });
-
-            this.state.onStateChange.add(this.handleStateChange, this);
 
             this.state.start(__WEBPACK_IMPORTED_MODULE_2__constants__["V" /* STATE_LOADING */], true, false, {
                 assets: [['pack', 'initial', null, __WEBPACK_IMPORTED_MODULE_0__assets_pack__["a" /* default */]]],
@@ -636,6 +651,19 @@ var Boot = function () {
         key: 'handleStateChange',
         value: function handleStateChange() {
             this.game.rg.i18n.clear();
+        }
+    }, {
+        key: 'handleOrientationChange',
+        value: function handleOrientationChange(scale, prevOrientation, wasIncorrect) {
+            var _this = this;
+
+            if (scale.screenOrientation !== prevOrientation && scale.screenOrientation.startsWith('landscape')) {
+                setTimeout(function () {
+                    var _scale;
+
+                    (_scale = _this.scale).setGameSize.apply(_scale, _toConsumableArray(window.rgResizeBody()));
+                }, 500);
+            }
         }
     }]);
 
@@ -950,35 +978,41 @@ var StartMenu = function () {
 
             this.game.world.resize(this.game.width, this.game.height);
 
-            var offsetLeft = 40;
-
-            this.title = this.game.rg.i18n.createText(this.game.width / 2, this.game.height / 6, __WEBPACK_IMPORTED_MODULE_1__constants__["n" /* I18N_GAME_TITLE */], {
+            this.title = this.game.rg.i18n.createText(0, 0, __WEBPACK_IMPORTED_MODULE_1__constants__["n" /* I18N_GAME_TITLE */], {
                 fill: '#fff'
             });
             this.title.anchor.set(0.5);
 
-            var menuOffset = this.game.height / 3;
-            var menuVerticalSpacing = Math.min(this.game.height / 7, 70);
             this.menu = [[__WEBPACK_IMPORTED_MODULE_1__constants__["p" /* I18N_MENU_START */], this.handleClickPlay.bind(this)]].map(function (_ref, i) {
                 var _ref2 = _slicedToArray(_ref, 2),
                     itemTitle = _ref2[0],
                     callback = _ref2[1];
 
-                return [_this.game.rg.i18n.createText(offsetLeft, i * menuVerticalSpacing + menuOffset, itemTitle, {
+                return [_this.game.rg.i18n.createText(0, 0, itemTitle, {
                     font: '18px "Press Start 2P", Arial',
                     fill: '#fff'
                 }), callback];
             });
 
-            this.langButton = this.game.add.button(this.game.world.width - __WEBPACK_IMPORTED_MODULE_1__constants__["X" /* UI_OFFSET */], 0, 'langButtons', this.handleClickLang.bind(this));
+            this.langButton = this.game.add.button(0, 0, 'langButtons', this.handleClickLang.bind(this));
             this.langButton.anchor.set(1, 0);
 
+            this.setObjectsPosition();
+
+            // events
             this.game.input.onDown.add(this.handleClickMenu, this);
+            this.scale.onSizeChange.add(this.setObjectsPosition, this);
         }
     }, {
         key: 'update',
         value: function update() {
             this.langButton.frame = this.game.rg.i18n.currentLang === __WEBPACK_IMPORTED_MODULE_1__constants__["L" /* LANG_RU */] ? 1 : 0;
+        }
+    }, {
+        key: 'shutdown',
+        value: function shutdown() {
+            this.game.input.onDown.remove(this.handleClickMenu, this);
+            this.scale.onSizeChange.remove(this.setObjectsPosition, this);
         }
     }, {
         key: 'handleClickPlay',
@@ -1009,6 +1043,22 @@ var StartMenu = function () {
                     return true;
                 }
             });
+        }
+    }, {
+        key: 'setObjectsPosition',
+        value: function setObjectsPosition() {
+            this.title.position.set(this.game.width / 2, this.game.height / 6);
+
+            var menuOffsetLeft = 40;
+            var menuOffset = this.game.height / 3;
+            var menuVerticalSpacing = Math.min(this.game.height / 7, 70);
+            this.menu.forEach(function (_ref5, i) {
+                var _ref6 = _slicedToArray(_ref5, 1),
+                    item = _ref6[0];
+
+                item.position.set(menuOffsetLeft, i * menuVerticalSpacing + menuOffset);
+            });
+            this.langButton.position.set(this.game.width - __WEBPACK_IMPORTED_MODULE_1__constants__["X" /* UI_OFFSET */], 0);
         }
     }]);
 
@@ -1297,6 +1347,12 @@ var Game = function () {
             // this.game.debug.body(this.mz.objects.player.sprite);
             // this.game.debug.spriteBounds(this.rg.objects.radar.mainText);
             // this.game.debug.bodyInfo(this.mz.objects.player.sprite, 0, 100);
+        }
+    }, {
+        key: 'shutdown',
+        value: function shutdown() {
+            this.game.input.onDown.remove(this.handleTap, this);
+            this.game.input.keyboard.removeKey(Phaser.Keyboard.SPACEBAR);
         }
     }, {
         key: 'handleTap',

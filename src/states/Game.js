@@ -227,6 +227,11 @@ class Game {
         // this.game.debug.bodyInfo(this.mz.objects.player.sprite, 0, 100);
     }
 
+    shutdown() {
+        this.game.input.onDown.remove(this.handleTap, this);
+        this.game.input.keyboard.removeKey(Phaser.Keyboard.SPACEBAR);
+    }
+
     handleTap(pointer) {
         let handled;
 

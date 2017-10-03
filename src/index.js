@@ -28,18 +28,14 @@ const script = document.createElement('script');
 script.src = 'dist/webfontloader.js';
 document.head.appendChild(script);
 
-function initGame() {
-    const windowInnerHeight = window.innerHeight;
-    if (document.body.clientHeight > windowInnerHeight) {
-        document.body.style.height = windowInnerHeight + 'px';
-        document.documentElement.style.height = windowInnerHeight + 'px';
-    }
+const containerNode = document.querySelector('.js-game-container');
 
-    const containerNode = document.querySelector('.js-game-container');
+function initGame() {
+    const [gameWidth, gameHeight] = rgResizeBody();
 
     const game = new Phaser.Game({
-        width: containerNode.clientWidth,
-        height: containerNode.clientHeight,
+        width: gameWidth,
+        height: gameHeight,
         parent: containerNode,
         antialias: true,
         renderer: Phaser.CANVAS
@@ -52,3 +48,13 @@ function initGame() {
 
     game.state.start(STATE_BOOT);
 }
+
+window.rgResizeBody = function rgResizeBody() {
+    const windowInnerHeight = window.innerHeight;
+    if (document.body.clientHeight > windowInnerHeight) {
+        document.body.style.height = windowInnerHeight + 'px';
+        document.documentElement.style.height = windowInnerHeight + 'px';
+    }
+
+    return [containerNode.clientWidth, containerNode.clientHeight];
+};

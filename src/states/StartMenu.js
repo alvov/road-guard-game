@@ -19,11 +19,9 @@ class StartMenu {
     create() {
         this.game.world.resize(this.game.width, this.game.height);
 
-        const offsetLeft = 40;
-
         this.title = this.game.rg.i18n.createText(
-            this.game.width / 2,
-            this.game.height / 6,
+            0,
+            0,
             I18N_GAME_TITLE,
             {
                 fill: '#fff'
@@ -31,15 +29,13 @@ class StartMenu {
         );
         this.title.anchor.set(0.5);
 
-        const menuOffset = this.game.height / 3;
-        const menuVerticalSpacing = Math.min(this.game.height / 7, 70);
         this.menu = [
             [I18N_MENU_START, this.handleClickPlay.bind(this)],
         ].map(([itemTitle, callback], i) => {
             return [
                 this.game.rg.i18n.createText(
-                    offsetLeft,
-                    i * menuVerticalSpacing + menuOffset,
+                    0,
+                    0,
                     itemTitle,
                     {
                         font: '18px "Press Start 2P", Arial',
@@ -51,18 +47,27 @@ class StartMenu {
         });
 
         this.langButton = this.game.add.button(
-            this.game.world.width - UI_OFFSET,
+            0,
             0,
             'langButtons',
             this.handleClickLang.bind(this)
         );
         this.langButton.anchor.set(1, 0);
 
+        this.setObjectsPosition();
+
+        // events
         this.game.input.onDown.add(this.handleClickMenu, this);
+        this.scale.onSizeChange.add(this.setObjectsPosition, this);
     }
 
     update() {
         this.langButton.frame = this.game.rg.i18n.currentLang === LANG_RU ? 1 : 0;
+    }
+
+    shutdown() {
+        this.game.input.onDown.remove(this.handleClickMenu, this);
+        this.scale.onSizeChange.remove(this.setObjectsPosition, this);
     }
 
     handleClickPlay() {
@@ -90,6 +95,27 @@ class StartMenu {
                 return true;
             }
         });
+    }
+
+    setObjectsPosition() {
+        this.title.position.set(
+            this.game.width / 2,
+            this.game.height / 6,
+        );
+
+        const menuOffsetLeft = 40;
+        const menuOffset = this.game.height / 3;
+        const menuVerticalSpacing = Math.min(this.game.height / 7, 70);
+        this.menu.forEach(([item], i) => {
+            item.position.set(
+                menuOffsetLeft,
+                i * menuVerticalSpacing + menuOffset,
+            );
+        });
+        this.langButton.position.set(
+            this.game.width - UI_OFFSET,
+            0,
+        );
     }
 }
 

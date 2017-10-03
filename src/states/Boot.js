@@ -15,11 +15,13 @@ class Boot {
     }
 
     create() {
+        // events
+        this.state.onStateChange.add(this.handleStateChange, this);
+        this.scale.onOrientationChange.add(this.handleOrientationChange, this);
+
         this.game.rg.i18n = new i18n({
             game: this.game
         });
-
-        this.state.onStateChange.add(this.handleStateChange, this);
 
         this.state.start(STATE_LOADING, true, false, {
             assets: [
@@ -31,6 +33,16 @@ class Boot {
 
     handleStateChange() {
         this.game.rg.i18n.clear();
+    }
+
+    handleOrientationChange(scale, prevOrientation, wasIncorrect) {
+        if (scale.screenOrientation !== prevOrientation && scale.screenOrientation.startsWith('landscape')) {
+            setTimeout(() => {
+                this.scale.setGameSize(
+                    ...window.rgResizeBody()
+                );
+            }, 500);
+        }
     }
 }
 
