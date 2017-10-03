@@ -13,6 +13,10 @@ export default {
         en: 'Play',
         ru: 'Играть'
     },
+    [cnst.I18N_UI_LEVEL]: {
+        en: 'Level',
+        ru: 'Уровень'
+    },
     [cnst.I18N_UI_LOADING]: {
         en: 'Loading',
         ru: 'Загрузка'
@@ -28,6 +32,10 @@ export default {
     [cnst.I18N_UI_BUTTON_NEXT]: {
         en: 'Next',
         ru: 'Дальше'
+    },
+    [cnst.I18N_UI_BUTTON_PLAY]: {
+        en: 'Play',
+        ru: 'Играть'
     },
     [cnst.I18N_UI_BUTTON_REPLAY]: {
         en: 'Try again',
@@ -72,6 +80,14 @@ export default {
     [cnst.I18N_END_WIN]: {
         en: 'You won!',
         ru: 'Вы выиграли!'
+    },
+    [cnst.I18N_RULES_GOAL]: {
+        en: 'Goal',
+        ru: 'Цель'
+    },
+    [cnst.I18N_RULES_AUTHORITIES]: {
+        en: 'Authorities',
+        ru: 'Блатные номера'
     },
     [cnst.I18N_STATS_TIME]: {
         en: 'Time',

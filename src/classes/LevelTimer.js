@@ -13,7 +13,6 @@ class LevelTimer {
 
         this.timer = this.game.time.create();
         this.timer.loop(Phaser.Timer.SECOND, this.updateTimer, this);
-        this.timer.start();
 
         this.secondsElapsed = 0;
 
@@ -42,6 +41,10 @@ class LevelTimer {
         }
 
         this.textTimer.setText(getFormattedTime(secondsLeft));
+    }
+
+    start() {
+        this.timer.start();
     }
 
     kill() {

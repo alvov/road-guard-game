@@ -1,12 +1,10 @@
-? M pre-level screen
-? M orientation screen
-? M graphics cars
-? M mobile
 ?   graphics rogue car signs
 ?   graphics more cars
 ?   graphics road lines
 ?   graphics grass
 ?   graphics day times / weather
+?   multicolor stats/rules
+?   UIScreen max height
 ?   acceleration for changing lanes
 ?   pause screen
 ?   how to play screen
@@ -18,6 +16,8 @@
 ?   minification
 ?   readme
 ?   screenshots
++ M orientation screen
++ M pre-level screen
 + M try FINE button
 + M end screen
 + M time limit
@@ -25,5 +25,6 @@
 + M graphics speed limit
 + M graphics radar monitor
 + M graphics score
++ M mobile
 +   fine on space key
 +   graphics car colors

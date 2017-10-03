@@ -1,3 +1,5 @@
+import './index.css';
+
 import Boot from './states/Boot';
 import Loading from './states/Loading';
 import StartMenu from './states/StartMenu';

@@ -1,3 +1,11 @@
+import UIScreen from '../UIScreen';
+import UIButton from '../UIButton';
+
+import {
+    getFormattedCurrency,
+    getFormattedTime
+} from '../../utils';
+
 import {
     COLOR,
     COLOR_HEX,
@@ -5,45 +13,13 @@ import {
     I18N_STATS_FINES, I18N_STATS_MISSED, I18N_STATS_TIME, I18N_STATS_WRONG,
     I18N_UI_BUTTON_NEXT, I18N_UI_BUTTON_QUIT, I18N_UI_BUTTON_REPLAY,
 } from '../../constants';
-import {
-    getFormattedCurrency,
-    getFormattedTime
-} from '../../utils';
-import UIButton from '../UIButton';
 
-const OVERLAY_TWEEN_DURATION = 200;
-
-class EndLevel {
+class EndLevel extends UIScreen {
     constructor({ game }) {
-        this.game = game;
-
-        this.leftOffset = this.game.width / 15;
-        this.topOffset = this.game.height / 10;
-        this.width = this.game.width - 2 * this.leftOffset;
-        this.height = this.game.height - 2 * this.topOffset;
+        super({ game });
 
         const verticalPadding = 20;
         const horizontalPadding = 40;
-
-        this.group = this.game.add.group();
-        this.group.x = this.leftOffset;
-        this.group.y = this.topOffset;
-
-        this.overlay = this.game.add.graphics();
-        this.overlay.beginFill(0xffffff);
-        this.overlay.drawRoundedRect(0, 0, this.width, this.height, 20);
-        this.overlay.endFill();
-        this.overlay.scale.set(0);
-        this.group.add(this.overlay);
-
-        this.overlayTween = this.game.add.tween(this.overlay.scale)
-            .to({
-                x: 1,
-                y: 1
-            }, OVERLAY_TWEEN_DURATION);
-
-        this.textGroup = this.game.add.group();
-        this.group.add(this.textGroup);
 
         this.textMode = this.game.add.text(
             this.width / 2,
@@ -55,7 +31,7 @@ class EndLevel {
             },
         );
         this.textMode.anchor.set(0.5, 0);
-        this.textGroup.add(this.textMode);
+        this.contentGroup.add(this.textMode);
 
         const statsLineSpacing = Math.round(Math.min(10, this.height / 43));
         const statsFontStyle = {
@@ -68,7 +44,7 @@ class EndLevel {
             statsFontStyle
         );
         this.textStatsLeft.lineSpacing = statsLineSpacing;
-        this.textGroup.add(this.textStatsLeft);
+        this.contentGroup.add(this.textStatsLeft);
 
         this.textStatsRight = this.game.add.text(
             0,
@@ -77,7 +53,7 @@ class EndLevel {
             statsFontStyle
         );
         this.textStatsRight.lineSpacing = statsLineSpacing;
-        this.textGroup.add(this.textStatsRight);
+        this.contentGroup.add(this.textStatsRight);
 
         const buttonsHeight = 40;
         const buttonsWidth = 140;
@@ -92,7 +68,7 @@ class EndLevel {
             bg: COLOR.GREEN,
             text: this.game.rg.i18n.getTranslation(I18N_UI_BUTTON_NEXT),
         });
-        this.textGroup.add(this.nextButton.group);
+        this.contentGroup.add(this.nextButton.group);
 
         this.replayButton = new UIButton({
             game: this.game,
@@ -104,7 +80,7 @@ class EndLevel {
             bg: COLOR.GREEN,
             text: this.game.rg.i18n.getTranslation(I18N_UI_BUTTON_REPLAY),
         });
-        this.textGroup.add(this.replayButton.group);
+        this.contentGroup.add(this.replayButton.group);
 
         this.quitButton = new UIButton({
             game: this.game,
@@ -116,9 +92,7 @@ class EndLevel {
             bg: COLOR.MAROON,
             text: this.game.rg.i18n.getTranslation(I18N_UI_BUTTON_QUIT),
         });
-        this.textGroup.add(this.quitButton.group);
-
-        this.hide();
+        this.contentGroup.add(this.quitButton.group);
     }
 
     handleOverlayTweenComplete(point, tween, { mode, stats, nextLevel }) {
@@ -161,19 +135,7 @@ class EndLevel {
             this.replayButton.visible = true;
         }
 
-        this.textGroup.visible = true;
-    }
-
-    show(...args) {
-        this.overlay.visible = true;
-
-        this.overlayTween.onComplete.addOnce(this.handleOverlayTweenComplete, this, 0, ...args);
-        this.overlayTween.start();
-    }
-
-    hide() {
-        this.overlay.visible = false;
-        this.textGroup.visible = false;
+        super.handleOverlayTweenComplete();
     }
 }
 

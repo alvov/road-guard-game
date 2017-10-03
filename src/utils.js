@@ -22,9 +22,12 @@ export function getLevel(levelId = getNextLevelId()) {
     return levels[levelId];
 }
 
-export function getNextLevelId(currentLevel = 'level0') {
-    const currentLevelNumber = Number(currentLevel.substr(5));
-    const nextLevelId = 'level' + (currentLevelNumber + 1);
+export function getLevelNumber(levelId) {
+    return Number(levelId.substr(5));
+}
+
+export function getNextLevelId(currentLevelId = 'level0') {
+    const nextLevelId = 'level' + (getLevelNumber(currentLevelId) + 1);
     if (levels.hasOwnProperty(nextLevelId)) {
         return nextLevelId;
     } else {

@@ -4,8 +4,9 @@ import Radar from '../classes/Radar';
 import RoadSign from '../classes/RoadSign';
 import Score from '../classes/Score';
 import LevelTimer from '../classes/LevelTimer';
+import StartLevel from '../classes/screens/StartLevel';
 import EndLevel from '../classes/screens/EndLevel';
-import { getLevel, getNextLevelId } from '../utils';
+import { getLevel, getLevelNumber, getNextLevelId } from '../utils';
 
 import {
     UI_OFFSET,
@@ -18,13 +19,14 @@ import {
     RADAR_MODE_FINED,
     END_GAME_TIME_OUT, END_GAME_WIN, I18N_UI_BUTTON_QUIT, STATE_MENU, I18N_UI_BUTTON_NEXT, STATE_GAME,
     I18N_UI_BUTTON_REPLAY, I18N_UI_BUTTON_FINE,
-    COLOR_HEX,
+    COLOR_HEX, I18N_UI_BUTTON_PLAY,
 } from '../constants';
 
 class Game {
     init(level) {
         this.rg = {
             level,
+            levelStarted: false,
             levelEnded: false,
             stats: {
                 fines: {
@@ -53,6 +55,7 @@ class Game {
                 radar: null,
             },
             screens: {
+                startLevel: null,
                 endLevel: null,
             },
             arrays: {
@@ -97,7 +100,6 @@ class Game {
 
         // cars
         this.rg.timers.reviveCar = this.game.time.create(false);
-        this.resetCarTimer();
 
         this.rg.groups.cars = this.game.add.group();
         this.createCars(this.rg.cars.count);
@@ -127,6 +129,15 @@ class Game {
         });
 
         // screens
+        this.rg.screens.startLevel = new StartLevel({
+            game: this.game,
+        });
+        this.rg.screens.startLevel.show({
+            levelNumber: getLevelNumber(this.rg.level.id),
+            goal: this.rg.level.money.goal,
+            series: this.rg.level.cars.series,
+        });
+
         this.rg.screens.endLevel = new EndLevel({
             game: this.game,
         });
@@ -137,6 +148,10 @@ class Game {
     }
 
     update() {
+        if (!this.rg.levelStarted) {
+            return;
+        }
+
         // update cars starting from the closest to the player
         for (let i = this.rg.groups.cars.length - 1; i >= 0; i--) {
             const carSprite = this.rg.groups.cars.getChildAt(i);
@@ -225,17 +240,19 @@ class Game {
                         this.handleFine();
                         handled = true
                     }
+                } else if (pointer.targetObject.sprite.name === I18N_UI_BUTTON_PLAY) {
+                    this.startLevel();
+                    handled = true
+                } else if (pointer.targetObject.sprite.name === I18N_UI_BUTTON_QUIT) {
+                    this.handleClickQuit();
                 }
             } else {
                 if (pointer.targetObject.sprite.name === I18N_UI_BUTTON_QUIT) {
                     this.handleClickQuit();
-                    handled = true;
                 } else if (pointer.targetObject.sprite.name === I18N_UI_BUTTON_NEXT) {
                     this.handleClickNext();
-                    handled = true;
                 } else if (pointer.targetObject.sprite.name === I18N_UI_BUTTON_REPLAY) {
                     this.handleClickReplay();
-                    handled = true;
                 }
             }
         }
@@ -304,6 +321,15 @@ class Game {
         } else if (this.rg.objects.score.reachedGoal) {
             this.endLevel(END_GAME_WIN);
         }
+    }
+
+    startLevel() {
+        this.rg.levelStarted = true;
+
+        this.rg.objects.timer.start();
+        this.resetCarTimer();
+
+        this.rg.screens.startLevel.hide();
     }
 
     endLevel(mode) {
@@ -462,8 +488,8 @@ class Game {
 
     getRandomCarSpeed(isRogue) {
         if (isRogue) {
-            let minDisallowedSpeed = this.rg.level.money.fines[1][0];
-            let maxDisallowedSpeed = this.rg.level.money.fines[this.rg.level.money.fines.length - 1][0];
+            let minDisallowedSpeed = this.rg.level.speed.limit + this.rg.level.money.fines[1][0];
+            let maxDisallowedSpeed = this.rg.level.speed.limit + this.rg.level.money.fines[this.rg.level.money.fines.length - 1][0];
             return this.game.rnd.integerInRange(minDisallowedSpeed, maxDisallowedSpeed - 1);
         } else {
             const randomNumber = this.game.rnd.integerInRange(1, 100);
