@@ -29,13 +29,20 @@ const pack = {
             frameWidth: 152,
             frameHeight: 102
         },
-        // {
-        //     type: 'spritesheet',
-        //     key: 'soundButtons',
-        //     url: require('./soundButtons.png'),
-        //     frameWidth: 50,
-        //     frameHeight: 50
-        // },
+        {
+            type: 'spritesheet',
+            key: 'car02',
+            url: require('./images/car02.png'),
+            frameWidth: 150,
+            frameHeight: 141
+        },
+        {
+            type: 'spritesheet',
+            key: 'rogueSigns',
+            url: require('./images/rogueSigns.png'),
+            frameWidth: 11,
+            frameHeight: 12
+        },
         // {
         //     type: 'audio',
         //     key: 'theme',

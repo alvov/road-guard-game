@@ -1,4 +1,4 @@
-import Car from '../classes/Car';
+import cars from '../classes/cars/cars';
 import Road from '../classes/Road';
 import Radar from '../classes/Radar';
 import RoadSign from '../classes/RoadSign';
@@ -363,9 +363,14 @@ class Game {
     }
 
     createCars(count) {
-        // count = 2;
         for (let i = 0; i < count; i++) {
-            const car = new Car({
+            const randomNumber = this.game.rnd.integerInRange(0, 100);
+            let cummulativeProbability = 0;
+            const [Ctr] = cars.find(([Ctr, probability]) => {
+                cummulativeProbability += probability;
+                return randomNumber <= cummulativeProbability;
+            });
+            const car = new Ctr({
                 game: this.game,
                 name: `car${i}`,
                 rogueSeries: this.rg.level.cars.series,

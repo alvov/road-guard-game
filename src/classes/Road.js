@@ -14,15 +14,14 @@ class Road {
         this.group = this.game.add.group();
 
         this.groundHeight = this.game.height * 4 / 5;
-        this.groundGraphics = this.game.add.graphics(0, 0, this.group);
-        this.groundGraphics.beginFill(0x517F30);
-        this.groundGraphics.drawRect(
+        const groundTile = this.game.add.tileSprite(
             0,
             this.game.height - this.groundHeight,
             this.game.width,
-            this.groundHeight
+            this.groundHeight,
+            'ground'
         );
-        this.groundGraphics.endFill();
+        this.group.add(groundTile);
 
         this.roadWidthTop = this.game.width / 3;
         this.roadOffsetLeft = (this.game.width - this.roadWidthTop) / 2;

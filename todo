@@ -1,7 +1,5 @@
-?   graphics rogue car signs
 ?   graphics more cars
 ?   graphics road lines
-?   graphics grass
 ?   graphics day times / weather
 ?   multicolor stats/rules
 ?   UIScreen max height
@@ -27,4 +25,6 @@
 + M graphics score
 + M mobile
 +   fine on space key
++   graphics rogue car signs
 +   graphics car colors
++   graphics grass
