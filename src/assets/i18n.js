@@ -33,6 +33,10 @@ export default {
         en: 'Try again',
         ru: 'Еще раз'
     },
+    [cnst.I18N_UI_BUTTON_FINE]: {
+        en: 'FINE!',
+        ru: 'ШТРАФ!'
+    },
     [cnst.I18N_CURRENCY]: {
         en: 'rub.',
         ru: 'руб.'
@@ -42,8 +46,8 @@ export default {
         ru: 'км/ч'
     },
     [cnst.I18N_RADAR_EMPTY]: {
-        en: 'CHOOSE A CAR',
-        ru: 'ВЫБЕРИТЕ МАШИНУ'
+        en: 'POINT A CAR',
+        ru: 'УКАЖИТЕ МАШИНУ'
     },
     [cnst.I18N_RADAR_WAIT]: {
         en: 'wait...',
@@ -60,10 +64,6 @@ export default {
     [cnst.I18N_RADAR_ALREADY_FINED]: {
         en: 'ALREADY FINED!',
         ru: 'ШТРАФ ВЫПИСАН!'
-    },
-    [cnst.I18N_RADAR_PRESS_TO_FINE]: {
-        en: 'tap to fine',
-        ru: 'оштрафовать?'
     },
     [cnst.I18N_END_LOOSE]: {
         en: 'You lost!',
@@ -82,7 +82,7 @@ export default {
         ru: 'Штрафов'
     },
     [cnst.I18N_STATS_WRONG]: {
-        en: 'Wrong cars',
+        en: 'Authorities',
         ru: 'Блатных'
     },
     [cnst.I18N_STATS_MISSED]: {

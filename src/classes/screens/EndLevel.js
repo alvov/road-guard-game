@@ -1,7 +1,9 @@
 import {
-    COLOR_DARK_RED, COLOR_GREEN, END_GAME_WIN, I18N_CURRENCY, I18N_END_LOOSE, I18N_END_WIN,
+    COLOR,
+    COLOR_HEX,
+    END_GAME_WIN, I18N_CURRENCY, I18N_END_LOOSE, I18N_END_WIN,
     I18N_STATS_FINES, I18N_STATS_MISSED, I18N_STATS_TIME, I18N_STATS_WRONG,
-    I18N_UI_BUTTON_NEXT, I18N_UI_BUTTON_QUIT, I18N_UI_BUTTON_REPLAY, STATE_MENU
+    I18N_UI_BUTTON_NEXT, I18N_UI_BUTTON_QUIT, I18N_UI_BUTTON_REPLAY,
 } from '../../constants';
 import {
     getFormattedCurrency,
@@ -87,7 +89,7 @@ class EndLevel {
             y: this.height - verticalPadding - buttonsHeight,
             width: buttonsWidth,
             height: buttonsHeight,
-            bg: Phaser.Color.hexToRGB(COLOR_GREEN),
+            bg: COLOR.GREEN,
             text: this.game.rg.i18n.getTranslation(I18N_UI_BUTTON_NEXT),
         });
         this.textGroup.add(this.nextButton.group);
@@ -99,7 +101,7 @@ class EndLevel {
             y: this.height - verticalPadding - buttonsHeight,
             width: buttonsWidth,
             height: buttonsHeight,
-            bg: Phaser.Color.hexToRGB(COLOR_GREEN),
+            bg: COLOR.GREEN,
             text: this.game.rg.i18n.getTranslation(I18N_UI_BUTTON_REPLAY),
         });
         this.textGroup.add(this.replayButton.group);
@@ -111,7 +113,7 @@ class EndLevel {
             y: this.height - verticalPadding - buttonsHeight,
             width: buttonsWidth,
             height: buttonsHeight,
-            bg: Phaser.Color.hexToRGB(COLOR_DARK_RED),
+            bg: COLOR.MAROON,
             text: this.game.rg.i18n.getTranslation(I18N_UI_BUTTON_QUIT),
         });
         this.textGroup.add(this.quitButton.group);
@@ -120,7 +122,7 @@ class EndLevel {
     }
 
     handleOverlayTweenComplete(point, tween, { mode, stats, nextLevel }) {
-        this.textMode.fill = mode === END_GAME_WIN ? COLOR_GREEN : COLOR_DARK_RED;
+        this.textMode.fill = mode === END_GAME_WIN ? COLOR_HEX.GREEN : COLOR_HEX.MAROON;
         this.textMode.setText(this.game.rg.i18n.getTranslation(
             mode === END_GAME_WIN ? I18N_END_WIN : I18N_END_LOOSE
         ));

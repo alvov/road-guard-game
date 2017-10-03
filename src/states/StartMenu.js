@@ -1,19 +1,19 @@
 import pack from '../assets/pack.js';
 
 import {
-    COLOR_MAIN_BG,
     LANG_RU,
     LANG_EN,
     I18N_GAME_TITLE,
     I18N_MENU_START, STATE_LOADING, STATE_GAME,
     UI_OFFSET,
+    COLOR_HEX,
 } from '../constants';
 
 import { getLevel } from '../utils';
 
 class StartMenu {
     preload() {
-        this.game.stage.backgroundColor = COLOR_MAIN_BG;
+        this.game.stage.backgroundColor = COLOR_HEX.MAIN;
     }
 
     create() {

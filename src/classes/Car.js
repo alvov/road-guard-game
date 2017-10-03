@@ -3,7 +3,8 @@ import {
     CAR_COLORS,
     CAR_SPRITE_KEYS,
     CAR_ALLOWED_PLATE_LETTERS,
-    CAR_MODE_NORMAL, CAR_MODE_FINED, COLOR_RED,
+    CAR_MODE_NORMAL, CAR_MODE_FINED,
+    COLOR,
 } from '../constants';
 
 const CAR_STEERING_SPEED_COEFF = 1.5;
@@ -73,7 +74,7 @@ class Car {
         if (this.rogueFinedTimer.running) {
             this.sprite.tint = Math.floor(this.rogueFinedTimer.ms / CAR_ROGUE_FINED_BLINK_DURATION) % 2 ?
                 this.color :
-                Phaser.Color.hexToRGB(COLOR_RED);
+                COLOR.RED;
         }
     }
 

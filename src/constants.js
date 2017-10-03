@@ -1,11 +1,28 @@
 export const UI_OFFSET = 10;
 
-export const COLOR_MAIN_BG = '#312162';
-export const COLOR_RED = '#F23B3B';
-export const COLOR_DARK_RED = '#BD0E0E';
-export const COLOR_DARK_GREY = '#707070';
-export const COLOR_GREEN = '#517F30';
-export const COLOR_YELLOW = '#F9FF77';
+export const COLOR_HEX = {
+    RED: '#F23B3B',
+    YELLOW: '#FFFF00',
+    GREEN: '#72C636',
+    MAROON: '#800000',
+    STEEL: '#AAB0B6',
+    SPACE_GREY: '#252525',
+    MIDNIGHT_BLUE: '#191970',
+    FLORAL_WHITE: '#FFFAF0',
+    RADAR_SCREEN: '#B2B7B1',
+    RADAR_SCREEN_RED: '#DDAAAA',
+    ROAD: '#45454A',
+    GRASS: '#517F30',
+    SKY: '#87CEFA',
+    CAR_WINDOWS: '#778899',
+    CAR_LIGHTS: '#FCFF9F',
+    MAIN: '#312162',
+};
+
+export const COLOR = Object.keys(COLOR_HEX).reduce((result, colorKey) => {
+    result[colorKey] = Phaser.Color.hexToRGB(COLOR_HEX[colorKey]);
+    return result;
+}, {});
 
 export const STATE_BOOT = 'boot';
 export const STATE_LOADING = 'loading';
@@ -34,6 +51,7 @@ export const I18N_MENU_BACK = 'menuBack';
 export const I18N_MENU_START = 'menuStart';
 export const I18N_UI_LOADING = 'uiLoading';
 export const I18N_UI_PAUSE = 'uiPause';
+export const I18N_UI_BUTTON_FINE = 'uiBtnFine';
 export const I18N_UI_BUTTON_QUIT = 'uiBtnQuit';
 export const I18N_UI_BUTTON_NEXT = 'uiBtnNext';
 export const I18N_UI_BUTTON_REPLAY = 'uiBtnReplay';
@@ -44,7 +62,6 @@ export const I18N_RADAR_WAIT = 'radarWait';
 export const I18N_RADAR_FINED = 'radarFined';
 export const I18N_RADAR_ROGUE = 'radarRogue';
 export const I18N_RADAR_ALREADY_FINED = 'radarAlreadyFined';
-export const I18N_RADAR_PRESS_TO_FINE = 'radarPressToFine';
 export const I18N_END_WIN = 'endWin';
 export const I18N_END_LOOSE = 'endLoose';
 export const I18N_STATS_TIME = 'statsTime';
@@ -57,11 +74,11 @@ export const CAR_SPRITE_KEYS = [
     'car01',
 ];
 export const CAR_COLORS = [
-    0x252525,
-    0xFCF8EE,
-    0x9A2F2F,
-    0xAAB0B6,
-    0x2A3485,
+    COLOR.SPACE_GREY,
+    COLOR.MAROON,
+    COLOR.STEEL,
+    COLOR.MIDNIGHT_BLUE,
+    COLOR.FLORAL_WHITE,
 ];
 export const CAR_ALLOWED_PLATE_LETTERS = [
     'A', 'B', 'C', 'E', 'H', 'K', 'M', 'O', 'P', 'T', 'X'

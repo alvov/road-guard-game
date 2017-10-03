@@ -2,8 +2,7 @@ import UIProgressBar from './UIProgressBar';
 import { getFormattedCurrency } from '../utils';
 import {
     I18N_CURRENCY,
-    COLOR_RED,
-    COLOR_YELLOW,
+    COLOR_HEX,
 } from '../constants';
 
 const UPDATE_TEXT_TWEEN_DURATION = 2000;
@@ -75,7 +74,7 @@ class Score {
                 (sum > 0 ? '+ ' : '- ') +
                 getFormattedCurrency(Math.abs(sum), this.game.rg.i18n.getTranslation(I18N_CURRENCY))
             );
-            this.updateText.fill = sum > 0 ? COLOR_YELLOW : COLOR_RED;
+            this.updateText.fill = sum > 0 ? COLOR_HEX.YELLOW : COLOR_HEX.RED;
             this.updateText.alpha = 1;
 
             if (this.updateTextTween) {

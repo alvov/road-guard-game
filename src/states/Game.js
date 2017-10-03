@@ -1,6 +1,6 @@
 import Car from '../classes/Car';
 import Road from '../classes/Road';
-import RadarMonitor from '../classes/RadarMonitor';
+import Radar from '../classes/Radar';
 import RoadSign from '../classes/RoadSign';
 import Score from '../classes/Score';
 import LevelTimer from '../classes/LevelTimer';
@@ -16,8 +16,9 @@ import {
     RADAR_MODE_EMPTY,
     RADAR_MODE_ROGUE,
     RADAR_MODE_FINED,
-    END_GAME_TIME_OUT, END_GAME_WIN, I18N_UI_BUTTON_QUIT, STATE_MENU, STATE_LOADING, I18N_UI_BUTTON_NEXT, STATE_GAME,
-    I18N_UI_BUTTON_REPLAY,
+    END_GAME_TIME_OUT, END_GAME_WIN, I18N_UI_BUTTON_QUIT, STATE_MENU, I18N_UI_BUTTON_NEXT, STATE_GAME,
+    I18N_UI_BUTTON_REPLAY, I18N_UI_BUTTON_FINE,
+    COLOR_HEX,
 } from '../constants';
 
 class Game {
@@ -62,14 +63,19 @@ class Game {
                 carsBehind: null,
             },
             timers: {
-                reviveCar: null
+                reviveCar: null,
+            },
+            input: {
+                keys: {
+                    space: null,
+                },
             },
         };
     }
 
     create() {
         // background
-        this.game.stage.backgroundColor = '#85c2ee';
+        this.game.stage.backgroundColor = COLOR_HEX.SKY;
 
         // cars behind the road
         this.rg.groups.carsBehind = this.game.add.group();
@@ -109,13 +115,11 @@ class Game {
             duration: this.rg.level.duration,
         });
 
-        const radarHeight = 100;
-        this.rg.objects.radar = new RadarMonitor({
+        this.rg.objects.radar = new Radar({
             game: this.game,
             x: UI_OFFSET,
-            y: this.game.height - radarHeight - UI_OFFSET,
+            y: this.game.height - UI_OFFSET,
             width: this.rg.objects.road.roadOffsetLeft - UI_OFFSET * 2,
-            height: radarHeight,
             ...this.rg.level.radar,
             fines: this.rg.level.money.fines,
             speedLimit: this.rg.level.speed.limit,
@@ -129,6 +133,7 @@ class Game {
 
         // events
         this.game.input.onDown.add(this.handleTap, this);
+        this.rg.input.keys.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     }
 
     update() {
@@ -175,6 +180,13 @@ class Game {
         if (!this.rg.levelEnded) {
             this.checkLevelEnd();
         }
+
+        // input
+        if (this.rg.input.keys.space.justDown) {
+            if (this.rg.objects.radar.mode === RADAR_MODE_FINE) {
+                this.handleFine();
+            }
+        }
     }
 
     updateCar(carSprite) {
@@ -208,7 +220,7 @@ class Game {
                 if (pointer.targetObject.sprite.name.startsWith('car')) {
                     this.handleClickCar(pointer.targetObject.sprite.rg);
                     handled = true;
-                } else if (pointer.targetObject.sprite.name === 'radar') {
+                } else if (pointer.targetObject.sprite.name === I18N_UI_BUTTON_FINE) {
                     if (this.rg.objects.radar.mode === RADAR_MODE_FINE) {
                         this.handleFine();
                         handled = true

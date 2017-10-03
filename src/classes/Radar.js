@@ -1,74 +1,127 @@
 import UIProgressBar from './UIProgressBar';
+import UIButton from '../classes/UIButton';
+
 import { getFormattedCurrency } from '../utils';
 import {
-    COLOR_DARK_RED,
     I18N_CURRENCY,
     I18N_RADAR_ALREADY_FINED,
     I18N_RADAR_EMPTY,
     I18N_RADAR_FINED,
-    I18N_RADAR_METRICS, I18N_RADAR_PRESS_TO_FINE, I18N_RADAR_ROGUE, I18N_RADAR_WAIT, RADAR_MODE_ALREADY_FINED,
+    I18N_RADAR_METRICS,
+    I18N_RADAR_ROGUE,
+    I18N_RADAR_WAIT,
+    I18N_UI_BUTTON_FINE,
+    RADAR_MODE_ALREADY_FINED,
     RADAR_MODE_COMPUTING, RADAR_MODE_DISMISS,
-    RADAR_MODE_EMPTY, RADAR_MODE_FINE, RADAR_MODE_FINED, RADAR_MODE_ROGUE
+    RADAR_MODE_EMPTY, RADAR_MODE_FINE, RADAR_MODE_FINED, RADAR_MODE_ROGUE,
+    UI_OFFSET,
+    COLOR,
+    COLOR_HEX,
 } from '../constants';
 
 const TEMPORARY_MODE_DURATION = 2000;
+const RADAR_SCREEN_HEIGHT = 120;
+const RADAR_FINE_BUTTON_HEIGHT = 70;
 
-class RadarMonitor {
-    constructor({ game, x, y, width, height, computing, fines, speedLimit, onFine, }) {
+class Radar {
+    constructor({ game, x, y, width, computing, fines, speedLimit, onFine, }) {
         this.game = game;
         this.width = width;
-        this.height = height;
+        this.height = RADAR_SCREEN_HEIGHT + RADAR_FINE_BUTTON_HEIGHT + 4 * UI_OFFSET;
         this.fines = fines;
         this.speedLimit = speedLimit;
         this.onFine = onFine;
 
-        this.group = this.game.add.group();
-        this.group.x = x;
-        this.group.y = y;
+        this.radarGroup = this.game.add.group();
+        this.radarGroup.x = x;
+        this.radarGroup.y = y - this.height;
+
+        this.body = this.game.add.graphics();
+        this.body.beginFill(0x252525);
+        this.body.drawRoundedRect(0, 0, this.width, this.height, 20);
+        this.body.endFill();
+        this.radarGroup.add(this.body);
+
+        this.screenGroup = this.game.add.group();
+        this.screenGroup.x = UI_OFFSET;
+        this.screenGroup.y = 2 * UI_OFFSET;
+        this.radarGroup.add(this.screenGroup);
 
         this.screen = this.game.add.graphics();
-        this.screen.name = 'radar';
-        this.screen.inputEnabled = true;
-        this.group.add(this.screen);
+        this.screenGroup.add(this.screen);
+        this.screenWidth = this.width - 2 * UI_OFFSET;
 
         this.mainText = this.game.add.text(
-            this.width / 2,
-            this.height / 2 + 5,
+            this.screenWidth / 2,
+            RADAR_SCREEN_HEIGHT / 2 + 5,
             '',
             {
                 align: 'center',
                 wordWrap: true,
-                wordWrapWidth: this.width
+                wordWrapWidth: this.screenWidth
             }
         );
         this.mainText.font = '"Press Start 2P", Arial';
-        this.mainText.fontSize = 20;
+        this.mainText.fontSize = 18;
         this.mainText.anchor.set(0.5, 0.5);
-        this.group.add(this.mainText);
+        this.screenGroup.add(this.mainText);
 
-        this.secondaryText = this.game.add.text(
-            this.width / 2,
-            this.height - 10,
+        this.topText = this.game.add.text(
+            this.screenWidth / 2,
+            10,
             '',
             {
                 align: 'center',
             }
         );
-        this.secondaryText.font = '"Press Start 2P", Arial';
-        this.secondaryText.fontSize = 12;
-        this.secondaryText.anchor.set(0.5, 1);
-        this.group.add(this.secondaryText);
+        this.topText.font = '"Press Start 2P", Arial';
+        this.topText.fontSize = 14;
+        this.topText.fontVariant = 'small-caps';
+        this.topText.anchor.set(0.5, 0);
+        this.screenGroup.add(this.topText);
 
-        const progressBarOffset = this.height / 10;
+        this.bottomText = this.game.add.text(
+            this.screenWidth / 2,
+            RADAR_SCREEN_HEIGHT - 10,
+            '',
+            {
+                align: 'center',
+            }
+        );
+        this.bottomText.font = '"Press Start 2P", Arial';
+        this.bottomText.fontSize = 12;
+        this.bottomText.anchor.set(0.5, 1);
+        this.screenGroup.add(this.bottomText);
+
+        const progressBarOffset = RADAR_SCREEN_HEIGHT / 10;
         this.progressBar = new UIProgressBar({
             game: this.game,
             x: progressBarOffset,
-            y: this.height - 2 * progressBarOffset - 5,
-            width: this.width - 2 * progressBarOffset,
+            y: RADAR_SCREEN_HEIGHT - 2 * progressBarOffset - 5,
+            width: this.screenWidth - 2 * progressBarOffset,
             height: 10,
             color: 0,
         });
-        this.group.add(this.progressBar.graphics);
+        this.screenGroup.add(this.progressBar.graphics);
+
+        const fineButtonWidth = this.width / 1.5;
+        this.fineButton = new UIButton({
+            game: this.game,
+            name: I18N_UI_BUTTON_FINE,
+            x: (this.width - fineButtonWidth) / 2,
+            y: this.height - RADAR_FINE_BUTTON_HEIGHT - UI_OFFSET,
+            width: fineButtonWidth,
+            height: RADAR_FINE_BUTTON_HEIGHT,
+            bg: COLOR.MAROON,
+            text: this.game.rg.i18n.getTranslation(I18N_UI_BUTTON_FINE),
+            fontStyle: {
+                font: '24px Arial',
+                fontWeight: 'bold',
+                fill: '#fff',
+            },
+            radius: 20,
+        });
+        this.radarGroup.add(this.fineButton.group);
 
         this.mode = null;
 
@@ -110,10 +163,14 @@ class RadarMonitor {
         this.temporaryModeTimer.stop(true);
 
         this.progressBar.graphics.visible = false;
-        this.secondaryText.visible = false;
+        this.topText.visible = false;
+        this.bottomText.visible = false;
 
         this.mainText.fill = '#000';
-        this.secondaryText.fill = '#000';
+        this.topText.fill = '#000';
+        this.bottomText.fill = '#000';
+
+        this.fineButton.update({ text: '...' });
 
         switch (mode) {
             case RADAR_MODE_EMPTY: {
@@ -122,17 +179,23 @@ class RadarMonitor {
                 break;
             }
             case RADAR_MODE_DISMISS: {
+                this.topText.setText(this.currentCar.plateNumber.getText());
+                this.topText.visible = true;
+
                 this.mainText.setText(
                     `${Math.round(props.speed)} ${this.game.rg.i18n.getTranslation(I18N_RADAR_METRICS)}`
                 );
                 break;
             }
             case RADAR_MODE_FINE: {
+                this.topText.setText(this.currentCar.plateNumber.getText());
+                this.topText.visible = true;
+
                 this.mainText.setText(
                     `${Math.round(props.speed)} ${this.game.rg.i18n.getTranslation(I18N_RADAR_METRICS)}`
                 );
-                this.secondaryText.setText(this.game.rg.i18n.getTranslation(I18N_RADAR_PRESS_TO_FINE));
-                this.secondaryText.visible = true;
+
+                this.fineButton.reset();
                 break;
             }
             case RADAR_MODE_COMPUTING: {
@@ -148,6 +211,9 @@ class RadarMonitor {
                 break;
             }
             case RADAR_MODE_FINED: {
+                this.topText.setText(this.currentCar.plateNumber.getText());
+                this.topText.visible = true;
+
                 this.mainText.setText(
                     this.game.rg.i18n.getTranslation(I18N_RADAR_FINED) + "\n" +
                     this.currentFine + ' ' + this.game.rg.i18n.getTranslation(I18N_CURRENCY)
@@ -157,13 +223,19 @@ class RadarMonitor {
                 break;
             }
             case RADAR_MODE_ROGUE: {
-                this.mainText.fill = COLOR_DARK_RED;
+                if (this.currentCar !== null) {
+                    this.topText.setText(this.currentCar.plateNumber.getText());
+                    this.topText.fill = COLOR_HEX.MAROON;
+                    this.topText.visible = true;
+                }
+
+                this.mainText.fill = COLOR_HEX.MAROON;
                 this.mainText.setText(this.game.rg.i18n.getTranslation(I18N_RADAR_ROGUE));
-                this.secondaryText.setText(
+                this.bottomText.setText(
                     getFormattedCurrency(-this.currentFine, this.game.rg.i18n.getTranslation(I18N_CURRENCY))
                 );
-                this.secondaryText.fill = COLOR_DARK_RED;
-                this.secondaryText.visible = true;
+                this.bottomText.fill = COLOR_HEX.MAROON;
+                this.bottomText.visible = true;
                 this.resetCurrentCar();
                 this.startTemporaryModeTimer();
                 break;
@@ -186,20 +258,18 @@ class RadarMonitor {
         switch (this.mode) {
             case RADAR_MODE_FINE:
             case RADAR_MODE_ROGUE:
-                color = 0xDDAAAA;
+                color = COLOR.RADAR_SCREEN_RED;
                 break;
             default:
-                color = 0xD1D1D1;
+                color = COLOR.RADAR_SCREEN;
         }
         this.screen.clear();
-        this.screen.lineStyle(4, 0);
         this.screen.beginFill(color);
-        this.screen.drawRoundedRect(
+        this.screen.drawRect(
             0,
             0,
-            this.width,
-            this.height,
-            16
+            this.screenWidth,
+            RADAR_SCREEN_HEIGHT
         );
         this.screen.endFill();
     }
@@ -227,4 +297,4 @@ class RadarMonitor {
     }
 }
 
-export default RadarMonitor;
+export default Radar;

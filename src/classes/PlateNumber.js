@@ -42,16 +42,21 @@ class PlateNumber {
         this.letters = letters;
         this.numbers = numbers;
 
-        this.text.setText([
-            this.letters[0].toLowerCase(),
-            this.numbers,
-            this.letters.substr(1).toLowerCase()
-        ].join('.'));
+        this.text.setText(this.getText('.'));
+        // white dots stand for spaces
         this.text.addColor('#fff', 1);
         this.text.addColor('#000', 2);
         this.text.addColor('#fff', 5);
         this.text.addColor('#000', 6);
         this.text.updateCache();
+    }
+
+    getText(spacer = '') {
+        return [
+            this.letters[0].toLowerCase(),
+            this.numbers,
+            this.letters.substr(1).toLowerCase()
+        ].join(spacer);
     }
 }
 

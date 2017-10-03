@@ -1,4 +1,7 @@
-import { CAR_RELATIVE_WIDTH } from '../constants';
+import {
+    CAR_RELATIVE_WIDTH,
+    COLOR,
+} from '../constants';
 
 class Road {
     constructor({ game, length, lanes, laneWidth }) {
@@ -29,7 +32,7 @@ class Road {
         this.topLeft = new Phaser.Point(this.roadOffsetLeft, this.game.height - this.groundHeight);
 
         this.roadGraphics = this.game.add.graphics(0, 0, this.group);
-        this.roadGraphics.beginFill(0x45454A);
+        this.roadGraphics.beginFill(COLOR.ROAD);
         this.roadGraphics.drawPolygon([
             this.topLeft,
             { x: this.roadOffsetLeft + this.roadWidthTop, y: this.topLeft.y },

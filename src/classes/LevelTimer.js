@@ -1,6 +1,6 @@
 import { getFormattedTime } from '../utils';
 import {
-    COLOR_DARK_RED,
+    COLOR_HEX,
     UI_OFFSET,
 } from '../constants';
 
@@ -38,7 +38,7 @@ class LevelTimer {
         const secondsLeft = this.duration - this.secondsElapsed;
 
         if (secondsLeft < TIME_RUNNING_OUT) {
-            this.textTimer.fill = COLOR_DARK_RED;
+            this.textTimer.fill = COLOR_HEX.MAROON;
         }
 
         this.textTimer.setText(getFormattedTime(secondsLeft));

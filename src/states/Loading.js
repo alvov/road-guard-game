@@ -1,5 +1,5 @@
 import {
-    COLOR_MAIN_BG,
+    COLOR_HEX,
     I18N_UI_LOADING,
 } from '../constants';
 
@@ -14,7 +14,7 @@ class Loading {
     }
 
     preload() {
-        this.game.stage.backgroundColor = COLOR_MAIN_BG;
+        this.game.stage.backgroundColor = COLOR_HEX.MAIN;
 
         this.rg.config.assets.forEach(([assetType, ...assetParams]) => {
             switch (assetType) {

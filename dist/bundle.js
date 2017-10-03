@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -68,64 +68,77 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "W", function() { return UI_OFFSET; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return COLOR_MAIN_BG; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return COLOR_RED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return COLOR_DARK_RED; });
-/* unused harmony export COLOR_DARK_GREY */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return COLOR_GREEN; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return COLOR_YELLOW; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "S", function() { return STATE_BOOT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "U", function() { return STATE_LOADING; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "V", function() { return STATE_MENU; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "T", function() { return STATE_GAME; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "K", function() { return LANG_RU; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "J", function() { return LANG_EN; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return END_GAME_TIME_OUT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return END_GAME_WIN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "T", function() { return UI_OFFSET; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return COLOR_HEX; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return COLOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "P", function() { return STATE_BOOT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "R", function() { return STATE_LOADING; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "S", function() { return STATE_MENU; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Q", function() { return STATE_GAME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "H", function() { return LANG_RU; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G", function() { return LANG_EN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return END_GAME_TIME_OUT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return END_GAME_WIN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return CAR_MODE_NORMAL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return CAR_MODE_FINED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "O", function() { return RADAR_MODE_EMPTY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "M", function() { return RADAR_MODE_COMPUTING; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "P", function() { return RADAR_MODE_FINE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "N", function() { return RADAR_MODE_DISMISS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Q", function() { return RADAR_MODE_FINED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "R", function() { return RADAR_MODE_ROGUE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "L", function() { return RADAR_MODE_ALREADY_FINED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return I18N_GAME_TITLE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return I18N_MENU_BACK; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return I18N_MENU_START; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "H", function() { return I18N_UI_LOADING; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "I", function() { return I18N_UI_PAUSE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return I18N_UI_BUTTON_QUIT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "E", function() { return I18N_UI_BUTTON_NEXT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G", function() { return I18N_UI_BUTTON_REPLAY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return I18N_CURRENCY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return I18N_RADAR_EMPTY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return I18N_RADAR_METRICS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "z", function() { return I18N_RADAR_WAIT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return I18N_RADAR_FINED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return I18N_RADAR_ROGUE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return I18N_RADAR_ALREADY_FINED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return I18N_RADAR_PRESS_TO_FINE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return I18N_END_WIN; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return I18N_END_LOOSE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return I18N_STATS_TIME; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "A", function() { return I18N_STATS_FINES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "D", function() { return I18N_STATS_WRONG; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "B", function() { return I18N_STATS_MISSED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "L", function() { return RADAR_MODE_EMPTY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "J", function() { return RADAR_MODE_COMPUTING; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "M", function() { return RADAR_MODE_FINE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "K", function() { return RADAR_MODE_DISMISS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "N", function() { return RADAR_MODE_FINED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "O", function() { return RADAR_MODE_ROGUE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "I", function() { return RADAR_MODE_ALREADY_FINED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return I18N_GAME_TITLE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return I18N_MENU_BACK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return I18N_MENU_START; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "E", function() { return I18N_UI_LOADING; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return I18N_UI_PAUSE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "A", function() { return I18N_UI_BUTTON_FINE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return I18N_UI_BUTTON_QUIT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "B", function() { return I18N_UI_BUTTON_NEXT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "D", function() { return I18N_UI_BUTTON_REPLAY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return I18N_CURRENCY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return I18N_RADAR_EMPTY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return I18N_RADAR_METRICS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return I18N_RADAR_WAIT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return I18N_RADAR_FINED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return I18N_RADAR_ROGUE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return I18N_RADAR_ALREADY_FINED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return I18N_END_WIN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return I18N_END_LOOSE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return I18N_STATS_TIME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return I18N_STATS_FINES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "z", function() { return I18N_STATS_WRONG; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return I18N_STATS_MISSED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return CAR_RELATIVE_WIDTH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return CAR_SPRITE_KEYS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return CAR_COLORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CAR_ALLOWED_PLATE_LETTERS; });
 var UI_OFFSET = 10;
 
-var COLOR_MAIN_BG = '#312162';
-var COLOR_RED = '#F23B3B';
-var COLOR_DARK_RED = '#BD0E0E';
-var COLOR_DARK_GREY = '#707070';
-var COLOR_GREEN = '#517F30';
-var COLOR_YELLOW = '#F9FF77';
+var COLOR_HEX = {
+    RED: '#F23B3B',
+    YELLOW: '#FFFF00',
+    GREEN: '#72C636',
+    MAROON: '#800000',
+    STEEL: '#AAB0B6',
+    SPACE_GREY: '#252525',
+    MIDNIGHT_BLUE: '#191970',
+    FLORAL_WHITE: '#FFFAF0',
+    RADAR_SCREEN: '#B2B7B1',
+    RADAR_SCREEN_RED: '#DDAAAA',
+    ROAD: '#45454A',
+    GRASS: '#517F30',
+    SKY: '#87CEFA',
+    CAR_WINDOWS: '#778899',
+    CAR_LIGHTS: '#FCFF9F',
+    MAIN: '#312162'
+};
+
+var COLOR = Object.keys(COLOR_HEX).reduce(function (result, colorKey) {
+    result[colorKey] = Phaser.Color.hexToRGB(COLOR_HEX[colorKey]);
+    return result;
+}, {});
 
 var STATE_BOOT = 'boot';
 var STATE_LOADING = 'loading';
@@ -154,6 +167,7 @@ var I18N_MENU_BACK = 'menuBack';
 var I18N_MENU_START = 'menuStart';
 var I18N_UI_LOADING = 'uiLoading';
 var I18N_UI_PAUSE = 'uiPause';
+var I18N_UI_BUTTON_FINE = 'uiBtnFine';
 var I18N_UI_BUTTON_QUIT = 'uiBtnQuit';
 var I18N_UI_BUTTON_NEXT = 'uiBtnNext';
 var I18N_UI_BUTTON_REPLAY = 'uiBtnReplay';
@@ -164,7 +178,6 @@ var I18N_RADAR_WAIT = 'radarWait';
 var I18N_RADAR_FINED = 'radarFined';
 var I18N_RADAR_ROGUE = 'radarRogue';
 var I18N_RADAR_ALREADY_FINED = 'radarAlreadyFined';
-var I18N_RADAR_PRESS_TO_FINE = 'radarPressToFine';
 var I18N_END_WIN = 'endWin';
 var I18N_END_LOOSE = 'endLoose';
 var I18N_STATS_TIME = 'statsTime';
@@ -174,7 +187,7 @@ var I18N_STATS_MISSED = 'statsMissed';
 
 var CAR_RELATIVE_WIDTH = 200;
 var CAR_SPRITE_KEYS = ['car01'];
-var CAR_COLORS = [0x252525, 0xFCF8EE, 0x9A2F2F, 0xAAB0B6, 0x2A3485];
+var CAR_COLORS = [COLOR.SPACE_GREY, COLOR.MAROON, COLOR.STEEL, COLOR.MIDNIGHT_BLUE, COLOR.FLORAL_WHITE];
 var CAR_ALLOWED_PLATE_LETTERS = ['A', 'B', 'C', 'E', 'H', 'K', 'M', 'O', 'P', 'T', 'X'];
 
 /***/ }),
@@ -182,29 +195,76 @@ var CAR_ALLOWED_PLATE_LETTERS = ['A', 'B', 'C', 'E', 'H', 'K', 'M', 'O', 'P', 'T
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (immutable) */ __webpack_exports__["b"] = getFormattedTime;
+/* harmony export (immutable) */ __webpack_exports__["a"] = getFormattedCurrency;
+/* harmony export (immutable) */ __webpack_exports__["c"] = getLevel;
+/* harmony export (immutable) */ __webpack_exports__["d"] = getNextLevelId;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__levels__ = __webpack_require__(15);
+
+
+function getFormattedTime(seconds) {
+    return String(Math.floor(seconds / 60)).padStart(2, '0') + ':' + String(seconds % 60).padStart(2, '0');
+}
+
+function getFormattedCurrency(value, currency) {
+    var sign = value < 0;
+    value = String(Math.abs(value));
+    var result = '';
+    for (var i = 0; i < value.length; i++) {
+        if (i % 3 === 0) {
+            result = ' ' + result;
+        }
+        result = value.charAt(value.length - i - 1) + result;
+    }
+    return (sign ? '-' : '') + result + currency;
+}
+
+function getLevel() {
+    var levelId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : getNextLevelId();
+
+    return __WEBPACK_IMPORTED_MODULE_0__levels__["a" /* default */][levelId];
+}
+
+function getNextLevelId() {
+    var currentLevel = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'level0';
+
+    var currentLevelNumber = Number(currentLevel.substr(5));
+    var nextLevelId = 'level' + (currentLevelNumber + 1);
+    if (__WEBPACK_IMPORTED_MODULE_0__levels__["a" /* default */].hasOwnProperty(nextLevelId)) {
+        return nextLevelId;
+    } else {
+        return null;
+    }
+}
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 var pack = {
     initial: [{
         type: 'spritesheet',
         key: 'langButtons',
-        url: __webpack_require__(4),
+        url: __webpack_require__(7),
         frameWidth: 50,
         frameHeight: 50
     }],
     game: [{
         type: 'image',
         key: 'ground',
-        url: __webpack_require__(5),
+        url: __webpack_require__(8),
         overwrite: false
     }, {
         type: 'spritesheet',
         key: 'roadSign',
-        url: __webpack_require__(18),
+        url: __webpack_require__(9),
         frameWidth: 60,
         frameHeight: 140
     }, {
         type: 'spritesheet',
         key: 'car01',
-        url: __webpack_require__(6),
+        url: __webpack_require__(10),
         frameWidth: 152,
         frameHeight: 102
     }]
@@ -213,15 +273,172 @@ var pack = {
 /* harmony default export */ __webpack_exports__["a"] = (JSON.stringify(pack));
 
 /***/ }),
-/* 2 */
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var UIProgressBar = function () {
+    function UIProgressBar(_ref) {
+        var game = _ref.game,
+            x = _ref.x,
+            y = _ref.y,
+            width = _ref.width,
+            height = _ref.height,
+            color = _ref.color,
+            _ref$radius = _ref.radius,
+            radius = _ref$radius === undefined ? 0 : _ref$radius;
+
+        _classCallCheck(this, UIProgressBar);
+
+        this.game = game;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.radius = radius;
+        this.color = color;
+
+        this.graphics = this.game.add.graphics();
+    }
+
+    _createClass(UIProgressBar, [{
+        key: "update",
+        value: function update(_ref2) {
+            var percent = _ref2.percent,
+                _ref2$color = _ref2.color,
+                color = _ref2$color === undefined ? this.color : _ref2$color;
+
+            percent = this.game.math.clamp(percent, 0, 1);
+            this.graphics.clear();
+            this.graphics.lineStyle(1, color);
+            if (this.radius === 0) {
+                this.graphics.drawRect(this.x, this.y, this.width, this.height);
+            } else {
+                this.graphics.drawRoundedRect(this.x, this.y, this.width, this.height, this.radius);
+            }
+            this.graphics.beginFill(color);
+            this.graphics.drawRoundedRect(this.x, this.y, this.width * percent, this.height, this.radius);
+            this.graphics.endFill();
+        }
+    }]);
+
+    return UIProgressBar;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (UIProgressBar);
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var UIButton = function () {
+    function UIButton(_ref) {
+        var game = _ref.game,
+            name = _ref.name,
+            x = _ref.x,
+            y = _ref.y,
+            width = _ref.width,
+            height = _ref.height,
+            bg = _ref.bg,
+            text = _ref.text,
+            fontStyle = _ref.fontStyle,
+            _ref$radius = _ref.radius,
+            radius = _ref$radius === undefined ? height / 3 : _ref$radius;
+
+        _classCallCheck(this, UIButton);
+
+        this.group = game.add.group();
+        this.group.x = x;
+        this.group.y = y;
+
+        this.width = width;
+        this.height = height;
+        this.radius = radius;
+
+        this.initialBg = bg;
+        this.initialFontStyle = fontStyle || {
+            font: height / 2 + 'px Arial',
+            fill: '#fff'
+        };
+        this.initialText = text;
+
+        this.buttonGraphics = game.add.graphics();
+        this.buttonGraphics.name = name;
+        this.buttonGraphics.inputEnabled = true;
+        this.buttonGraphics.input.useHandCursor = true;
+        this.group.add(this.buttonGraphics);
+
+        this.quitButtonText = game.add.text(width / 2, height / 2 + height / 13);
+        this.quitButtonText.anchor.set(0.5);
+        this.group.add(this.quitButtonText);
+
+        this.reset();
+    }
+
+    _createClass(UIButton, [{
+        key: 'update',
+        value: function update() {
+            var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+                bg = _ref2.bg,
+                fontStyle = _ref2.fontStyle,
+                text = _ref2.text;
+
+            if (text !== undefined) {
+                this.quitButtonText.setText(text);
+            }
+            if (fontStyle) {
+                this.quitButtonText.setStyle(_extends({}, this.initialFontStyle, fontStyle));
+            }
+            if (bg !== undefined) {
+                this.drawGraphics({ bg: bg });
+            }
+        }
+    }, {
+        key: 'reset',
+        value: function reset() {
+            this.update({
+                bg: this.initialBg,
+                fontStyle: {},
+                text: this.initialText
+            });
+        }
+    }, {
+        key: 'drawGraphics',
+        value: function drawGraphics(_ref3) {
+            var bg = _ref3.bg;
+
+            this.buttonGraphics.beginFill(bg);
+            this.buttonGraphics.drawRoundedRect(0, 0, this.width, this.height, this.radius);
+            this.buttonGraphics.endFill();
+        }
+    }]);
+
+    return UIButton;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (UIButton);
+
+/***/ }),
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__states_Boot__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__states_Loading__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__states_StartMenu__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__states_Game__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__states_Boot__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__states_Loading__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__states_StartMenu__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__states_Game__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__constants__ = __webpack_require__(0);
 
 
@@ -263,21 +480,21 @@ function initGame() {
         renderer: Phaser.CANVAS
     });
 
-    game.state.add(__WEBPACK_IMPORTED_MODULE_4__constants__["S" /* STATE_BOOT */], __WEBPACK_IMPORTED_MODULE_0__states_Boot__["a" /* default */]);
-    game.state.add(__WEBPACK_IMPORTED_MODULE_4__constants__["U" /* STATE_LOADING */], __WEBPACK_IMPORTED_MODULE_1__states_Loading__["a" /* default */]);
-    game.state.add(__WEBPACK_IMPORTED_MODULE_4__constants__["V" /* STATE_MENU */], __WEBPACK_IMPORTED_MODULE_2__states_StartMenu__["a" /* default */]);
-    game.state.add(__WEBPACK_IMPORTED_MODULE_4__constants__["T" /* STATE_GAME */], __WEBPACK_IMPORTED_MODULE_3__states_Game__["a" /* default */]);
+    game.state.add(__WEBPACK_IMPORTED_MODULE_4__constants__["P" /* STATE_BOOT */], __WEBPACK_IMPORTED_MODULE_0__states_Boot__["a" /* default */]);
+    game.state.add(__WEBPACK_IMPORTED_MODULE_4__constants__["R" /* STATE_LOADING */], __WEBPACK_IMPORTED_MODULE_1__states_Loading__["a" /* default */]);
+    game.state.add(__WEBPACK_IMPORTED_MODULE_4__constants__["S" /* STATE_MENU */], __WEBPACK_IMPORTED_MODULE_2__states_StartMenu__["a" /* default */]);
+    game.state.add(__WEBPACK_IMPORTED_MODULE_4__constants__["Q" /* STATE_GAME */], __WEBPACK_IMPORTED_MODULE_3__states_Game__["a" /* default */]);
 
-    game.state.start(__WEBPACK_IMPORTED_MODULE_4__constants__["S" /* STATE_BOOT */]);
+    game.state.start(__WEBPACK_IMPORTED_MODULE_4__constants__["P" /* STATE_BOOT */]);
 }
 
 /***/ }),
-/* 3 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__assets_pack__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__classes_i18n__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__assets_pack__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__classes_i18n__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants__ = __webpack_require__(0);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -310,9 +527,9 @@ var Boot = function () {
 
             this.state.onStateChange.add(this.handleStateChange, this);
 
-            this.state.start(__WEBPACK_IMPORTED_MODULE_2__constants__["U" /* STATE_LOADING */], true, false, {
+            this.state.start(__WEBPACK_IMPORTED_MODULE_2__constants__["R" /* STATE_LOADING */], true, false, {
                 assets: [['pack', 'initial', null, __WEBPACK_IMPORTED_MODULE_0__assets_pack__["a" /* default */]]],
-                nextState: [__WEBPACK_IMPORTED_MODULE_2__constants__["V" /* STATE_MENU */]]
+                nextState: [__WEBPACK_IMPORTED_MODULE_2__constants__["S" /* STATE_MENU */]]
             });
         }
     }, {
@@ -328,29 +545,35 @@ var Boot = function () {
 /* harmony default export */ __webpack_exports__["a"] = (Boot);
 
 /***/ }),
-/* 4 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/66dd3dd498c059b331146e5fe01f17dd.png";
 
 /***/ }),
-/* 5 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/cea0f9cd29f9b7e3183f04f328253200.png";
 
 /***/ }),
-/* 6 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/36087b23846a93778075af2ed030812c.png";
+module.exports = __webpack_require__.p + "assets/75410de91275760b3ce7d204a47f2113.png";
 
 /***/ }),
-/* 7 */
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/d7de3abe4ed1952a2dbfe47bf1cb8356.png";
+
+/***/ }),
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__assets_i18n__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__assets_i18n__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__constants__ = __webpack_require__(0);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -367,7 +590,7 @@ var i18n = function () {
 
         this.game = game;
         this.textObjects = [];
-        this.currentLang = navigator.language === __WEBPACK_IMPORTED_MODULE_1__constants__["K" /* LANG_RU */] ? __WEBPACK_IMPORTED_MODULE_1__constants__["K" /* LANG_RU */] : __WEBPACK_IMPORTED_MODULE_1__constants__["J" /* LANG_EN */];
+        this.currentLang = navigator.language === __WEBPACK_IMPORTED_MODULE_1__constants__["H" /* LANG_RU */] ? __WEBPACK_IMPORTED_MODULE_1__constants__["H" /* LANG_RU */] : __WEBPACK_IMPORTED_MODULE_1__constants__["G" /* LANG_EN */];
         this.translations = __WEBPACK_IMPORTED_MODULE_0__assets_i18n__["a" /* default */];
     }
 
@@ -412,7 +635,7 @@ var i18n = function () {
 /* harmony default export */ __webpack_exports__["a"] = (i18n);
 
 /***/ }),
-/* 8 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -423,76 +646,76 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-/* harmony default export */ __webpack_exports__["a"] = (_cnst$I18N_GAME_TITLE = {}, _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["q" /* I18N_GAME_TITLE */], {
+/* harmony default export */ __webpack_exports__["a"] = (_cnst$I18N_GAME_TITLE = {}, _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["n" /* I18N_GAME_TITLE */], {
     en: 'Road Guard',
     ru: 'Дорожный Дозор'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["r" /* I18N_MENU_BACK */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["o" /* I18N_MENU_BACK */], {
     en: '<   Back',
     ru: '<   Назад'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["s" /* I18N_MENU_START */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["p" /* I18N_MENU_START */], {
     en: 'Play',
     ru: 'Играть'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["H" /* I18N_UI_LOADING */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["E" /* I18N_UI_LOADING */], {
     en: 'Loading',
     ru: 'Загрузка'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["I" /* I18N_UI_PAUSE */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["F" /* I18N_UI_PAUSE */], {
     en: 'Paused',
     ru: 'Пауза'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["F" /* I18N_UI_BUTTON_QUIT */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["C" /* I18N_UI_BUTTON_QUIT */], {
     en: 'Quit',
     ru: 'Выход'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["E" /* I18N_UI_BUTTON_NEXT */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["B" /* I18N_UI_BUTTON_NEXT */], {
     en: 'Next',
     ru: 'Дальше'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["G" /* I18N_UI_BUTTON_REPLAY */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["D" /* I18N_UI_BUTTON_REPLAY */], {
     en: 'Try again',
     ru: 'Еще раз'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["n" /* I18N_CURRENCY */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["A" /* I18N_UI_BUTTON_FINE */], {
+    en: 'FINE!',
+    ru: 'ШТРАФ!'
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["k" /* I18N_CURRENCY */], {
     en: 'rub.',
     ru: 'руб.'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["w" /* I18N_RADAR_METRICS */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["t" /* I18N_RADAR_METRICS */], {
     en: 'km/h',
     ru: 'км/ч'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["u" /* I18N_RADAR_EMPTY */], {
-    en: 'CHOOSE A CAR',
-    ru: 'ВЫБЕРИТЕ МАШИНУ'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["z" /* I18N_RADAR_WAIT */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["r" /* I18N_RADAR_EMPTY */], {
+    en: 'POINT A CAR',
+    ru: 'УКАЖИТЕ МАШИНУ'
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["v" /* I18N_RADAR_WAIT */], {
     en: 'wait...',
     ru: 'ждите...'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["v" /* I18N_RADAR_FINED */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["s" /* I18N_RADAR_FINED */], {
     en: 'Fine',
     ru: 'Штраф'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["y" /* I18N_RADAR_ROGUE */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["u" /* I18N_RADAR_ROGUE */], {
     en: 'AUTHORITY!',
     ru: 'БЛАТНОЙ!'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["t" /* I18N_RADAR_ALREADY_FINED */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["q" /* I18N_RADAR_ALREADY_FINED */], {
     en: 'ALREADY FINED!',
     ru: 'ШТРАФ ВЫПИСАН!'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["x" /* I18N_RADAR_PRESS_TO_FINE */], {
-    en: 'tap to fine',
-    ru: 'оштрафовать?'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["o" /* I18N_END_LOOSE */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["l" /* I18N_END_LOOSE */], {
     en: 'You lost!',
     ru: 'Вы проиграли!'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["p" /* I18N_END_WIN */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["m" /* I18N_END_WIN */], {
     en: 'You won!',
     ru: 'Вы выиграли!'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["C" /* I18N_STATS_TIME */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["y" /* I18N_STATS_TIME */], {
     en: 'Time',
     ru: 'Время'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["A" /* I18N_STATS_FINES */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["w" /* I18N_STATS_FINES */], {
     en: 'Fines',
     ru: 'Штрафов'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["D" /* I18N_STATS_WRONG */], {
-    en: 'Wrong cars',
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["z" /* I18N_STATS_WRONG */], {
+    en: 'Authorities',
     ru: 'Блатных'
-}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["B" /* I18N_STATS_MISSED */], {
+}), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["x" /* I18N_STATS_MISSED */], {
     en: 'Missed',
     ru: 'Пропущено'
 }), _cnst$I18N_GAME_TITLE);
 
 /***/ }),
-/* 9 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -527,7 +750,7 @@ var Loading = function () {
         value: function preload() {
             var _this = this;
 
-            this.game.stage.backgroundColor = __WEBPACK_IMPORTED_MODULE_0__constants__["i" /* COLOR_MAIN_BG */];
+            this.game.stage.backgroundColor = __WEBPACK_IMPORTED_MODULE_0__constants__["h" /* COLOR_HEX */].MAIN;
 
             this.rg.config.assets.forEach(function (_ref) {
                 var _load, _load2, _load3;
@@ -549,7 +772,7 @@ var Loading = function () {
                 }
             });
 
-            this.rg.objects.textLoading = this.game.add.text(this.game.world.centerX - 5, this.game.world.centerY, this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["H" /* I18N_UI_LOADING */]), {
+            this.rg.objects.textLoading = this.game.add.text(this.game.world.centerX - 5, this.game.world.centerY, this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["E" /* I18N_UI_LOADING */]), {
                 font: '26px Arial',
                 fill: '#fff'
             });
@@ -579,13 +802,13 @@ var Loading = function () {
 /* harmony default export */ __webpack_exports__["a"] = (Loading);
 
 /***/ }),
-/* 10 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__assets_pack_js__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__assets_pack_js__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__constants__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils__ = __webpack_require__(1);
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -606,7 +829,7 @@ var StartMenu = function () {
     _createClass(StartMenu, [{
         key: 'preload',
         value: function preload() {
-            this.game.stage.backgroundColor = __WEBPACK_IMPORTED_MODULE_1__constants__["i" /* COLOR_MAIN_BG */];
+            this.game.stage.backgroundColor = __WEBPACK_IMPORTED_MODULE_1__constants__["h" /* COLOR_HEX */].MAIN;
         }
     }, {
         key: 'create',
@@ -617,14 +840,14 @@ var StartMenu = function () {
 
             var offsetLeft = 40;
 
-            this.title = this.game.rg.i18n.createText(this.game.width / 2, this.game.height / 6, __WEBPACK_IMPORTED_MODULE_1__constants__["q" /* I18N_GAME_TITLE */], {
+            this.title = this.game.rg.i18n.createText(this.game.width / 2, this.game.height / 6, __WEBPACK_IMPORTED_MODULE_1__constants__["n" /* I18N_GAME_TITLE */], {
                 fill: '#fff'
             });
             this.title.anchor.set(0.5);
 
             var menuOffset = this.game.height / 3;
             var menuVerticalSpacing = Math.min(this.game.height / 7, 70);
-            this.menu = [[__WEBPACK_IMPORTED_MODULE_1__constants__["s" /* I18N_MENU_START */], this.handleClickPlay.bind(this)]].map(function (_ref, i) {
+            this.menu = [[__WEBPACK_IMPORTED_MODULE_1__constants__["p" /* I18N_MENU_START */], this.handleClickPlay.bind(this)]].map(function (_ref, i) {
                 var _ref2 = _slicedToArray(_ref, 2),
                     itemTitle = _ref2[0],
                     callback = _ref2[1];
@@ -635,7 +858,7 @@ var StartMenu = function () {
                 }), callback];
             });
 
-            this.langButton = this.game.add.button(this.game.world.width - __WEBPACK_IMPORTED_MODULE_1__constants__["W" /* UI_OFFSET */], 0, 'langButtons', this.handleClickLang.bind(this));
+            this.langButton = this.game.add.button(this.game.world.width - __WEBPACK_IMPORTED_MODULE_1__constants__["T" /* UI_OFFSET */], 0, 'langButtons', this.handleClickLang.bind(this));
             this.langButton.anchor.set(1, 0);
 
             this.game.input.onDown.add(this.handleClickMenu, this);
@@ -643,20 +866,20 @@ var StartMenu = function () {
     }, {
         key: 'update',
         value: function update() {
-            this.langButton.frame = this.game.rg.i18n.currentLang === __WEBPACK_IMPORTED_MODULE_1__constants__["K" /* LANG_RU */] ? 1 : 0;
+            this.langButton.frame = this.game.rg.i18n.currentLang === __WEBPACK_IMPORTED_MODULE_1__constants__["H" /* LANG_RU */] ? 1 : 0;
         }
     }, {
         key: 'handleClickPlay',
         value: function handleClickPlay() {
-            this.state.start(__WEBPACK_IMPORTED_MODULE_1__constants__["U" /* STATE_LOADING */], true, false, {
+            this.state.start(__WEBPACK_IMPORTED_MODULE_1__constants__["R" /* STATE_LOADING */], true, false, {
                 assets: [['pack', 'game', null, __WEBPACK_IMPORTED_MODULE_0__assets_pack_js__["a" /* default */]]],
-                nextState: [__WEBPACK_IMPORTED_MODULE_1__constants__["T" /* STATE_GAME */], Object(__WEBPACK_IMPORTED_MODULE_2__utils__["c" /* getLevel */])()]
+                nextState: [__WEBPACK_IMPORTED_MODULE_1__constants__["Q" /* STATE_GAME */], Object(__WEBPACK_IMPORTED_MODULE_2__utils__["c" /* getLevel */])()]
             });
         }
     }, {
         key: 'handleClickLang',
         value: function handleClickLang() {
-            this.game.rg.i18n.setLang(this.game.rg.i18n.currentLang === __WEBPACK_IMPORTED_MODULE_1__constants__["K" /* LANG_RU */] ? __WEBPACK_IMPORTED_MODULE_1__constants__["J" /* LANG_EN */] : __WEBPACK_IMPORTED_MODULE_1__constants__["K" /* LANG_RU */]);
+            this.game.rg.i18n.setLang(this.game.rg.i18n.currentLang === __WEBPACK_IMPORTED_MODULE_1__constants__["H" /* LANG_RU */] ? __WEBPACK_IMPORTED_MODULE_1__constants__["G" /* LANG_EN */] : __WEBPACK_IMPORTED_MODULE_1__constants__["H" /* LANG_RU */]);
         }
     }, {
         key: 'handleClickMenu',
@@ -683,7 +906,7 @@ var StartMenu = function () {
 /* harmony default export */ __webpack_exports__["a"] = (StartMenu);
 
 /***/ }),
-/* 11 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -703,7 +926,7 @@ var StartMenu = function () {
         },
         money: {
             fines: [[20, 0, 50], [40, 500, 30], [60, 1500, 10], [80, 2500, 8], [100, 5000, 2]],
-            goal: 50000
+            goal: 30000
         },
         radar: {
             computing: 1000 // ms
@@ -717,18 +940,18 @@ var StartMenu = function () {
 });
 
 /***/ }),
-/* 12 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_Car__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__classes_Road__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__classes_RadarMonitor__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_RoadSign__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_Score__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_LevelTimer__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_screens_EndLevel__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_Car__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__classes_Road__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__classes_Radar__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_RoadSign__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_Score__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_LevelTimer__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_screens_EndLevel__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__constants__ = __webpack_require__(0);
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
@@ -800,6 +1023,11 @@ var Game = function () {
                 },
                 timers: {
                     reviveCar: null
+                },
+                input: {
+                    keys: {
+                        space: null
+                    }
                 }
             };
         }
@@ -807,7 +1035,7 @@ var Game = function () {
         key: 'create',
         value: function create() {
             // background
-            this.game.stage.backgroundColor = '#85c2ee';
+            this.game.stage.backgroundColor = __WEBPACK_IMPORTED_MODULE_8__constants__["h" /* COLOR_HEX */].SKY;
 
             // cars behind the road
             this.rg.groups.carsBehind = this.game.add.group();
@@ -821,7 +1049,7 @@ var Game = function () {
                 game: this.game
             }, this.rg.objects.road.getProjection({
                 x: this.rg.objects.road.length / 2,
-                y: -__WEBPACK_IMPORTED_MODULE_8__constants__["W" /* UI_OFFSET */]
+                y: -__WEBPACK_IMPORTED_MODULE_8__constants__["T" /* UI_OFFSET */]
             }), {
                 speedLimit: this.rg.level.speed.limit
             }));
@@ -836,8 +1064,8 @@ var Game = function () {
             // ui
             this.rg.objects.score = new __WEBPACK_IMPORTED_MODULE_4__classes_Score__["a" /* default */]({
                 game: this.game,
-                x: __WEBPACK_IMPORTED_MODULE_8__constants__["W" /* UI_OFFSET */],
-                y: __WEBPACK_IMPORTED_MODULE_8__constants__["W" /* UI_OFFSET */],
+                x: __WEBPACK_IMPORTED_MODULE_8__constants__["T" /* UI_OFFSET */],
+                y: __WEBPACK_IMPORTED_MODULE_8__constants__["T" /* UI_OFFSET */],
                 goal: this.rg.level.money.goal
             });
 
@@ -846,13 +1074,11 @@ var Game = function () {
                 duration: this.rg.level.duration
             });
 
-            var radarHeight = 100;
-            this.rg.objects.radar = new __WEBPACK_IMPORTED_MODULE_2__classes_RadarMonitor__["a" /* default */](_extends({
+            this.rg.objects.radar = new __WEBPACK_IMPORTED_MODULE_2__classes_Radar__["a" /* default */](_extends({
                 game: this.game,
-                x: __WEBPACK_IMPORTED_MODULE_8__constants__["W" /* UI_OFFSET */],
-                y: this.game.height - radarHeight - __WEBPACK_IMPORTED_MODULE_8__constants__["W" /* UI_OFFSET */],
-                width: this.rg.objects.road.roadOffsetLeft - __WEBPACK_IMPORTED_MODULE_8__constants__["W" /* UI_OFFSET */] * 2,
-                height: radarHeight
+                x: __WEBPACK_IMPORTED_MODULE_8__constants__["T" /* UI_OFFSET */],
+                y: this.game.height - __WEBPACK_IMPORTED_MODULE_8__constants__["T" /* UI_OFFSET */],
+                width: this.rg.objects.road.roadOffsetLeft - __WEBPACK_IMPORTED_MODULE_8__constants__["T" /* UI_OFFSET */] * 2
             }, this.rg.level.radar, {
                 fines: this.rg.level.money.fines,
                 speedLimit: this.rg.level.speed.limit,
@@ -866,6 +1092,7 @@ var Game = function () {
 
             // events
             this.game.input.onDown.add(this.handleTap, this);
+            this.rg.input.keys.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         }
     }, {
         key: 'update',
@@ -913,6 +1140,13 @@ var Game = function () {
             if (!this.rg.levelEnded) {
                 this.checkLevelEnd();
             }
+
+            // input
+            if (this.rg.input.keys.space.justDown) {
+                if (this.rg.objects.radar.mode === __WEBPACK_IMPORTED_MODULE_8__constants__["M" /* RADAR_MODE_FINE */]) {
+                    this.handleFine();
+                }
+            }
         }
     }, {
         key: 'updateCar',
@@ -946,20 +1180,20 @@ var Game = function () {
                     if (pointer.targetObject.sprite.name.startsWith('car')) {
                         this.handleClickCar(pointer.targetObject.sprite.rg);
                         handled = true;
-                    } else if (pointer.targetObject.sprite.name === 'radar') {
-                        if (this.rg.objects.radar.mode === __WEBPACK_IMPORTED_MODULE_8__constants__["P" /* RADAR_MODE_FINE */]) {
+                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_8__constants__["A" /* I18N_UI_BUTTON_FINE */]) {
+                        if (this.rg.objects.radar.mode === __WEBPACK_IMPORTED_MODULE_8__constants__["M" /* RADAR_MODE_FINE */]) {
                             this.handleFine();
                             handled = true;
                         }
                     }
                 } else {
-                    if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_8__constants__["F" /* I18N_UI_BUTTON_QUIT */]) {
+                    if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_8__constants__["C" /* I18N_UI_BUTTON_QUIT */]) {
                         this.handleClickQuit();
                         handled = true;
-                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_8__constants__["E" /* I18N_UI_BUTTON_NEXT */]) {
+                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_8__constants__["B" /* I18N_UI_BUTTON_NEXT */]) {
                         this.handleClickNext();
                         handled = true;
-                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_8__constants__["G" /* I18N_UI_BUTTON_REPLAY */]) {
+                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_8__constants__["D" /* I18N_UI_BUTTON_REPLAY */]) {
                         this.handleClickReplay();
                         handled = true;
                     }
@@ -972,38 +1206,38 @@ var Game = function () {
     }, {
         key: 'handleClickField',
         value: function handleClickField() {
-            this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_8__constants__["O" /* RADAR_MODE_EMPTY */]);
+            this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_8__constants__["L" /* RADAR_MODE_EMPTY */]);
         }
     }, {
         key: 'handleClickQuit',
         value: function handleClickQuit() {
-            this.state.start(__WEBPACK_IMPORTED_MODULE_8__constants__["V" /* STATE_MENU */]);
+            this.state.start(__WEBPACK_IMPORTED_MODULE_8__constants__["S" /* STATE_MENU */]);
         }
     }, {
         key: 'handleClickNext',
         value: function handleClickNext() {
             var nextLevel = Object(__WEBPACK_IMPORTED_MODULE_7__utils__["d" /* getNextLevelId */])(this.rg.level.id);
-            this.state.start(__WEBPACK_IMPORTED_MODULE_8__constants__["T" /* STATE_GAME */], true, false, Object(__WEBPACK_IMPORTED_MODULE_7__utils__["c" /* getLevel */])(nextLevel));
+            this.state.start(__WEBPACK_IMPORTED_MODULE_8__constants__["Q" /* STATE_GAME */], true, false, Object(__WEBPACK_IMPORTED_MODULE_7__utils__["c" /* getLevel */])(nextLevel));
         }
     }, {
         key: 'handleClickReplay',
         value: function handleClickReplay() {
-            this.state.start(__WEBPACK_IMPORTED_MODULE_8__constants__["T" /* STATE_GAME */], true, false, Object(__WEBPACK_IMPORTED_MODULE_7__utils__["c" /* getLevel */])(this.rg.level.id));
+            this.state.start(__WEBPACK_IMPORTED_MODULE_8__constants__["Q" /* STATE_GAME */], true, false, Object(__WEBPACK_IMPORTED_MODULE_7__utils__["c" /* getLevel */])(this.rg.level.id));
         }
     }, {
         key: 'handleClickCar',
         value: function handleClickCar(car) {
             if (car.mode === __WEBPACK_IMPORTED_MODULE_8__constants__["c" /* CAR_MODE_FINED */]) {
-                this.rg.objects.radar.setMode(car.isRogue ? __WEBPACK_IMPORTED_MODULE_8__constants__["R" /* RADAR_MODE_ROGUE */] : __WEBPACK_IMPORTED_MODULE_8__constants__["L" /* RADAR_MODE_ALREADY_FINED */]);
+                this.rg.objects.radar.setMode(car.isRogue ? __WEBPACK_IMPORTED_MODULE_8__constants__["O" /* RADAR_MODE_ROGUE */] : __WEBPACK_IMPORTED_MODULE_8__constants__["I" /* RADAR_MODE_ALREADY_FINED */]);
             } else {
-                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_8__constants__["M" /* RADAR_MODE_COMPUTING */], { car: car });
+                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_8__constants__["J" /* RADAR_MODE_COMPUTING */], { car: car });
             }
         }
     }, {
         key: 'handleKillCar',
         value: function handleKillCar(car) {
             if (car === this.rg.objects.radar.currentCar) {
-                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_8__constants__["O" /* RADAR_MODE_EMPTY */]);
+                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_8__constants__["L" /* RADAR_MODE_EMPTY */]);
             }
             if (!this.rg.levelEnded && car.mode !== __WEBPACK_IMPORTED_MODULE_8__constants__["c" /* CAR_MODE_FINED */] && !car.isRogue) {
                 var fine = this.rg.objects.radar.getFine(car.velocity.x);
@@ -1022,21 +1256,21 @@ var Game = function () {
                 this.rg.stats.wrong.count++;
                 this.rg.stats.wrong.sum -= this.rg.objects.radar.currentFine;
                 this.rg.objects.score.updateValue(-this.rg.objects.radar.currentFine);
-                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_8__constants__["R" /* RADAR_MODE_ROGUE */]);
+                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_8__constants__["O" /* RADAR_MODE_ROGUE */]);
             } else {
                 this.rg.stats.fines.count++;
                 this.rg.stats.fines.sum += this.rg.objects.radar.currentFine;
                 this.rg.objects.score.updateValue(this.rg.objects.radar.currentFine);
-                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_8__constants__["Q" /* RADAR_MODE_FINED */]);
+                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_8__constants__["N" /* RADAR_MODE_FINED */]);
             }
         }
     }, {
         key: 'checkLevelEnd',
         value: function checkLevelEnd() {
             if (this.rg.objects.timer.isExpired) {
-                this.endLevel(__WEBPACK_IMPORTED_MODULE_8__constants__["l" /* END_GAME_TIME_OUT */]);
+                this.endLevel(__WEBPACK_IMPORTED_MODULE_8__constants__["i" /* END_GAME_TIME_OUT */]);
             } else if (this.rg.objects.score.reachedGoal) {
-                this.endLevel(__WEBPACK_IMPORTED_MODULE_8__constants__["m" /* END_GAME_WIN */]);
+                this.endLevel(__WEBPACK_IMPORTED_MODULE_8__constants__["j" /* END_GAME_WIN */]);
             }
         }
     }, {
@@ -1212,11 +1446,11 @@ var Game = function () {
 /* harmony default export */ __webpack_exports__["a"] = (Game);
 
 /***/ }),
-/* 13 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PlateNumber__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PlateNumber__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__constants__ = __webpack_require__(0);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -1299,7 +1533,7 @@ var Car = function () {
             this.sprite.position.set(x, y);
             this.sprite.scale.set(scale);
             if (this.rogueFinedTimer.running) {
-                this.sprite.tint = Math.floor(this.rogueFinedTimer.ms / CAR_ROGUE_FINED_BLINK_DURATION) % 2 ? this.color : Phaser.Color.hexToRGB(__WEBPACK_IMPORTED_MODULE_1__constants__["j" /* COLOR_RED */]);
+                this.sprite.tint = Math.floor(this.rogueFinedTimer.ms / CAR_ROGUE_FINED_BLINK_DURATION) % 2 ? this.color : __WEBPACK_IMPORTED_MODULE_1__constants__["g" /* COLOR */].RED;
             }
         }
     }, {
@@ -1393,7 +1627,7 @@ var Car = function () {
 /* harmony default export */ __webpack_exports__["a"] = (Car);
 
 /***/ }),
-/* 14 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1449,12 +1683,20 @@ var PlateNumber = function () {
             this.letters = letters;
             this.numbers = numbers;
 
-            this.text.setText([this.letters[0].toLowerCase(), this.numbers, this.letters.substr(1).toLowerCase()].join('.'));
+            this.text.setText(this.getText('.'));
+            // white dots stand for spaces
             this.text.addColor('#fff', 1);
             this.text.addColor('#000', 2);
             this.text.addColor('#fff', 5);
             this.text.addColor('#000', 6);
             this.text.updateCache();
+        }
+    }, {
+        key: 'getText',
+        value: function getText() {
+            var spacer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
+            return [this.letters[0].toLowerCase(), this.numbers, this.letters.substr(1).toLowerCase()].join(spacer);
         }
     }]);
 
@@ -1464,7 +1706,7 @@ var PlateNumber = function () {
 /* harmony default export */ __webpack_exports__["a"] = (PlateNumber);
 
 /***/ }),
-/* 15 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1506,7 +1748,7 @@ var Road = function () {
         this.topLeft = new Phaser.Point(this.roadOffsetLeft, this.game.height - this.groundHeight);
 
         this.roadGraphics = this.game.add.graphics(0, 0, this.group);
-        this.roadGraphics.beginFill(0x45454A);
+        this.roadGraphics.beginFill(__WEBPACK_IMPORTED_MODULE_0__constants__["g" /* COLOR */].ROAD);
         this.roadGraphics.drawPolygon([this.topLeft, { x: this.roadOffsetLeft + this.roadWidthTop, y: this.topLeft.y }, { x: this.roadOffsetLeft + this.roadWidthBottom, y: this.game.height }, { x: this.roadOffsetLeft, y: this.game.height }]);
         this.roadGraphics.endFill();
     }
@@ -1538,14 +1780,14 @@ var Road = function () {
 /* harmony default export */ __webpack_exports__["a"] = (Road);
 
 /***/ }),
-/* 16 */,
-/* 17 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__UIProgressBar__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__UIProgressBar__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__classes_UIButton__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__constants__ = __webpack_require__(0);
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1556,66 +1798,107 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
 
-var TEMPORARY_MODE_DURATION = 2000;
 
-var RadarMonitor = function () {
-    function RadarMonitor(_ref) {
+
+var TEMPORARY_MODE_DURATION = 2000;
+var RADAR_SCREEN_HEIGHT = 120;
+var RADAR_FINE_BUTTON_HEIGHT = 70;
+
+var Radar = function () {
+    function Radar(_ref) {
         var game = _ref.game,
             x = _ref.x,
             y = _ref.y,
             width = _ref.width,
-            height = _ref.height,
             computing = _ref.computing,
             fines = _ref.fines,
             speedLimit = _ref.speedLimit,
             onFine = _ref.onFine;
 
-        _classCallCheck(this, RadarMonitor);
+        _classCallCheck(this, Radar);
 
         this.game = game;
         this.width = width;
-        this.height = height;
+        this.height = RADAR_SCREEN_HEIGHT + RADAR_FINE_BUTTON_HEIGHT + 4 * __WEBPACK_IMPORTED_MODULE_3__constants__["T" /* UI_OFFSET */];
         this.fines = fines;
         this.speedLimit = speedLimit;
         this.onFine = onFine;
 
-        this.group = this.game.add.group();
-        this.group.x = x;
-        this.group.y = y;
+        this.radarGroup = this.game.add.group();
+        this.radarGroup.x = x;
+        this.radarGroup.y = y - this.height;
+
+        this.body = this.game.add.graphics();
+        this.body.beginFill(0x252525);
+        this.body.drawRoundedRect(0, 0, this.width, this.height, 20);
+        this.body.endFill();
+        this.radarGroup.add(this.body);
+
+        this.screenGroup = this.game.add.group();
+        this.screenGroup.x = __WEBPACK_IMPORTED_MODULE_3__constants__["T" /* UI_OFFSET */];
+        this.screenGroup.y = 2 * __WEBPACK_IMPORTED_MODULE_3__constants__["T" /* UI_OFFSET */];
+        this.radarGroup.add(this.screenGroup);
 
         this.screen = this.game.add.graphics();
-        this.screen.name = 'radar';
-        this.screen.inputEnabled = true;
-        this.group.add(this.screen);
+        this.screenGroup.add(this.screen);
+        this.screenWidth = this.width - 2 * __WEBPACK_IMPORTED_MODULE_3__constants__["T" /* UI_OFFSET */];
 
-        this.mainText = this.game.add.text(this.width / 2, this.height / 2 + 5, '', {
+        this.mainText = this.game.add.text(this.screenWidth / 2, RADAR_SCREEN_HEIGHT / 2 + 5, '', {
             align: 'center',
             wordWrap: true,
-            wordWrapWidth: this.width
+            wordWrapWidth: this.screenWidth
         });
         this.mainText.font = '"Press Start 2P", Arial';
-        this.mainText.fontSize = 20;
+        this.mainText.fontSize = 18;
         this.mainText.anchor.set(0.5, 0.5);
-        this.group.add(this.mainText);
+        this.screenGroup.add(this.mainText);
 
-        this.secondaryText = this.game.add.text(this.width / 2, this.height - 10, '', {
+        this.topText = this.game.add.text(this.screenWidth / 2, 10, '', {
             align: 'center'
         });
-        this.secondaryText.font = '"Press Start 2P", Arial';
-        this.secondaryText.fontSize = 12;
-        this.secondaryText.anchor.set(0.5, 1);
-        this.group.add(this.secondaryText);
+        this.topText.font = '"Press Start 2P", Arial';
+        this.topText.fontSize = 14;
+        this.topText.fontVariant = 'small-caps';
+        this.topText.anchor.set(0.5, 0);
+        this.screenGroup.add(this.topText);
 
-        var progressBarOffset = this.height / 10;
+        this.bottomText = this.game.add.text(this.screenWidth / 2, RADAR_SCREEN_HEIGHT - 10, '', {
+            align: 'center'
+        });
+        this.bottomText.font = '"Press Start 2P", Arial';
+        this.bottomText.fontSize = 12;
+        this.bottomText.anchor.set(0.5, 1);
+        this.screenGroup.add(this.bottomText);
+
+        var progressBarOffset = RADAR_SCREEN_HEIGHT / 10;
         this.progressBar = new __WEBPACK_IMPORTED_MODULE_0__UIProgressBar__["a" /* default */]({
             game: this.game,
             x: progressBarOffset,
-            y: this.height - 2 * progressBarOffset - 5,
-            width: this.width - 2 * progressBarOffset,
+            y: RADAR_SCREEN_HEIGHT - 2 * progressBarOffset - 5,
+            width: this.screenWidth - 2 * progressBarOffset,
             height: 10,
             color: 0
         });
-        this.group.add(this.progressBar.graphics);
+        this.screenGroup.add(this.progressBar.graphics);
+
+        var fineButtonWidth = this.width / 1.5;
+        this.fineButton = new __WEBPACK_IMPORTED_MODULE_1__classes_UIButton__["a" /* default */]({
+            game: this.game,
+            name: __WEBPACK_IMPORTED_MODULE_3__constants__["A" /* I18N_UI_BUTTON_FINE */],
+            x: (this.width - fineButtonWidth) / 2,
+            y: this.height - RADAR_FINE_BUTTON_HEIGHT - __WEBPACK_IMPORTED_MODULE_3__constants__["T" /* UI_OFFSET */],
+            width: fineButtonWidth,
+            height: RADAR_FINE_BUTTON_HEIGHT,
+            bg: __WEBPACK_IMPORTED_MODULE_3__constants__["g" /* COLOR */].MAROON,
+            text: this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["A" /* I18N_UI_BUTTON_FINE */]),
+            fontStyle: {
+                font: '24px Arial',
+                fontWeight: 'bold',
+                fill: '#fff'
+            },
+            radius: 20
+        });
+        this.radarGroup.add(this.fineButton.group);
 
         this.mode = null;
 
@@ -1626,13 +1909,13 @@ var RadarMonitor = function () {
         this.currentCar = null;
         this.currentFine = 0;
 
-        this.setMode(__WEBPACK_IMPORTED_MODULE_2__constants__["O" /* RADAR_MODE_EMPTY */]);
+        this.setMode(__WEBPACK_IMPORTED_MODULE_3__constants__["L" /* RADAR_MODE_EMPTY */]);
     }
 
-    _createClass(RadarMonitor, [{
+    _createClass(Radar, [{
         key: 'update',
         value: function update() {
-            if (this.mode === __WEBPACK_IMPORTED_MODULE_2__constants__["M" /* RADAR_MODE_COMPUTING */]) {
+            if (this.mode === __WEBPACK_IMPORTED_MODULE_3__constants__["J" /* RADAR_MODE_COMPUTING */]) {
                 if (this.computingTimer.running) {
                     this.progressBar.update({ percent: this.computingTimer.ms / this.computingTimerDuration });
                 }
@@ -1644,16 +1927,16 @@ var RadarMonitor = function () {
             this.computingTimer.stop(true);
             this.currentFine = this.getFine(this.currentCar.velocity.x);
             if (this.currentFine === 0) {
-                this.setMode(__WEBPACK_IMPORTED_MODULE_2__constants__["N" /* RADAR_MODE_DISMISS */], { speed: this.currentCar.velocity.x });
+                this.setMode(__WEBPACK_IMPORTED_MODULE_3__constants__["K" /* RADAR_MODE_DISMISS */], { speed: this.currentCar.velocity.x });
             } else {
-                this.setMode(__WEBPACK_IMPORTED_MODULE_2__constants__["P" /* RADAR_MODE_FINE */], { speed: this.currentCar.velocity.x });
+                this.setMode(__WEBPACK_IMPORTED_MODULE_3__constants__["M" /* RADAR_MODE_FINE */], { speed: this.currentCar.velocity.x });
             }
         }
     }, {
         key: 'handleCompleteTemporaryMode',
         value: function handleCompleteTemporaryMode() {
             this.temporaryModeTimer.stop(true);
-            this.setMode(__WEBPACK_IMPORTED_MODULE_2__constants__["O" /* RADAR_MODE_EMPTY */]);
+            this.setMode(__WEBPACK_IMPORTED_MODULE_3__constants__["L" /* RADAR_MODE_EMPTY */]);
         }
     }, {
         key: 'setMode',
@@ -1664,36 +1947,46 @@ var RadarMonitor = function () {
             this.temporaryModeTimer.stop(true);
 
             this.progressBar.graphics.visible = false;
-            this.secondaryText.visible = false;
+            this.topText.visible = false;
+            this.bottomText.visible = false;
 
             this.mainText.fill = '#000';
-            this.secondaryText.fill = '#000';
+            this.topText.fill = '#000';
+            this.bottomText.fill = '#000';
+
+            this.fineButton.update({ text: '...' });
 
             switch (mode) {
-                case __WEBPACK_IMPORTED_MODULE_2__constants__["O" /* RADAR_MODE_EMPTY */]:
+                case __WEBPACK_IMPORTED_MODULE_3__constants__["L" /* RADAR_MODE_EMPTY */]:
                     {
-                        this.mainText.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_2__constants__["u" /* I18N_RADAR_EMPTY */]));
+                        this.mainText.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["r" /* I18N_RADAR_EMPTY */]));
                         this.resetCurrentCar();
                         break;
                     }
-                case __WEBPACK_IMPORTED_MODULE_2__constants__["N" /* RADAR_MODE_DISMISS */]:
+                case __WEBPACK_IMPORTED_MODULE_3__constants__["K" /* RADAR_MODE_DISMISS */]:
                     {
-                        this.mainText.setText(Math.round(props.speed) + ' ' + this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_2__constants__["w" /* I18N_RADAR_METRICS */]));
+                        this.topText.setText(this.currentCar.plateNumber.getText());
+                        this.topText.visible = true;
+
+                        this.mainText.setText(Math.round(props.speed) + ' ' + this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["t" /* I18N_RADAR_METRICS */]));
                         break;
                     }
-                case __WEBPACK_IMPORTED_MODULE_2__constants__["P" /* RADAR_MODE_FINE */]:
+                case __WEBPACK_IMPORTED_MODULE_3__constants__["M" /* RADAR_MODE_FINE */]:
                     {
-                        this.mainText.setText(Math.round(props.speed) + ' ' + this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_2__constants__["w" /* I18N_RADAR_METRICS */]));
-                        this.secondaryText.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_2__constants__["x" /* I18N_RADAR_PRESS_TO_FINE */]));
-                        this.secondaryText.visible = true;
+                        this.topText.setText(this.currentCar.plateNumber.getText());
+                        this.topText.visible = true;
+
+                        this.mainText.setText(Math.round(props.speed) + ' ' + this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["t" /* I18N_RADAR_METRICS */]));
+
+                        this.fineButton.reset();
                         break;
                     }
-                case __WEBPACK_IMPORTED_MODULE_2__constants__["M" /* RADAR_MODE_COMPUTING */]:
+                case __WEBPACK_IMPORTED_MODULE_3__constants__["J" /* RADAR_MODE_COMPUTING */]:
                     {
-                        if (this.mode !== __WEBPACK_IMPORTED_MODULE_2__constants__["M" /* RADAR_MODE_COMPUTING */] || this.currentCar !== props.car) {
+                        if (this.mode !== __WEBPACK_IMPORTED_MODULE_3__constants__["J" /* RADAR_MODE_COMPUTING */] || this.currentCar !== props.car) {
                             this.currentCar = props.car;
 
-                            this.mainText.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_2__constants__["z" /* I18N_RADAR_WAIT */]));
+                            this.mainText.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["v" /* I18N_RADAR_WAIT */]));
                             this.progressBar.graphics.visible = true;
 
                             this.computingTimer.add(this.computingTimerDuration, this.handleCompleteComputing, this);
@@ -1701,27 +1994,36 @@ var RadarMonitor = function () {
                         }
                         break;
                     }
-                case __WEBPACK_IMPORTED_MODULE_2__constants__["Q" /* RADAR_MODE_FINED */]:
+                case __WEBPACK_IMPORTED_MODULE_3__constants__["N" /* RADAR_MODE_FINED */]:
                     {
-                        this.mainText.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_2__constants__["v" /* I18N_RADAR_FINED */]) + "\n" + this.currentFine + ' ' + this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_2__constants__["n" /* I18N_CURRENCY */]));
+                        this.topText.setText(this.currentCar.plateNumber.getText());
+                        this.topText.visible = true;
+
+                        this.mainText.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["s" /* I18N_RADAR_FINED */]) + "\n" + this.currentFine + ' ' + this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["k" /* I18N_CURRENCY */]));
                         this.resetCurrentCar();
                         this.startTemporaryModeTimer();
                         break;
                     }
-                case __WEBPACK_IMPORTED_MODULE_2__constants__["R" /* RADAR_MODE_ROGUE */]:
+                case __WEBPACK_IMPORTED_MODULE_3__constants__["O" /* RADAR_MODE_ROGUE */]:
                     {
-                        this.mainText.fill = __WEBPACK_IMPORTED_MODULE_2__constants__["g" /* COLOR_DARK_RED */];
-                        this.mainText.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_2__constants__["y" /* I18N_RADAR_ROGUE */]));
-                        this.secondaryText.setText(Object(__WEBPACK_IMPORTED_MODULE_1__utils__["a" /* getFormattedCurrency */])(-this.currentFine, this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_2__constants__["n" /* I18N_CURRENCY */])));
-                        this.secondaryText.fill = __WEBPACK_IMPORTED_MODULE_2__constants__["g" /* COLOR_DARK_RED */];
-                        this.secondaryText.visible = true;
+                        if (this.currentCar !== null) {
+                            this.topText.setText(this.currentCar.plateNumber.getText());
+                            this.topText.fill = __WEBPACK_IMPORTED_MODULE_3__constants__["h" /* COLOR_HEX */].MAROON;
+                            this.topText.visible = true;
+                        }
+
+                        this.mainText.fill = __WEBPACK_IMPORTED_MODULE_3__constants__["h" /* COLOR_HEX */].MAROON;
+                        this.mainText.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["u" /* I18N_RADAR_ROGUE */]));
+                        this.bottomText.setText(Object(__WEBPACK_IMPORTED_MODULE_2__utils__["a" /* getFormattedCurrency */])(-this.currentFine, this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["k" /* I18N_CURRENCY */])));
+                        this.bottomText.fill = __WEBPACK_IMPORTED_MODULE_3__constants__["h" /* COLOR_HEX */].MAROON;
+                        this.bottomText.visible = true;
                         this.resetCurrentCar();
                         this.startTemporaryModeTimer();
                         break;
                     }
-                case __WEBPACK_IMPORTED_MODULE_2__constants__["L" /* RADAR_MODE_ALREADY_FINED */]:
+                case __WEBPACK_IMPORTED_MODULE_3__constants__["I" /* RADAR_MODE_ALREADY_FINED */]:
                     {
-                        this.mainText.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_2__constants__["t" /* I18N_RADAR_ALREADY_FINED */]));
+                        this.mainText.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["q" /* I18N_RADAR_ALREADY_FINED */]));
                         this.resetCurrentCar();
                         this.startTemporaryModeTimer();
                         break;
@@ -1737,17 +2039,16 @@ var RadarMonitor = function () {
         value: function drawScreen() {
             var color = void 0;
             switch (this.mode) {
-                case __WEBPACK_IMPORTED_MODULE_2__constants__["P" /* RADAR_MODE_FINE */]:
-                case __WEBPACK_IMPORTED_MODULE_2__constants__["R" /* RADAR_MODE_ROGUE */]:
-                    color = 0xDDAAAA;
+                case __WEBPACK_IMPORTED_MODULE_3__constants__["M" /* RADAR_MODE_FINE */]:
+                case __WEBPACK_IMPORTED_MODULE_3__constants__["O" /* RADAR_MODE_ROGUE */]:
+                    color = __WEBPACK_IMPORTED_MODULE_3__constants__["g" /* COLOR */].RADAR_SCREEN_RED;
                     break;
                 default:
-                    color = 0xD1D1D1;
+                    color = __WEBPACK_IMPORTED_MODULE_3__constants__["g" /* COLOR */].RADAR_SCREEN;
             }
             this.screen.clear();
-            this.screen.lineStyle(4, 0);
             this.screen.beginFill(color);
-            this.screen.drawRoundedRect(0, 0, this.width, this.height, 16);
+            this.screen.drawRect(0, 0, this.screenWidth, RADAR_SCREEN_HEIGHT);
             this.screen.endFill();
         }
     }, {
@@ -1780,19 +2081,13 @@ var RadarMonitor = function () {
         }
     }]);
 
-    return RadarMonitor;
+    return Radar;
 }();
 
-/* harmony default export */ __webpack_exports__["a"] = (RadarMonitor);
+/* harmony default export */ __webpack_exports__["a"] = (Radar);
 
 /***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "assets/aeaabcbdc856b252e7b2c0806410a328.png";
-
-/***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1826,12 +2121,12 @@ var RoadSign = function RoadSign(_ref) {
 /* harmony default export */ __webpack_exports__["a"] = (RoadSign);
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__UIProgressBar__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__UIProgressBar__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants__ = __webpack_require__(0);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -1899,11 +2194,11 @@ var Score = function () {
         value: function updateValue(sum) {
             this.value += sum;
 
-            this.scoreText.setText(Object(__WEBPACK_IMPORTED_MODULE_1__utils__["a" /* getFormattedCurrency */])(this.value, this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_2__constants__["n" /* I18N_CURRENCY */])));
+            this.scoreText.setText(Object(__WEBPACK_IMPORTED_MODULE_1__utils__["a" /* getFormattedCurrency */])(this.value, this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_2__constants__["k" /* I18N_CURRENCY */])));
 
             if (sum !== 0) {
-                this.updateText.setText((sum > 0 ? '+ ' : '- ') + Object(__WEBPACK_IMPORTED_MODULE_1__utils__["a" /* getFormattedCurrency */])(Math.abs(sum), this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_2__constants__["n" /* I18N_CURRENCY */])));
-                this.updateText.fill = sum > 0 ? __WEBPACK_IMPORTED_MODULE_2__constants__["k" /* COLOR_YELLOW */] : __WEBPACK_IMPORTED_MODULE_2__constants__["j" /* COLOR_RED */];
+                this.updateText.setText((sum > 0 ? '+ ' : '- ') + Object(__WEBPACK_IMPORTED_MODULE_1__utils__["a" /* getFormattedCurrency */])(Math.abs(sum), this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_2__constants__["k" /* I18N_CURRENCY */])));
+                this.updateText.fill = sum > 0 ? __WEBPACK_IMPORTED_MODULE_2__constants__["h" /* COLOR_HEX */].YELLOW : __WEBPACK_IMPORTED_MODULE_2__constants__["h" /* COLOR_HEX */].RED;
                 this.updateText.alpha = 1;
 
                 if (this.updateTextTween) {
@@ -1926,58 +2221,11 @@ var Score = function () {
 /* harmony default export */ __webpack_exports__["a"] = (Score);
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["b"] = getFormattedTime;
-/* harmony export (immutable) */ __webpack_exports__["a"] = getFormattedCurrency;
-/* harmony export (immutable) */ __webpack_exports__["c"] = getLevel;
-/* harmony export (immutable) */ __webpack_exports__["d"] = getNextLevelId;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__levels__ = __webpack_require__(11);
-
-
-function getFormattedTime(seconds) {
-    return String(Math.floor(seconds / 60)).padStart(2, '0') + ':' + String(seconds % 60).padStart(2, '0');
-}
-
-function getFormattedCurrency(value, currency) {
-    var sign = value < 0;
-    value = String(Math.abs(value));
-    var result = '';
-    for (var i = 0; i < value.length; i++) {
-        if (i % 3 === 0) {
-            result = ' ' + result;
-        }
-        result = value.charAt(value.length - i - 1) + result;
-    }
-    return (sign ? '-' : '') + result + currency;
-}
-
-function getLevel() {
-    var levelId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : getNextLevelId();
-
-    return __WEBPACK_IMPORTED_MODULE_0__levels__["a" /* default */][levelId];
-}
-
-function getNextLevelId() {
-    var currentLevel = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'level0';
-
-    var currentLevelNumber = Number(currentLevel.substr(5));
-    var nextLevelId = 'level' + (currentLevelNumber + 1);
-    if (__WEBPACK_IMPORTED_MODULE_0__levels__["a" /* default */].hasOwnProperty(nextLevelId)) {
-        return nextLevelId;
-    } else {
-        return null;
-    }
-}
-
-/***/ }),
-/* 22 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__constants__ = __webpack_require__(0);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -1992,9 +2240,9 @@ var LevelTimer = function () {
     function LevelTimer(_ref) {
         var game = _ref.game,
             _ref$x = _ref.x,
-            x = _ref$x === undefined ? game.width - __WEBPACK_IMPORTED_MODULE_1__constants__["W" /* UI_OFFSET */] : _ref$x,
+            x = _ref$x === undefined ? game.width - __WEBPACK_IMPORTED_MODULE_1__constants__["T" /* UI_OFFSET */] : _ref$x,
             _ref$y = _ref.y,
-            y = _ref$y === undefined ? __WEBPACK_IMPORTED_MODULE_1__constants__["W" /* UI_OFFSET */] : _ref$y,
+            y = _ref$y === undefined ? __WEBPACK_IMPORTED_MODULE_1__constants__["T" /* UI_OFFSET */] : _ref$y,
             duration = _ref.duration;
 
         _classCallCheck(this, LevelTimer);
@@ -2023,7 +2271,7 @@ var LevelTimer = function () {
             var secondsLeft = this.duration - this.secondsElapsed;
 
             if (secondsLeft < TIME_RUNNING_OUT) {
-                this.textTimer.fill = __WEBPACK_IMPORTED_MODULE_1__constants__["g" /* COLOR_DARK_RED */];
+                this.textTimer.fill = __WEBPACK_IMPORTED_MODULE_1__constants__["h" /* COLOR_HEX */].MAROON;
             }
 
             this.textTimer.setText(Object(__WEBPACK_IMPORTED_MODULE_0__utils__["b" /* getFormattedTime */])(secondsLeft));
@@ -2046,13 +2294,13 @@ var LevelTimer = function () {
 /* harmony default export */ __webpack_exports__["a"] = (LevelTimer);
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__UIButton__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__UIButton__ = __webpack_require__(4);
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -2124,37 +2372,37 @@ var EndLevel = function () {
         var buttonsMargin = 40;
         this.nextButton = new __WEBPACK_IMPORTED_MODULE_2__UIButton__["a" /* default */]({
             game: this.game,
-            name: __WEBPACK_IMPORTED_MODULE_0__constants__["E" /* I18N_UI_BUTTON_NEXT */],
+            name: __WEBPACK_IMPORTED_MODULE_0__constants__["B" /* I18N_UI_BUTTON_NEXT */],
             x: (this.width - buttonsMargin) / 2 - buttonsWidth,
             y: this.height - verticalPadding - buttonsHeight,
             width: buttonsWidth,
             height: buttonsHeight,
-            bg: Phaser.Color.hexToRGB(__WEBPACK_IMPORTED_MODULE_0__constants__["h" /* COLOR_GREEN */]),
-            text: this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["E" /* I18N_UI_BUTTON_NEXT */])
+            bg: __WEBPACK_IMPORTED_MODULE_0__constants__["g" /* COLOR */].GREEN,
+            text: this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["B" /* I18N_UI_BUTTON_NEXT */])
         });
         this.textGroup.add(this.nextButton.group);
 
         this.replayButton = new __WEBPACK_IMPORTED_MODULE_2__UIButton__["a" /* default */]({
             game: this.game,
-            name: __WEBPACK_IMPORTED_MODULE_0__constants__["G" /* I18N_UI_BUTTON_REPLAY */],
+            name: __WEBPACK_IMPORTED_MODULE_0__constants__["D" /* I18N_UI_BUTTON_REPLAY */],
             x: (this.width - buttonsMargin) / 2 - buttonsWidth,
             y: this.height - verticalPadding - buttonsHeight,
             width: buttonsWidth,
             height: buttonsHeight,
-            bg: Phaser.Color.hexToRGB(__WEBPACK_IMPORTED_MODULE_0__constants__["h" /* COLOR_GREEN */]),
-            text: this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["G" /* I18N_UI_BUTTON_REPLAY */])
+            bg: __WEBPACK_IMPORTED_MODULE_0__constants__["g" /* COLOR */].GREEN,
+            text: this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["D" /* I18N_UI_BUTTON_REPLAY */])
         });
         this.textGroup.add(this.replayButton.group);
 
         this.quitButton = new __WEBPACK_IMPORTED_MODULE_2__UIButton__["a" /* default */]({
             game: this.game,
-            name: __WEBPACK_IMPORTED_MODULE_0__constants__["F" /* I18N_UI_BUTTON_QUIT */],
+            name: __WEBPACK_IMPORTED_MODULE_0__constants__["C" /* I18N_UI_BUTTON_QUIT */],
             x: (this.width + buttonsMargin) / 2,
             y: this.height - verticalPadding - buttonsHeight,
             width: buttonsWidth,
             height: buttonsHeight,
-            bg: Phaser.Color.hexToRGB(__WEBPACK_IMPORTED_MODULE_0__constants__["g" /* COLOR_DARK_RED */]),
-            text: this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["F" /* I18N_UI_BUTTON_QUIT */])
+            bg: __WEBPACK_IMPORTED_MODULE_0__constants__["g" /* COLOR */].MAROON,
+            text: this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["C" /* I18N_UI_BUTTON_QUIT */])
         });
         this.textGroup.add(this.quitButton.group);
 
@@ -2170,21 +2418,21 @@ var EndLevel = function () {
                 stats = _ref2.stats,
                 nextLevel = _ref2.nextLevel;
 
-            this.textMode.fill = mode === __WEBPACK_IMPORTED_MODULE_0__constants__["m" /* END_GAME_WIN */] ? __WEBPACK_IMPORTED_MODULE_0__constants__["h" /* COLOR_GREEN */] : __WEBPACK_IMPORTED_MODULE_0__constants__["g" /* COLOR_DARK_RED */];
-            this.textMode.setText(this.game.rg.i18n.getTranslation(mode === __WEBPACK_IMPORTED_MODULE_0__constants__["m" /* END_GAME_WIN */] ? __WEBPACK_IMPORTED_MODULE_0__constants__["p" /* I18N_END_WIN */] : __WEBPACK_IMPORTED_MODULE_0__constants__["o" /* I18N_END_LOOSE */]));
+            this.textMode.fill = mode === __WEBPACK_IMPORTED_MODULE_0__constants__["j" /* END_GAME_WIN */] ? __WEBPACK_IMPORTED_MODULE_0__constants__["h" /* COLOR_HEX */].GREEN : __WEBPACK_IMPORTED_MODULE_0__constants__["h" /* COLOR_HEX */].MAROON;
+            this.textMode.setText(this.game.rg.i18n.getTranslation(mode === __WEBPACK_IMPORTED_MODULE_0__constants__["j" /* END_GAME_WIN */] ? __WEBPACK_IMPORTED_MODULE_0__constants__["m" /* I18N_END_WIN */] : __WEBPACK_IMPORTED_MODULE_0__constants__["l" /* I18N_END_LOOSE */]));
 
-            var statsList = [[__WEBPACK_IMPORTED_MODULE_0__constants__["A" /* I18N_STATS_FINES */], stats.fines], [__WEBPACK_IMPORTED_MODULE_0__constants__["D" /* I18N_STATS_WRONG */], stats.wrong], [__WEBPACK_IMPORTED_MODULE_0__constants__["B" /* I18N_STATS_MISSED */], stats.missed]].map(function (_ref3) {
+            var statsList = [[__WEBPACK_IMPORTED_MODULE_0__constants__["w" /* I18N_STATS_FINES */], stats.fines], [__WEBPACK_IMPORTED_MODULE_0__constants__["z" /* I18N_STATS_WRONG */], stats.wrong], [__WEBPACK_IMPORTED_MODULE_0__constants__["x" /* I18N_STATS_MISSED */], stats.missed]].map(function (_ref3) {
                 var _ref4 = _slicedToArray(_ref3, 2),
                     label = _ref4[0],
                     _ref4$ = _ref4[1],
                     count = _ref4$.count,
                     sum = _ref4$.sum;
 
-                return [label, sum === 0 ? String(count) : count + ' (' + Object(__WEBPACK_IMPORTED_MODULE_1__utils__["a" /* getFormattedCurrency */])(sum, _this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["n" /* I18N_CURRENCY */])) + ')'];
+                return [label, sum === 0 ? String(count) : count + ' (' + Object(__WEBPACK_IMPORTED_MODULE_1__utils__["a" /* getFormattedCurrency */])(sum, _this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["k" /* I18N_CURRENCY */])) + ')'];
             });
 
-            if (mode === __WEBPACK_IMPORTED_MODULE_0__constants__["m" /* END_GAME_WIN */]) {
-                statsList.unshift([__WEBPACK_IMPORTED_MODULE_0__constants__["C" /* I18N_STATS_TIME */], String(Object(__WEBPACK_IMPORTED_MODULE_1__utils__["b" /* getFormattedTime */])(stats.time))]);
+            if (mode === __WEBPACK_IMPORTED_MODULE_0__constants__["j" /* END_GAME_WIN */]) {
+                statsList.unshift([__WEBPACK_IMPORTED_MODULE_0__constants__["y" /* I18N_STATS_TIME */], String(Object(__WEBPACK_IMPORTED_MODULE_1__utils__["b" /* getFormattedTime */])(stats.time))]);
             }
             this.textStatsLeft.setText(statsList.map(function (_ref5) {
                 var _ref6 = _slicedToArray(_ref5, 1),
@@ -2202,7 +2450,7 @@ var EndLevel = function () {
                 return value;
             }).join("\n"));
 
-            if (mode === __WEBPACK_IMPORTED_MODULE_0__constants__["m" /* END_GAME_WIN */] && nextLevel !== null) {
+            if (mode === __WEBPACK_IMPORTED_MODULE_0__constants__["j" /* END_GAME_WIN */] && nextLevel !== null) {
                 this.nextButton.visible = true;
                 this.replayButton.visible = false;
             } else {
@@ -2238,103 +2486,6 @@ var EndLevel = function () {
 }();
 
 /* harmony default export */ __webpack_exports__["a"] = (EndLevel);
-
-/***/ }),
-/* 24 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var UIButton = function UIButton(_ref) {
-    var game = _ref.game,
-        name = _ref.name,
-        x = _ref.x,
-        y = _ref.y,
-        width = _ref.width,
-        height = _ref.height,
-        bg = _ref.bg,
-        text = _ref.text;
-
-    _classCallCheck(this, UIButton);
-
-    this.group = game.add.group();
-    this.group.x = x;
-    this.group.y = y;
-
-    this.buttonGraphics = game.add.graphics();
-    this.buttonGraphics.name = name;
-    this.buttonGraphics.beginFill(bg);
-    this.buttonGraphics.drawRoundedRect(0, 0, width, height, height / 3);
-    this.buttonGraphics.endFill();
-    this.buttonGraphics.inputEnabled = true;
-    this.buttonGraphics.input.useHandCursor = true;
-    this.group.add(this.buttonGraphics);
-
-    var quitButtonText = game.add.text(width / 2, height / 2 + 3, text, {
-        font: '20px Arial',
-        fill: '#fff'
-    });
-    quitButtonText.anchor.set(0.5);
-    this.group.add(quitButtonText);
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (UIButton);
-
-/***/ }),
-/* 25 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var UIProgressBar = function () {
-    function UIProgressBar(_ref) {
-        var game = _ref.game,
-            x = _ref.x,
-            y = _ref.y,
-            width = _ref.width,
-            height = _ref.height,
-            color = _ref.color,
-            _ref$radius = _ref.radius,
-            radius = _ref$radius === undefined ? 0 : _ref$radius;
-
-        _classCallCheck(this, UIProgressBar);
-
-        this.game = game;
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.radius = radius;
-        this.color = color;
-
-        this.graphics = this.game.add.graphics();
-    }
-
-    _createClass(UIProgressBar, [{
-        key: "update",
-        value: function update(_ref2) {
-            var percent = _ref2.percent,
-                _ref2$color = _ref2.color,
-                color = _ref2$color === undefined ? this.color : _ref2$color;
-
-            percent = this.game.math.clamp(percent, 0, 1);
-            this.graphics.clear();
-            this.graphics.lineStyle(1, color);
-            this.graphics.drawRoundedRect(this.x, this.y, this.width, this.height, this.radius);
-            this.graphics.beginFill(color);
-            this.graphics.drawRoundedRect(this.x, this.y, this.width * percent, this.height, this.radius);
-            this.graphics.endFill();
-        }
-    }]);
-
-    return UIProgressBar;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (UIProgressBar);
 
 /***/ })
 /******/ ]);

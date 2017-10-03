@@ -20,7 +20,7 @@ export default {
                 [80, 2500, 8],
                 [100, 5000, 2]
             ],
-            goal: 50000,
+            goal: 30000,
         },
         radar: {
             computing: 1000, // ms

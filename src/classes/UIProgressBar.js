@@ -15,7 +15,11 @@ class UIProgressBar {
         percent = this.game.math.clamp(percent, 0, 1);
         this.graphics.clear();
         this.graphics.lineStyle(1, color);
-        this.graphics.drawRoundedRect(this.x, this.y, this.width, this.height, this.radius);
+        if (this.radius === 0) {
+            this.graphics.drawRect(this.x, this.y, this.width, this.height);
+        } else {
+            this.graphics.drawRoundedRect(this.x, this.y, this.width, this.height, this.radius);
+        }
         this.graphics.beginFill(color);
         this.graphics.drawRoundedRect(this.x, this.y, this.width * percent, this.height, this.radius);
         this.graphics.endFill();
