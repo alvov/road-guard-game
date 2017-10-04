@@ -13,18 +13,23 @@ import {
 
 class StartMenu {
     preload() {
-        this.game.stage.backgroundColor = COLOR_HEX.MAIN;
+        this.game.stage.backgroundColor = '#fff';
     }
 
     create() {
-        this.game.world.resize(this.game.width, this.game.height);
+        this.bgSprite = this.game.add.sprite(
+            0,
+            0,
+            'startMenu'
+        );
+        this.bgSprite.anchor.set(1, 0);
 
         this.title = this.game.rg.i18n.createText(
             0,
             0,
             I18N_GAME_TITLE,
             {
-                fill: '#fff'
+                fill: COLOR_HEX.MAIN
             }
         );
         this.title.anchor.set(0.5);
@@ -50,7 +55,7 @@ class StartMenu {
                     itemTitle,
                     {
                         font: '22px Arial',
-                        fill: '#fff'
+                        fill: COLOR_HEX.MAIN
                     },
                     postfix,
                 ),
@@ -64,7 +69,6 @@ class StartMenu {
             'langButtons',
             this.handleClickLang.bind(this)
         );
-        this.langButton.anchor.set(1, 0);
 
         this.versionText = this.game.rg.i18n.createText(
             0,
@@ -72,7 +76,7 @@ class StartMenu {
             I18N_UI_VER,
             {
                 font: '10px "Press Start 2P", Arial',
-                fill: '#fff',
+                fill: COLOR_HEX.MAIN,
             },
             '1.0.0',
         );
@@ -126,6 +130,9 @@ class StartMenu {
     }
 
     setObjectsPosition() {
+        this.bgSprite.scale.set(this.game.height / this.bgSprite.height);
+        this.bgSprite.position.set(this.game.width, 0);
+
         this.title.position.set(
             this.game.width / 2,
             this.game.height / 6,
@@ -142,7 +149,7 @@ class StartMenu {
         });
 
         this.langButton.position.set(
-            this.game.width - UI_OFFSET,
+            UI_OFFSET,
             0,
         );
 

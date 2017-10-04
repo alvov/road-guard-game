@@ -6,7 +6,14 @@ const pack = {
             url: require('./images/langButtons.png'),
             frameWidth: 50,
             frameHeight: 50
-        }
+        },
+        {
+            type: 'spritesheet',
+            key: 'startMenu',
+            url: require('./images/startMenu.png'),
+            frameWidth: 800,
+            frameHeight: 600
+        },
     ],
     game: [
         {
