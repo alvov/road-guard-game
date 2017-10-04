@@ -10,8 +10,28 @@ export default {
         ru: '<   Назад'
     },
     [cnst.I18N_MENU_START]: {
-        en: 'Play',
-        ru: 'Играть'
+        en: 'Start',
+        ru: 'Начать'
+    },
+    [cnst.I18N_MENU_HOW_TO]: {
+        en: 'How to play',
+        ru: 'Как играть'
+    },
+    [cnst.I18N_HOW_TO_GOAL]: {
+        en: 'Reach the needed amount of issued fines (in rubles) before your shift is over.',
+        ru: 'Выполните норму по выписанным штрафам, пока не закончилась ваша смена.'
+    },
+    [cnst.I18N_HOW_TO_FINE]: {
+        en: 'Choose a car on the road and press \'Fine!\' if its speed is higher than allowed.',
+        ru: 'Выберите автомобиль из потока, и если его скорость окажется выше предельно допустимой, нажмите «Штраф!»'
+    },
+    [cnst.I18N_HOW_TO_SPACEBAR]: {
+        en: 'You can also use \'spacebar\' key on your keyboard instead of the \'Fine!\' button.',
+        ru: 'Вместо кнопки «Штраф!» можно нажимать на «Пробел» на клавиатуре.'
+    },
+    [cnst.I18N_HOW_TO_AUTHORITIES]: {
+        en: 'BE CAREFUL! Issuing fines to the cars of the authorities leads to your own penalty!',
+        ru: 'БУДЬТЕ ОСТОРОЖНЫ! Штрафы, выписанные «привилегированным» авто, вычтутся из вашей нормы!'
     },
     [cnst.I18N_UI_LEVEL]: {
         en: 'Level',

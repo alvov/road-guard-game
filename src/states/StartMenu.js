@@ -2,12 +2,13 @@ import Level from '../classes/Level';
 import pack from '../assets/pack.js';
 
 import {
+    UI_OFFSET,
+    COLOR_HEX,
     LANG_RU,
     LANG_EN,
+    STATE_LOADING, STATE_GAME, STATE_HOW_TO,
     I18N_GAME_TITLE,
-    I18N_MENU_START, STATE_LOADING, STATE_GAME,
-    UI_OFFSET,
-    COLOR_HEX, I18N_UI_LEVEL, I18N_UI_VER,
+    I18N_MENU_START, I18N_UI_LEVEL, I18N_UI_VER, I18N_MENU_HOW_TO,
 } from '../constants';
 
 class StartMenu {
@@ -29,16 +30,19 @@ class StartMenu {
         this.title.anchor.set(0.5);
 
         this.menu = [];
+
         const maxLevel = this.game.rg.level.maxLevel;
         if (maxLevel > 1) {
             for (let i = 1; i <= maxLevel; i++) {
-                this.menu.push([I18N_UI_LEVEL, ` ${i}`, this.handleClickPlay.bind(this, i)]);
+                this.menu.push([I18N_UI_LEVEL, this.handleClickPlay.bind(this, i), ` ${i}`]);
             }
         } else {
-            this.menu.push([I18N_MENU_START, '', this.handleClickPlay.bind(this)]);
+            this.menu.push([I18N_MENU_START, this.handleClickPlay.bind(this)]);
         }
 
-        this.menu = this.menu.map(([itemTitle, postfix, callback], i) => {
+        this.menu.push([I18N_MENU_HOW_TO, this.handleClickHowTo.bind(this)]);
+
+        this.menu = this.menu.map(([itemTitle, callback, postfix]) => {
             return [
                 this.game.rg.i18n.createText(
                     0,
@@ -90,6 +94,16 @@ class StartMenu {
         this.scale.onSizeChange.remove(this.setObjectsPosition, this);
     }
 
+    handleClickMenu() {
+        this.menu.some(([item, callback]) => {
+            if (item.getBounds().contains(this.game.input.x, this.game.input.y)) {
+                this.game.input.onDown.remove(this.handleClickMenu, this);
+                callback();
+                return true;
+            }
+        });
+    }
+
     handleClickPlay(levelNumber = 1) {
         this.state.start(STATE_LOADING, true, false, {
             assets: [
@@ -101,20 +115,14 @@ class StartMenu {
         });
     }
 
+    handleClickHowTo() {
+        this.state.start(STATE_HOW_TO, true, false);
+    }
+
     handleClickLang() {
         this.game.rg.i18n.setLang(
             this.game.rg.i18n.currentLang === LANG_RU ? LANG_EN : LANG_RU
         );
-    }
-
-    handleClickMenu() {
-        this.menu.some(([item, callback]) => {
-            if (item.getBounds().contains(this.game.input.x, this.game.input.y)) {
-                this.game.input.onDown.remove(this.handleClickMenu, this);
-                callback();
-                return true;
-            }
-        });
     }
 
     setObjectsPosition() {

@@ -27,6 +27,7 @@ export const COLOR = Object.keys(COLOR_HEX).reduce((result, colorKey) => {
 export const STATE_BOOT = 'boot';
 export const STATE_LOADING = 'loading';
 export const STATE_MENU = 'menu';
+export const STATE_HOW_TO = 'howTo';
 export const STATE_GAME = 'game';
 
 export const LANG_RU = 'ru';
@@ -50,6 +51,11 @@ export const RADAR_MODE_ERROR = 'error';
 export const I18N_GAME_TITLE = 'gameTitle';
 export const I18N_MENU_BACK = 'menuBack';
 export const I18N_MENU_START = 'menuStart';
+export const I18N_MENU_HOW_TO = 'menuHowTo';
+export const I18N_HOW_TO_GOAL = 'howToGoal';
+export const I18N_HOW_TO_FINE = 'howToFine';
+export const I18N_HOW_TO_SPACEBAR = 'howToSpacebar';
+export const I18N_HOW_TO_AUTHORITIES = 'howToAuth';
 export const I18N_UI_LEVEL = 'uiLevel';
 export const I18N_UI_LOADING = 'uiLoading';
 export const I18N_UI_PAUSE = 'uiPause';

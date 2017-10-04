@@ -5,8 +5,6 @@
 ?   UIScreen max height
 ?   acceleration for changing lanes
 ?   pause screen
-?   how to play screen
-?   controls screen
 ?   sound
 ?   music
 ?   minification
@@ -31,3 +29,5 @@
 +   more levels
 +   localstorage levels
 +   common fines
++   how to play screen
+-   controls screen

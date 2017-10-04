@@ -3,6 +3,7 @@ import './index.css';
 import Boot from './states/Boot';
 import Loading from './states/Loading';
 import StartMenu from './states/StartMenu';
+import HowTo from './states/HowTo';
 import Game from './states/Game';
 
 import {
@@ -10,6 +11,7 @@ import {
     STATE_LOADING,
     STATE_MENU,
     STATE_GAME,
+    STATE_HOW_TO,
 } from './constants';
 
 window.WebFontConfig = {
@@ -44,6 +46,7 @@ function initGame() {
     game.state.add(STATE_BOOT, Boot);
     game.state.add(STATE_LOADING, Loading);
     game.state.add(STATE_MENU, StartMenu);
+    game.state.add(STATE_HOW_TO, HowTo);
     game.state.add(STATE_GAME, Game);
 
     game.state.start(STATE_BOOT);
