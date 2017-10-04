@@ -6,7 +6,7 @@ import {
     COLOR,
 } from '../constants';
 
-const CAR_STEERING_SPEED_COEFF = 1.5;
+const CAR_STEERING_DURATION = 600;
 const CAR_ROGUE_FINED_BLINK_DURATION = 400;
 const CAR_ROGUE_FINED_BLINK_REPEAT = 4;
 
@@ -34,7 +34,7 @@ class Car {
 
         this.position = new Phaser.Point(0, 0);
         this.velocity = new Phaser.Point(0, 0);
-        this.moveTargetY = 0;
+        this.steeringTween = null;
 
         this.roadLane = null;
         this.color = null;
@@ -55,19 +55,8 @@ class Car {
     preUpdate() {
         this.position.add(
             this.velocity.x * this.game.time.physicsElapsed,
-            this.velocity.y * this.game.time.physicsElapsed
+            this.velocity.y * this.game.time.physicsElapsed,
         );
-
-        if (this.moveTargetY !== this.position.y) {
-            if (
-                this.velocity.y > 0 && this.position.y >= this.moveTargetY ||
-                this.velocity.y < 0 && this.position.y <= this.moveTargetY
-            ) {
-                this.position.y = this.moveTargetY;
-                // clear moveTargetY
-                this.moveToY(this.position.y);
-            }
-        }
     }
 
     update({ x, y, scale }) {
@@ -102,10 +91,18 @@ class Car {
         this.mode = mode;
     }
 
-    moveToY(y, roadLane = this.roadLane) {
-        this.moveTargetY = y;
+    moveToY(y, roadLane) {
         this.roadLane = roadLane;
-        this.velocity.y = Math.sign(y - this.position.y) * this.velocity.x * CAR_STEERING_SPEED_COEFF;
+        if (this.steeringTween) {
+            this.steeringTween.stop();
+        }
+        this.steeringTween = this.game.add.tween(this.position)
+            .to(
+                { y },
+                CAR_STEERING_DURATION,
+                Phaser.Easing.Quadratic.InOut,
+                true
+            );
     }
 
     generatePlateNumber() {
@@ -153,7 +150,7 @@ class Car {
         this.plateNumber.setText(this.generatePlateNumber());
 
         this.position.set(x, y);
-        this.moveToY(y, roadLane);
+        this.roadLane = roadLane;
         this.velocity.x = speed;
         this.color = this.generateBodyColor();
         this.sprite.tint = this.color;

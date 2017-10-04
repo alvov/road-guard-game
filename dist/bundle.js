@@ -534,7 +534,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
 
-var CAR_STEERING_SPEED_COEFF = 1.5;
+var CAR_STEERING_DURATION = 600;
 var CAR_ROGUE_FINED_BLINK_DURATION = 400;
 var CAR_ROGUE_FINED_BLINK_REPEAT = 4;
 
@@ -572,7 +572,7 @@ var Car = function () {
 
         this.position = new Phaser.Point(0, 0);
         this.velocity = new Phaser.Point(0, 0);
-        this.moveTargetY = 0;
+        this.steeringTween = null;
 
         this.roadLane = null;
         this.color = null;
@@ -592,14 +592,6 @@ var Car = function () {
         key: 'preUpdate',
         value: function preUpdate() {
             this.position.add(this.velocity.x * this.game.time.physicsElapsed, this.velocity.y * this.game.time.physicsElapsed);
-
-            if (this.moveTargetY !== this.position.y) {
-                if (this.velocity.y > 0 && this.position.y >= this.moveTargetY || this.velocity.y < 0 && this.position.y <= this.moveTargetY) {
-                    this.position.y = this.moveTargetY;
-                    // clear moveTargetY
-                    this.moveToY(this.position.y);
-                }
-            }
         }
     }, {
         key: 'update',
@@ -637,12 +629,12 @@ var Car = function () {
         }
     }, {
         key: 'moveToY',
-        value: function moveToY(y) {
-            var roadLane = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.roadLane;
-
-            this.moveTargetY = y;
+        value: function moveToY(y, roadLane) {
             this.roadLane = roadLane;
-            this.velocity.y = Math.sign(y - this.position.y) * this.velocity.x * CAR_STEERING_SPEED_COEFF;
+            if (this.steeringTween) {
+                this.steeringTween.stop();
+            }
+            this.steeringTween = this.game.add.tween(this.position).to({ y: y }, CAR_STEERING_DURATION, Phaser.Easing.Quadratic.InOut, true);
         }
     }, {
         key: 'generatePlateNumber',
@@ -699,7 +691,7 @@ var Car = function () {
             this.plateNumber.setText(this.generatePlateNumber());
 
             this.position.set(x, y);
-            this.moveToY(y, roadLane);
+            this.roadLane = roadLane;
             this.velocity.x = speed;
             this.color = this.generateBodyColor();
             this.sprite.tint = this.color;
@@ -2179,12 +2171,13 @@ var Game = function () {
         key: 'getClearestRoadLaneByCar',
         value: function getClearestRoadLaneByCar(currentCar) {
             var lanesClearness = _defineProperty({}, currentCar.roadLane, Infinity);
+            var currentCarRoadLaneY = this.rg.objects.road.getLaneCenter(currentCar.roadLane);
             var availableLanesCount = 1;
-            if (currentCar.roadLane < this.rg.objects.road.lanes - 1 && currentCar.position.y >= currentCar.moveTargetY) {
+            if (currentCar.roadLane < this.rg.objects.road.lanes - 1 && currentCar.position.y >= currentCarRoadLaneY) {
                 lanesClearness[currentCar.roadLane + 1] = Infinity;
                 availableLanesCount++;
             }
-            if (currentCar.roadLane > 0 && currentCar.position.y <= currentCar.moveTargetY) {
+            if (currentCar.roadLane > 0 && currentCar.position.y <= currentCarRoadLaneY) {
                 lanesClearness[currentCar.roadLane - 1] = Infinity;
                 availableLanesCount++;
             }

@@ -478,17 +478,18 @@ class Game {
         const lanesClearness = {
             [currentCar.roadLane]: Infinity,
         };
+        const currentCarRoadLaneY = this.rg.objects.road.getLaneCenter(currentCar.roadLane);
         let availableLanesCount = 1;
         if (
             currentCar.roadLane < this.rg.objects.road.lanes - 1 &&
-            currentCar.position.y >= currentCar.moveTargetY
+            currentCar.position.y >= currentCarRoadLaneY
         ) {
             lanesClearness[currentCar.roadLane + 1] = Infinity;
             availableLanesCount++;
         }
         if (
             currentCar.roadLane > 0 &&
-            currentCar.position.y <= currentCar.moveTargetY
+            currentCar.position.y <= currentCarRoadLaneY
         ) {
             lanesClearness[currentCar.roadLane - 1] = Infinity;
             availableLanesCount++;

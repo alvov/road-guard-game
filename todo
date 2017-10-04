@@ -2,9 +2,8 @@
 ?   graphics cars shadow
 ?   graphics road lines
 ?   graphics day times
-?   graphics start screen levels
+?   graphics start menu levels
 ?   graphics pattern
-?   acceleration for changing lanes
 ?   sound
 ?   music
 ?   minification
@@ -32,5 +31,6 @@
 +   how to play screen
 +   multicolor stats/rules
 +   pause screen
++   acceleration for changing lanes
 -   controls screen
 -   UIScreen max height
