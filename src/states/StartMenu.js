@@ -1,3 +1,4 @@
+import Level from '../classes/Level';
 import pack from '../assets/pack.js';
 
 import {
@@ -6,10 +7,8 @@ import {
     I18N_GAME_TITLE,
     I18N_MENU_START, STATE_LOADING, STATE_GAME,
     UI_OFFSET,
-    COLOR_HEX,
+    COLOR_HEX, I18N_UI_LEVEL, I18N_UI_VER,
 } from '../constants';
-
-import { getLevel } from '../utils';
 
 class StartMenu {
     preload() {
@@ -29,18 +28,27 @@ class StartMenu {
         );
         this.title.anchor.set(0.5);
 
-        this.menu = [
-            [I18N_MENU_START, this.handleClickPlay.bind(this)],
-        ].map(([itemTitle, callback], i) => {
+        this.menu = [];
+        const maxLevel = this.game.rg.level.maxLevel;
+        if (maxLevel > 1) {
+            for (let i = 1; i <= maxLevel; i++) {
+                this.menu.push([I18N_UI_LEVEL, ` ${i}`, this.handleClickPlay.bind(this, i)]);
+            }
+        } else {
+            this.menu.push([I18N_MENU_START, '', this.handleClickPlay.bind(this)]);
+        }
+
+        this.menu = this.menu.map(([itemTitle, postfix, callback], i) => {
             return [
                 this.game.rg.i18n.createText(
                     0,
                     0,
                     itemTitle,
                     {
-                        font: '18px "Press Start 2P", Arial',
+                        font: '22px Arial',
                         fill: '#fff'
-                    }
+                    },
+                    postfix,
                 ),
                 callback
             ];
@@ -53,6 +61,18 @@ class StartMenu {
             this.handleClickLang.bind(this)
         );
         this.langButton.anchor.set(1, 0);
+
+        this.versionText = this.game.rg.i18n.createText(
+            0,
+            0,
+            I18N_UI_VER,
+            {
+                font: '10px "Press Start 2P", Arial',
+                fill: '#fff',
+            },
+            '1.0.0',
+        );
+        this.versionText.anchor.set(1, 1);
 
         this.setObjectsPosition();
 
@@ -70,13 +90,13 @@ class StartMenu {
         this.scale.onSizeChange.remove(this.setObjectsPosition, this);
     }
 
-    handleClickPlay() {
+    handleClickPlay(levelNumber = 1) {
         this.state.start(STATE_LOADING, true, false, {
             assets: [
                 ['pack', 'game', null, pack],
             ],
             nextState: [
-                STATE_GAME, getLevel()
+                STATE_GAME, Level.getLevelByNumber(levelNumber)
             ]
         });
     }
@@ -112,9 +132,15 @@ class StartMenu {
                 i * menuVerticalSpacing + menuOffset,
             );
         });
+
         this.langButton.position.set(
             this.game.width - UI_OFFSET,
             0,
+        );
+
+        this.versionText.position.set(
+            this.game.width - UI_OFFSET,
+            this.game.height - UI_OFFSET
         );
     }
 }

@@ -16,6 +16,12 @@ const pack = {
             overwrite: false
         },
         {
+            type: 'image',
+            key: 'rain',
+            url: require('./images/rain.png'),
+            overwrite: false
+        },
+        {
             type: 'spritesheet',
             key: 'roadSign',
             url: require('./images/roadSign.png'),

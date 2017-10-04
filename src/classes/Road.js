@@ -4,7 +4,7 @@ import {
 } from '../constants';
 
 class Road {
-    constructor({ game, length, lanes, laneWidth }) {
+    constructor({ game, length, lanes, laneWidth, }) {
         this.game = game;
         this.length = length;
         this.lanes = lanes;

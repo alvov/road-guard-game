@@ -14,21 +14,22 @@ class i18n {
 
     setLang(lang) {
         this.currentLang = lang;
-        this.textObjects.forEach(({ inst, text }) => {
-            inst.setText(this.getTranslation(text));
+        this.textObjects.forEach(({ inst, text, postfix, }) => {
+            inst.setText(this.getTranslation(text) + postfix);
         });
     }
 
-    createText(x, y, text, font) {
+    createText(x, y, text, font, postfix = '',) {
         const textObject = this.game.add.text(
             x,
             y,
-            this.getTranslation(text),
+            this.getTranslation(text) + postfix,
             font
         );
         this.textObjects.push({
             inst: textObject,
-            text
+            text,
+            postfix,
         });
         return textObject;
     }

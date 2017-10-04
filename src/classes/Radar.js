@@ -1,7 +1,7 @@
 import UIProgressBar from './UIProgressBar';
 import UIButton from '../classes/UIButton';
 
-import { getFormattedCurrency } from '../utils';
+import { getFine, getFormattedCurrency } from '../utils';
 import {
     I18N_CURRENCY,
     I18N_RADAR_ALREADY_FINED,
@@ -10,10 +10,12 @@ import {
     I18N_RADAR_METRICS,
     I18N_RADAR_ROGUE,
     I18N_RADAR_WAIT,
+    I18N_RADAR_ERROR,
     I18N_UI_BUTTON_FINE,
     RADAR_MODE_ALREADY_FINED,
     RADAR_MODE_COMPUTING, RADAR_MODE_DISMISS,
     RADAR_MODE_EMPTY, RADAR_MODE_FINE, RADAR_MODE_FINED, RADAR_MODE_ROGUE,
+    RADAR_MODE_ERROR,
     UI_OFFSET,
     COLOR,
     COLOR_HEX,
@@ -24,13 +26,11 @@ const RADAR_SCREEN_HEIGHT = 120;
 const RADAR_FINE_BUTTON_HEIGHT = 70;
 
 class Radar {
-    constructor({ game, x, y, width, computing, fines, speedLimit, onFine, }) {
+    constructor({ game, x, y, width, computing, speedLimit, }) {
         this.game = game;
         this.width = width;
         this.height = RADAR_SCREEN_HEIGHT + RADAR_FINE_BUTTON_HEIGHT + 4 * UI_OFFSET;
-        this.fines = fines;
         this.speedLimit = speedLimit;
-        this.onFine = onFine;
 
         this.radarGroup = this.game.add.group();
         this.radarGroup.x = x;
@@ -145,7 +145,7 @@ class Radar {
 
     handleCompleteComputing() {
         this.computingTimer.stop(true);
-        this.currentFine = this.getFine(this.currentCar.velocity.x);
+        this.currentFine = getFine(this.currentCar.velocity.x, this.speedLimit);
         if (this.currentFine === 0) {
             this.setMode(RADAR_MODE_DISMISS, { speed: this.currentCar.velocity.x });
         } else {
@@ -246,6 +246,12 @@ class Radar {
                 this.startTemporaryModeTimer();
                 break;
             }
+            case RADAR_MODE_ERROR: {
+                this.mainText.fill = COLOR_HEX.MAROON;
+                this.mainText.setText(this.game.rg.i18n.getTranslation(I18N_RADAR_ERROR));
+                this.resetCurrentCar();
+                break;
+            }
         }
 
         this.mode = mode;
@@ -258,6 +264,7 @@ class Radar {
         switch (this.mode) {
             case RADAR_MODE_FINE:
             case RADAR_MODE_ROGUE:
+            case RADAR_MODE_ERROR:
                 color = COLOR.RADAR_SCREEN_RED;
                 break;
             default:
@@ -277,18 +284,6 @@ class Radar {
     startTemporaryModeTimer() {
         this.temporaryModeTimer.add(TEMPORARY_MODE_DURATION, this.handleCompleteTemporaryMode, this);
         this.temporaryModeTimer.start();
-    }
-
-    getFine(speed) {
-        let result = 0;
-        for (let i = 0; i < this.fines.length; i++) {
-            const [speedExcess, fine] = this.fines[i];
-            if (speed < speedExcess + this.speedLimit) {
-                result = fine;
-                break;
-            }
-        }
-        return result;
     }
 
     resetCurrentCar() {

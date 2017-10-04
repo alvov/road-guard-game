@@ -25,6 +25,10 @@ export default {
         en: 'Paused',
         ru: 'Пауза'
     },
+    [cnst.I18N_UI_VER]: {
+        en: 'ver.',
+        ru: 'вер.'
+    },
     [cnst.I18N_UI_BUTTON_QUIT]: {
         en: 'Quit',
         ru: 'Выход'
@@ -72,6 +76,10 @@ export default {
     [cnst.I18N_RADAR_ALREADY_FINED]: {
         en: 'ALREADY FINED!',
         ru: 'ШТРАФ ВЫПИСАН!'
+    },
+    [cnst.I18N_RADAR_ERROR]: {
+        en: 'ERROR!',
+        ru: 'СБОЙ!'
     },
     [cnst.I18N_END_LOOSE]: {
         en: 'You lost!',

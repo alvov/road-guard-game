@@ -1,14 +1,12 @@
 ?   graphics more cars
 ?   graphics road lines
-?   graphics day times / weather
+?   graphics day times
 ?   multicolor stats/rules
 ?   UIScreen max height
 ?   acceleration for changing lanes
 ?   pause screen
 ?   how to play screen
 ?   controls screen
-?   more levels
-?   localstorage levels
 ?   sound
 ?   music
 ?   minification
@@ -24,7 +22,12 @@
 + M graphics radar monitor
 + M graphics score
 + M mobile
++   start screen font bug
++   graphics weather
 +   fine on space key
 +   graphics rogue car signs
 +   graphics car colors
 +   graphics grass
++   more levels
++   localstorage levels
++   common fines

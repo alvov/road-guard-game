@@ -1,3 +1,4 @@
+import Level from '../classes/Level';
 import cars from '../classes/cars/cars';
 import Road from '../classes/Road';
 import Radar from '../classes/Radar';
@@ -6,8 +7,9 @@ import Score from '../classes/Score';
 import LevelTimer from '../classes/LevelTimer';
 import StartLevel from '../classes/screens/StartLevel';
 import EndLevel from '../classes/screens/EndLevel';
-import { getLevel, getLevelNumber, getNextLevelId } from '../utils';
+import Weather from '../classes/Weather';
 
+import { getFine, } from '../utils';
 import {
     UI_OFFSET,
     CAR_MODE_FINED,
@@ -19,7 +21,8 @@ import {
     RADAR_MODE_FINED,
     END_GAME_TIME_OUT, END_GAME_WIN, I18N_UI_BUTTON_QUIT, STATE_MENU, I18N_UI_BUTTON_NEXT, STATE_GAME,
     I18N_UI_BUTTON_REPLAY, I18N_UI_BUTTON_FINE,
-    COLOR_HEX, I18N_UI_BUTTON_PLAY,
+    COLOR_HEX, I18N_UI_BUTTON_PLAY, RADAR_MODE_ERROR,
+    FINES,
 } from '../constants';
 
 class Game {
@@ -49,7 +52,7 @@ class Game {
             objects: {
                 road: null,
                 roadSign: null,
-                interface: null,
+                weather: null,
                 score: null,
                 timer: null,
                 radar: null,
@@ -62,8 +65,9 @@ class Game {
                 cars: [],
             },
             groups: {
-                cars: null,
-                carsBehind: null,
+                bg: null,
+                behindRoad: null,
+                onRoad: null,
             },
             timers: {
                 reviveCar: null,
@@ -80,8 +84,11 @@ class Game {
         // background
         this.game.stage.backgroundColor = COLOR_HEX.SKY;
 
+        // background group
+        this.rg.groups.bg = this.game.add.group();
+
         // cars behind the road
-        this.rg.groups.carsBehind = this.game.add.group();
+        this.rg.groups.behindRoad = this.game.add.group();
 
         // road
         this.rg.objects.road = new Road({
@@ -89,8 +96,16 @@ class Game {
             ...this.rg.level.road,
         });
 
+        this.rg.groups.onRoad = this.game.add.group();
+
+        const roadSignX = this.rg.objects.road.length / 2;
+        const roadSignY = -UI_OFFSET;
         this.rg.objects.roadSign = new RoadSign({
             game: this.game,
+            position: {
+                x: roadSignX,
+                y: roadSignY,
+            },
             ...this.rg.objects.road.getProjection({
                 x: this.rg.objects.road.length / 2,
                 y: -UI_OFFSET,
@@ -98,10 +113,23 @@ class Game {
             speedLimit: this.rg.level.speed.limit,
         });
 
+        this.rg.groups.onRoad.add(this.rg.objects.roadSign.group);
+
+        if (this.rg.level.weather) {
+            this.rg.objects.weather = new Weather({
+                game: this.game,
+                weather: this.rg.level.weather,
+                road: this.rg.objects.road,
+                bgGroup: this.rg.groups.bg,
+                onFlash: this.handleFlash.bind(this),
+            });
+
+            this.rg.groups.onRoad.addMultiple(this.rg.objects.weather.curtains);
+        }
+
         // cars
         this.rg.timers.reviveCar = this.game.time.create(false);
 
-        this.rg.groups.cars = this.game.add.group();
         this.createCars(this.rg.cars.count);
 
         // ui
@@ -109,7 +137,7 @@ class Game {
             game: this.game,
             x: UI_OFFSET,
             y: UI_OFFSET,
-            goal: this.rg.level.money.goal,
+            goal: this.rg.level.goal,
         });
 
         this.rg.objects.timer = new LevelTimer({
@@ -123,9 +151,7 @@ class Game {
             y: this.game.height - UI_OFFSET,
             width: this.rg.objects.road.roadOffsetLeft - UI_OFFSET * 2,
             ...this.rg.level.radar,
-            fines: this.rg.level.money.fines,
             speedLimit: this.rg.level.speed.limit,
-            onFine: this.handleFine.bind(this)
         });
 
         // screens
@@ -133,8 +159,8 @@ class Game {
             game: this.game,
         });
         this.rg.screens.startLevel.show({
-            levelNumber: getLevelNumber(this.rg.level.id),
-            goal: this.rg.level.money.goal,
+            levelNumber: Level.getLevelNumber(this.rg.level.id),
+            goal: this.rg.level.goal,
             series: this.rg.level.cars.series,
         });
 
@@ -152,37 +178,43 @@ class Game {
             return;
         }
 
-        // update cars starting from the closest to the player
-        for (let i = this.rg.groups.cars.length - 1; i >= 0; i--) {
-            const carSprite = this.rg.groups.cars.getChildAt(i);
-            if (!carSprite.alive) {
+        // update road objects starting from the closest to the player
+        for (let i = this.rg.groups.onRoad.length - 1; i >= 0; i--) {
+            const sprite = this.rg.groups.onRoad.getChildAt(i);
+            if (!sprite.alive) {
                 continue;
             }
+            if (sprite.name.startsWith('car')) {
+                this.updateCar(sprite.rg);
 
-            this.updateCar(this.rg.groups.cars.getChildAt(i));
-
-            if (carSprite.rg.position.x > this.rg.level.road.end) {
-                carSprite.rg.kill();
+                if (sprite.rg.position.x > this.rg.level.road.end) {
+                    sprite.rg.kill();
+                }
             }
         }
 
-        for (let i = this.rg.groups.carsBehind.length - 1; i >= 0; i--) {
-            const carSprite = this.rg.groups.carsBehind.getChildAt(i);
+        for (let i = this.rg.groups.behindRoad.length - 1; i >= 0; i--) {
+            const carSprite = this.rg.groups.behindRoad.getChildAt(i);
             if (!carSprite.alive) {
                 continue;
             }
-            this.updateCar(this.rg.groups.carsBehind.getChildAt(i));
+            this.updateCar(carSprite.rg);
 
             if (carSprite.rg.position.x > 0) {
-                this.rg.groups.cars.add(carSprite);
+                this.rg.groups.onRoad.add(carSprite);
             }
         }
 
-        this.rg.groups.carsBehind.customSort(this.sortCars, this);
-        this.rg.groups.cars.customSort(this.sortCars, this);
+        this.rg.groups.behindRoad.customSort(this.sortRoadObjects, this);
+        this.rg.groups.onRoad.customSort(this.sortRoadObjects, this);
 
         if (this.rg.cars.revive) {
             this.rg.cars.revive = !this.reviveCar();
+        }
+
+        // update weather
+        if (this.rg.objects.weather) {
+            this.rg.objects.weather.update();
         }
 
         // update radar
@@ -204,8 +236,7 @@ class Game {
         }
     }
 
-    updateCar(carSprite) {
-        const car = carSprite.rg;
+    updateCar(car) {
         const bestRoadLane = this.getClearestRoadLaneByCar(car);
         if (bestRoadLane !== car.roadLane) {
             car.moveToY(
@@ -267,7 +298,9 @@ class Game {
     }
 
     handleClickField() {
-        this.rg.objects.radar.setMode(RADAR_MODE_EMPTY);
+        if (this.rg.objects.radar.mode !== RADAR_MODE_ERROR) {
+            this.rg.objects.radar.setMode(RADAR_MODE_EMPTY);
+        }
     }
 
     handleClickQuit() {
@@ -275,28 +308,31 @@ class Game {
     }
 
     handleClickNext() {
-        const nextLevel = getNextLevelId(this.rg.level.id);
-        this.state.start(STATE_GAME, true, false, getLevel(nextLevel));
+        this.state.start(STATE_GAME, true, false, Level.getNextLevelById(this.rg.level.id));
     }
 
     handleClickReplay() {
-        this.state.start(STATE_GAME, true, false, getLevel(this.rg.level.id));
+        this.state.start(STATE_GAME, true, false, Level.getLevelById(this.rg.level.id));
     }
 
     handleClickCar(car) {
-        if (car.mode === CAR_MODE_FINED) {
-            this.rg.objects.radar.setMode(car.isRogue ? RADAR_MODE_ROGUE : RADAR_MODE_ALREADY_FINED);
-        } else {
-            this.rg.objects.radar.setMode(RADAR_MODE_COMPUTING, { car });
+        if (this.rg.objects.radar.mode !== RADAR_MODE_ERROR) {
+            if (car.mode === CAR_MODE_FINED) {
+                this.rg.objects.radar.setMode(car.isRogue ? RADAR_MODE_ROGUE : RADAR_MODE_ALREADY_FINED);
+            } else {
+                this.rg.objects.radar.setMode(RADAR_MODE_COMPUTING, { car });
+            }
         }
     }
 
     handleKillCar(car) {
+        this.rg.groups.onRoad.removeChild(car.sprite);
+
         if (car === this.rg.objects.radar.currentCar) {
             this.rg.objects.radar.setMode(RADAR_MODE_EMPTY);
         }
         if (!this.rg.levelEnded && car.mode !== CAR_MODE_FINED && !car.isRogue) {
-            const fine = this.rg.objects.radar.getFine(car.velocity.x);
+            const fine = getFine(car.velocity.x);
             if (fine !== 0) {
                 this.rg.stats.missed.count++;
                 this.rg.stats.missed.sum += fine;
@@ -320,6 +356,14 @@ class Game {
         }
     }
 
+    handleFlash(on) {
+        if (on) {
+            this.rg.objects.radar.setMode(RADAR_MODE_ERROR);
+        } else {
+            this.rg.objects.radar.setMode(RADAR_MODE_EMPTY);
+        }
+    }
+
     checkLevelEnd() {
         if (this.rg.objects.timer.isExpired) {
             this.endLevel(END_GAME_TIME_OUT);
@@ -333,6 +377,9 @@ class Game {
 
         this.rg.objects.timer.start();
         this.resetCarTimer();
+        if (this.rg.objects.weather) {
+            this.rg.objects.weather.startFlashTimers();
+        }
 
         this.rg.screens.startLevel.hide();
     }
@@ -341,13 +388,17 @@ class Game {
         this.rg.levelEnded = true;
         this.rg.objects.timer.kill();
 
+        const nextLevel = Level.getNextLevelById(this.rg.level.id);
+        if (nextLevel) {
+            this.game.rg.level.maxLevel = Level.getLevelNumber(nextLevel.id);
+        }
         this.rg.screens.endLevel.show({
             mode,
             stats: {
                 time: this.rg.objects.timer.secondsElapsed,
                 ...this.rg.stats,
             },
-            nextLevel: getNextLevelId(this.rg.level.id),
+            nextLevel: nextLevel ? nextLevel.id : null,
         });
     }
 
@@ -393,7 +444,7 @@ class Game {
                 speed,
                 isRogue,
             });
-            this.rg.groups.carsBehind.addAt(deadCar.sprite, 0);
+            this.rg.groups.behindRoad.addAt(deadCar.sprite, 0);
             return true;
         }
 
@@ -421,8 +472,8 @@ class Game {
         }
         let lanesFoundCount = 0;
         if (currentCar.position.x < 0) {
-            for (let i = currentCar.sprite.z + 1; i < this.rg.groups.carsBehind.length; i++) {
-                const carSprite = this.rg.groups.carsBehind.getChildAt(i);
+            for (let i = currentCar.sprite.z + 1; i < this.rg.groups.behindRoad.length; i++) {
+                const carSprite = this.rg.groups.behindRoad.getChildAt(i);
                 const car = carSprite.rg;
                 if (
                     !carSprite.alive ||
@@ -444,13 +495,19 @@ class Game {
             let i = currentCar.position.x < 0 ?
                 0 :
                 currentCar.sprite.z + 1;
-            i < this.rg.groups.cars.length;
+            i < this.rg.groups.onRoad.length;
             i++
         ) {
-            const carSprite = this.rg.groups.cars.getChildAt(i);
-            const car = carSprite.rg;
+            const sprite = this.rg.groups.onRoad.getChildAt(i);
             if (
-                !carSprite.alive ||
+                !sprite.alive ||
+                !sprite.name.startsWith('car')
+            ) {
+                continue;
+            }
+
+            const car = sprite.rg;
+            if (
                 currentCar.velocity.x < car.velocity.x ||
                 Math.abs(car.roadLane - currentCar.roadLane) > 1
             ) {
@@ -498,17 +555,17 @@ class Game {
 
     getRandomCarSpeed(isRogue) {
         if (isRogue) {
-            let minDisallowedSpeed = this.rg.level.speed.limit + this.rg.level.money.fines[1][0];
-            let maxDisallowedSpeed = this.rg.level.speed.limit + this.rg.level.money.fines[this.rg.level.money.fines.length - 1][0];
+            let minDisallowedSpeed = this.rg.level.speed.limit + FINES[1][0];
+            let maxDisallowedSpeed = this.rg.level.speed.limit + FINES[FINES.length - 1][0];
             return this.game.rnd.integerInRange(minDisallowedSpeed, maxDisallowedSpeed - 1);
         } else {
             const randomNumber = this.game.rnd.integerInRange(1, 100);
             let cummulativeProbability = 0;
-            for (let i = 0; i < this.rg.level.money.fines.length; i++) {
-                const [speedExcess, fine, probability] = this.rg.level.money.fines[i];
+            for (let i = 0; i < FINES.length; i++) {
+                const [speedExcess, fine, probability] = FINES[i];
                 cummulativeProbability += probability;
                 if (randomNumber <= cummulativeProbability) {
-                    const prevSpeedExcess = (this.rg.level.money.fines[i - 1] || [0])[0];
+                    const prevSpeedExcess = (FINES[i - 1] || [0])[0];
                     return this.rg.level.speed.limit + this.game.rnd.integerInRange(prevSpeedExcess, speedExcess - 1);
                 }
             }
@@ -516,8 +573,8 @@ class Game {
         }
     }
 
-    sortCars(car1, car2) {
-        return car1.rg.position.x - car2.rg.position.x;
+    sortRoadObjects(obj1, obj2) {
+        return obj1.rg.position.x - obj2.rg.position.x;
     }
 }
 

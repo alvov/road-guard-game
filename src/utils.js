@@ -1,4 +1,4 @@
-import levels from './levels';
+import { FINES } from './constants';
 
 export function getFormattedTime(seconds) {
     return String(Math.floor(seconds / 60)).padStart(2, '0') + ':' +
@@ -18,19 +18,14 @@ export function getFormattedCurrency(value, currency) {
     return (sign ? '-' : '') + result + currency;
 }
 
-export function getLevel(levelId = getNextLevelId()) {
-    return levels[levelId];
-}
-
-export function getLevelNumber(levelId) {
-    return Number(levelId.substr(5));
-}
-
-export function getNextLevelId(currentLevelId = 'level0') {
-    const nextLevelId = 'level' + (getLevelNumber(currentLevelId) + 1);
-    if (levels.hasOwnProperty(nextLevelId)) {
-        return nextLevelId;
-    } else {
-        return null;
+export function getFine(speed, speedLimit) {
+    let result = 0;
+    for (let i = 0; i < FINES.length; i++) {
+        const [speedExcess, fine] = FINES[i];
+        if (speed < speedExcess + speedLimit) {
+            result = fine;
+            break;
+        }
     }
+    return result;
 }

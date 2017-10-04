@@ -1,8 +1,11 @@
 class RoadSign {
-    constructor({ game, x, y, speedLimit }) {
+    constructor({ game, x, y, position, speedLimit }) {
         this.group = game.add.group();
         this.group.x = x;
         this.group.y = y;
+        this.group.rg = this;
+
+        this.position = new Phaser.Point(position.x, position.y);
 
         this.signSprite = game.add.sprite(0, 0, 'roadSign');
         this.signSprite.anchor.set(0.5, 1);

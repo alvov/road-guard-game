@@ -4,6 +4,7 @@ import {
     STATE_LOADING,
     STATE_MENU
 } from '../constants';
+import Level from '../classes/Level';
 
 class Boot {
     init() {
@@ -11,13 +12,18 @@ class Boot {
         this.scale.pageAlignHorizontally = true;
         this.scale.pageAlignVertically = true;
 
-        this.game.rg = {};
+        this.game.rg = {
+            level: null,
+            i18n: null,
+        };
     }
 
     create() {
         // events
         this.state.onStateChange.add(this.handleStateChange, this);
         this.scale.onOrientationChange.add(this.handleOrientationChange, this);
+
+        this.game.rg.level = new Level();
 
         this.game.rg.i18n = new i18n({
             game: this.game

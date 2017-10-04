@@ -128,11 +128,11 @@ class EndLevel extends UIScreen {
         );
 
         if (mode === END_GAME_WIN && nextLevel !== null) {
-            this.nextButton.visible = true;
-            this.replayButton.visible = false;
+            this.nextButton.group.visible = true;
+            this.replayButton.group.visible = false;
         } else {
-            this.nextButton.visible = false;
-            this.replayButton.visible = true;
+            this.nextButton.group.visible = false;
+            this.replayButton.group.visible = true;
         }
 
         super.handleOverlayTweenComplete();
