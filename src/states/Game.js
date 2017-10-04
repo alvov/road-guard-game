@@ -7,6 +7,7 @@ import Score from '../classes/Score';
 import LevelTimer from '../classes/LevelTimer';
 import StartLevel from '../classes/screens/StartLevel';
 import EndLevel from '../classes/screens/EndLevel';
+import PauseLevel from '../classes/screens/PauseLevel';
 import Weather from '../classes/Weather';
 
 import { getFine, } from '../utils';
@@ -22,7 +23,7 @@ import {
     END_GAME_TIME_OUT, END_GAME_WIN, I18N_UI_BUTTON_QUIT, STATE_MENU, I18N_UI_BUTTON_NEXT, STATE_GAME,
     I18N_UI_BUTTON_REPLAY, I18N_UI_BUTTON_FINE,
     COLOR_HEX, I18N_UI_BUTTON_PLAY, RADAR_MODE_ERROR,
-    FINES,
+    FINES, I18N_UI_PAUSE,
 } from '../constants';
 
 class Game {
@@ -157,6 +158,7 @@ class Game {
         // screens
         this.rg.screens.startLevel = new StartLevel({
             game: this.game,
+            height: 270,
         });
         this.rg.screens.startLevel.show({
             levelNumber: Level.getLevelNumber(this.rg.level.id),
@@ -166,9 +168,16 @@ class Game {
 
         this.rg.screens.endLevel = new EndLevel({
             game: this.game,
+            height: 4 * this.game.height / 5,
+        });
+
+        this.rg.objects.pause = new PauseLevel({
+            game: this.game,
         });
 
         // events
+        this.game.onPause.add(this.handlePause, this);
+        this.game.onResume.add(this.handlePause, this);
         this.game.input.onDown.add(this.handleTap, this);
         this.rg.input.keys.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     }
@@ -259,6 +268,8 @@ class Game {
     }
 
     shutdown() {
+        this.game.onPause.remove(this.handlePause, this);
+        this.game.onResume.remove(this.handlePause, this);
         this.game.input.onDown.remove(this.handleTap, this);
         this.game.input.keyboard.removeKey(Phaser.Keyboard.SPACEBAR);
     }
@@ -281,6 +292,8 @@ class Game {
                     handled = true
                 } else if (pointer.targetObject.sprite.name === I18N_UI_BUTTON_QUIT) {
                     this.handleClickQuit();
+                } else if (pointer.targetObject.sprite.name === I18N_UI_PAUSE) {
+                    this.handlePause();
                 }
             } else {
                 if (pointer.targetObject.sprite.name === I18N_UI_BUTTON_QUIT) {
@@ -361,6 +374,16 @@ class Game {
             this.rg.objects.radar.setMode(RADAR_MODE_ERROR);
         } else {
             this.rg.objects.radar.setMode(RADAR_MODE_EMPTY);
+        }
+    }
+
+    handlePause() {
+        if (!this.rg.levelEnded) {
+            if (this.game.paused) {
+                this.rg.objects.pause.revive();
+            } else {
+                this.rg.objects.pause.kill();
+            }
         }
     }
 

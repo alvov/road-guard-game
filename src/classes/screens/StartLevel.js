@@ -1,4 +1,5 @@
 import UIScreen from '../UIScreen';
+import UIColumns from '../UIColumns';
 import UIButton from '../UIButton';
 
 import {
@@ -6,7 +7,7 @@ import {
 } from '../../utils'
 
 import {
-    COLOR,
+    COLOR, COLOR_HEX,
     I18N_CURRENCY,
     I18N_RULES_AUTHORITIES,
     I18N_RULES_GOAL,
@@ -16,8 +17,8 @@ import {
 } from '../../constants';
 
 class StartLevel extends UIScreen {
-    constructor({ game, }) {
-        super({ game, });
+    constructor({ game, height, }) {
+        super({ game, height, });
 
         const verticalPadding = 20;
         const horizontalPadding = 40;
@@ -34,30 +35,17 @@ class StartLevel extends UIScreen {
         this.textTitle.anchor.set(0.5, 0);
         this.contentGroup.add(this.textTitle);
 
-        const rulesLineSpacing = Math.round(Math.max(20, this.height / 20));
-        const rulesFontStyle = {
-            font: '16px "Press Start 2P", Arial'
-        };
-        const rulesY = this.height / 2;
-        this.textRulesLeft = this.game.add.text(
-            horizontalPadding,
-            rulesY,
-            '',
-            rulesFontStyle
-        );
-        this.textRulesLeft.anchor.set(0, 0.5);
-        this.textRulesLeft.lineSpacing = rulesLineSpacing;
-        this.contentGroup.add(this.textRulesLeft);
-
-        this.textRulesRight = this.game.add.text(
-            0,
-            rulesY,
-            '',
-            rulesFontStyle
-        );
-        this.textRulesRight.anchor.set(0, 0.5);
-        this.textRulesRight.lineSpacing = rulesLineSpacing;
-        this.contentGroup.add(this.textRulesRight);
+        this.rules = new UIColumns({
+            game: this.game,
+            x: horizontalPadding,
+            y: this.height / 2 - 30,
+            style: {
+                font: '16px "Press Start 2P", Arial',
+            },
+            lineSpacing: Math.round(Math.max(20, this.height / 20)),
+            columnSpacing: 2 * horizontalPadding,
+        });
+        this.contentGroup.add(this.rules.group);
 
         const buttonsHeight = 40;
         const buttonsWidth = 140;
@@ -81,8 +69,12 @@ class StartLevel extends UIScreen {
             y: this.height - verticalPadding - buttonsHeight,
             width: buttonsWidth,
             height: buttonsHeight,
-            bg: COLOR.MAROON,
+            bg: 0xffffff,
             text: this.game.rg.i18n.getTranslation(I18N_UI_BUTTON_QUIT),
+            style: {
+                font: `${buttonsHeight / 2}px Arial`,
+                fill: COLOR_HEX.MAROON,
+            },
         });
         this.contentGroup.add(this.quitButton.group);
     }
@@ -91,19 +83,17 @@ class StartLevel extends UIScreen {
         this.textTitle.setText(this.game.rg.i18n.getTranslation(I18N_UI_LEVEL) + ' ' + levelNumber);
 
         const rulesList = [
-            [I18N_RULES_GOAL, getFormattedCurrency(goal, this.game.rg.i18n.getTranslation(I18N_CURRENCY))],
-            [I18N_RULES_AUTHORITIES, series.join(', ')],
+            [[I18N_RULES_GOAL], [getFormattedCurrency(goal, this.game.rg.i18n.getTranslation(I18N_CURRENCY))]],
+            [[I18N_RULES_AUTHORITIES], [series.join(', '), COLOR_HEX.RED]],
         ];
 
-        this.textRulesLeft.setText(
-            rulesList.map(([label]) => this.game.rg.i18n.getTranslation(label) + ':')
-                .join("\n")
-        );
-
-        this.textRulesRight.x = this.textRulesLeft.width + 2 * this.textRulesLeft.x;
-
-        this.textRulesRight.setText(
-            rulesList.map(([_, value]) => value).join("\n")
+        this.rules.setText(
+            rulesList.map(([left, right]) => {
+                return [
+                    [this.game.rg.i18n.getTranslation(left[0]) + ':', left[1]],
+                    right,
+                ];
+            })
         );
 
         super.handleOverlayTweenComplete();

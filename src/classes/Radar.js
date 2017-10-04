@@ -114,7 +114,7 @@ class Radar {
             height: RADAR_FINE_BUTTON_HEIGHT,
             bg: COLOR.MAROON,
             text: this.game.rg.i18n.getTranslation(I18N_UI_BUTTON_FINE),
-            fontStyle: {
+            style: {
                 font: '24px Arial',
                 fontWeight: 'bold',
                 fill: '#fff',

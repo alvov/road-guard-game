@@ -1,10 +1,10 @@
-?   graphics more cars
+?   graphics more cars (sedan, suv)
+?   graphics cars shadow
 ?   graphics road lines
 ?   graphics day times
-?   multicolor stats/rules
-?   UIScreen max height
+?   graphics start screen levels
+?   graphics pattern
 ?   acceleration for changing lanes
-?   pause screen
 ?   sound
 ?   music
 ?   minification
@@ -30,4 +30,7 @@
 +   localstorage levels
 +   common fines
 +   how to play screen
++   multicolor stats/rules
++   pause screen
 -   controls screen
+-   UIScreen max height

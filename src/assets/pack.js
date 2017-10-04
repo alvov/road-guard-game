@@ -11,7 +11,7 @@ const pack = {
             type: 'spritesheet',
             key: 'startMenu',
             url: require('./images/startMenu.png'),
-            frameWidth: 800,
+            frameWidth: 205,
             frameHeight: 600
         },
     ],

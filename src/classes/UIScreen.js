@@ -1,13 +1,13 @@
 const OVERLAY_TWEEN_DURATION = 200;
 
 class UIScreen {
-    constructor({ game, }) {
+    constructor({ game, height, }) {
         this.game = game;
 
         this.leftOffset = this.game.width / 15;
-        this.topOffset = this.game.height / 10;
         this.width = this.game.width - 2 * this.leftOffset;
-        this.height = this.game.height - 2 * this.topOffset;
+        this.height = height;
+        this.topOffset = (this.game.height - height) / 2;
 
         this.group = this.game.add.group();
         this.group.x = this.leftOffset;

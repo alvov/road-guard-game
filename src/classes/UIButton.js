@@ -1,5 +1,5 @@
 class UIButton {
-    constructor({ game, name, x, y, width, height, bg, text, fontStyle, radius = height / 3 }) {
+    constructor({ game, name, x, y, width, height, bg, text, style, radius = height / 3 }) {
         this.group = game.add.group();
         this.group.x = x;
         this.group.y = y;
@@ -9,7 +9,7 @@ class UIButton {
         this.radius = radius;
 
         this.initialBg = bg;
-        this.initialFontStyle = fontStyle || {
+        this.initialFontStyle = style || {
             font: `${height / 2}px Arial`,
             fill: '#fff',
         };
@@ -31,14 +31,14 @@ class UIButton {
         this.reset();
     }
 
-    update({ bg, fontStyle, text, } = {}) {
+    update({ bg, style, text, } = {}) {
         if (text !== undefined) {
             this.quitButtonText.setText(text);
         }
-        if (fontStyle) {
+        if (style) {
             this.quitButtonText.setStyle({
                 ...this.initialFontStyle,
-                ...fontStyle,
+                ...style,
             });
         }
         if (bg !== undefined) {
@@ -49,7 +49,7 @@ class UIButton {
     reset() {
         this.update({
             bg: this.initialBg,
-            fontStyle: {},
+            style: {},
             text: this.initialText,
         });
     }

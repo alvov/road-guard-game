@@ -1,5 +1,6 @@
 import UIScreen from '../UIScreen';
 import UIButton from '../UIButton';
+import UIColumns from '../UIColumns';
 
 import {
     getFormattedCurrency,
@@ -15,8 +16,8 @@ import {
 } from '../../constants';
 
 class EndLevel extends UIScreen {
-    constructor({ game }) {
-        super({ game });
+    constructor({ game, height, }) {
+        super({ game, height, });
 
         const verticalPadding = 20;
         const horizontalPadding = 40;
@@ -33,27 +34,17 @@ class EndLevel extends UIScreen {
         this.textMode.anchor.set(0.5, 0);
         this.contentGroup.add(this.textMode);
 
-        const statsLineSpacing = Math.round(Math.min(10, this.height / 43));
-        const statsFontStyle = {
-            font: '16px "Press Start 2P", Arial'
-        };
-        this.textStatsLeft = this.game.add.text(
-            horizontalPadding,
-            2 * verticalPadding + this.textMode.height,
-            '',
-            statsFontStyle
-        );
-        this.textStatsLeft.lineSpacing = statsLineSpacing;
-        this.contentGroup.add(this.textStatsLeft);
-
-        this.textStatsRight = this.game.add.text(
-            0,
-            2 * verticalPadding + this.textMode.height,
-            '',
-            statsFontStyle
-        );
-        this.textStatsRight.lineSpacing = statsLineSpacing;
-        this.contentGroup.add(this.textStatsRight);
+        this.stats = new UIColumns({
+            game: this.game,
+            x: horizontalPadding,
+            y: this.textMode.bottom + Math.max(verticalPadding, this.height / 14),
+            style: {
+                font: '16px "Press Start 2P", Arial',
+            },
+            lineSpacing: Math.round(Math.max(10, this.height / 27)),
+            columnSpacing: 2 * horizontalPadding,
+        });
+        this.contentGroup.add(this.stats.group);
 
         const buttonsHeight = 40;
         const buttonsWidth = 140;
@@ -89,8 +80,12 @@ class EndLevel extends UIScreen {
             y: this.height - verticalPadding - buttonsHeight,
             width: buttonsWidth,
             height: buttonsHeight,
-            bg: COLOR.MAROON,
+            bg: 0xffffff,
             text: this.game.rg.i18n.getTranslation(I18N_UI_BUTTON_QUIT),
+            style: {
+                font: `${buttonsHeight / 2}px Arial`,
+                fill: COLOR_HEX.MAROON,
+            },
         });
         this.contentGroup.add(this.quitButton.group);
     }
@@ -103,28 +98,28 @@ class EndLevel extends UIScreen {
 
         const statsList = [
             [I18N_STATS_FINES, stats.fines],
-            [I18N_STATS_WRONG, stats.wrong],
+            [I18N_STATS_WRONG, stats.wrong, COLOR_HEX.RED],
             [I18N_STATS_MISSED, stats.missed],
-        ].map(([label, { count, sum }]) => {
+        ].map(([label, { count, sum }, fill]) => {
             return [
                 label,
                 sum === 0 ?
                     String(count) :
-                    `${count} (${getFormattedCurrency(sum, this.game.rg.i18n.getTranslation(I18N_CURRENCY))})`
-            ]
+                    `${count} (${getFormattedCurrency(sum, this.game.rg.i18n.getTranslation(I18N_CURRENCY))})`,
+                fill,
+            ];
         });
 
         if (mode === END_GAME_WIN) {
             statsList.unshift([I18N_STATS_TIME, String(getFormattedTime(stats.time))]);
         }
-        this.textStatsLeft.setText(
-            statsList.map(([label]) => this.game.rg.i18n.getTranslation(label) + ':')
-                .join("\n")
-        );
-
-        this.textStatsRight.x = this.textStatsLeft.width + 2 * this.textStatsLeft.x;
-        this.textStatsRight.setText(
-            statsList.map(([_, value]) => value).join("\n")
+        this.stats.setText(
+            statsList.map(([label, value, fill]) => {
+                return [
+                    [this.game.rg.i18n.getTranslation(label) + ':', fill],
+                    [value, fill],
+                ];
+            })
         );
 
         if (mode === END_GAME_WIN && nextLevel !== null) {

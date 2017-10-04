@@ -381,7 +381,7 @@ var UIButton = function () {
             height = _ref.height,
             bg = _ref.bg,
             text = _ref.text,
-            fontStyle = _ref.fontStyle,
+            style = _ref.style,
             _ref$radius = _ref.radius,
             radius = _ref$radius === undefined ? height / 3 : _ref$radius;
 
@@ -396,7 +396,7 @@ var UIButton = function () {
         this.radius = radius;
 
         this.initialBg = bg;
-        this.initialFontStyle = fontStyle || {
+        this.initialFontStyle = style || {
             font: height / 2 + 'px Arial',
             fill: '#fff'
         };
@@ -420,14 +420,14 @@ var UIButton = function () {
         value: function update() {
             var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
                 bg = _ref2.bg,
-                fontStyle = _ref2.fontStyle,
+                style = _ref2.style,
                 text = _ref2.text;
 
             if (text !== undefined) {
                 this.quitButtonText.setText(text);
             }
-            if (fontStyle) {
-                this.quitButtonText.setStyle(_extends({}, this.initialFontStyle, fontStyle));
+            if (style) {
+                this.quitButtonText.setStyle(_extends({}, this.initialFontStyle, style));
             }
             if (bg !== undefined) {
                 this.drawGraphics({ bg: bg });
@@ -438,7 +438,7 @@ var UIButton = function () {
         value: function reset() {
             this.update({
                 bg: this.initialBg,
-                fontStyle: {},
+                style: {},
                 text: this.initialText
             });
         }
@@ -474,7 +474,7 @@ var pack = {
         type: 'spritesheet',
         key: 'startMenu',
         url: __webpack_require__(12),
-        frameWidth: 800,
+        frameWidth: 205,
         frameHeight: 600
     }],
     game: [{
@@ -790,16 +790,17 @@ var OVERLAY_TWEEN_DURATION = 200;
 
 var UIScreen = function () {
     function UIScreen(_ref) {
-        var game = _ref.game;
+        var game = _ref.game,
+            height = _ref.height;
 
         _classCallCheck(this, UIScreen);
 
         this.game = game;
 
         this.leftOffset = this.game.width / 15;
-        this.topOffset = this.game.height / 10;
         this.width = this.game.width - 2 * this.leftOffset;
-        this.height = this.game.height - 2 * this.topOffset;
+        this.height = height;
+        this.topOffset = (this.game.height - height) / 2;
 
         this.group = this.game.add.group();
         this.group.x = this.leftOffset;
@@ -1663,10 +1664,11 @@ var HowTo = function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_Score__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_LevelTimer__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__classes_screens_StartLevel__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__classes_screens_EndLevel__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__classes_Weather__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__utils__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__constants__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__classes_screens_EndLevel__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__classes_screens_PauseLevel__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__classes_Weather__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__utils__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__constants__ = __webpack_require__(0);
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1676,6 +1678,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 
 
 
@@ -1755,7 +1758,7 @@ var Game = function () {
         key: 'create',
         value: function create() {
             // background
-            this.game.stage.backgroundColor = __WEBPACK_IMPORTED_MODULE_11__constants__["g" /* COLOR_HEX */].SKY;
+            this.game.stage.backgroundColor = __WEBPACK_IMPORTED_MODULE_12__constants__["g" /* COLOR_HEX */].SKY;
 
             // background group
             this.rg.groups.bg = this.game.add.group();
@@ -1771,7 +1774,7 @@ var Game = function () {
             this.rg.groups.onRoad = this.game.add.group();
 
             var roadSignX = this.rg.objects.road.length / 2;
-            var roadSignY = -__WEBPACK_IMPORTED_MODULE_11__constants__["_6" /* UI_OFFSET */];
+            var roadSignY = -__WEBPACK_IMPORTED_MODULE_12__constants__["_6" /* UI_OFFSET */];
             this.rg.objects.roadSign = new __WEBPACK_IMPORTED_MODULE_4__classes_RoadSign__["a" /* default */](_extends({
                 game: this.game,
                 position: {
@@ -1780,7 +1783,7 @@ var Game = function () {
                 }
             }, this.rg.objects.road.getProjection({
                 x: this.rg.objects.road.length / 2,
-                y: -__WEBPACK_IMPORTED_MODULE_11__constants__["_6" /* UI_OFFSET */]
+                y: -__WEBPACK_IMPORTED_MODULE_12__constants__["_6" /* UI_OFFSET */]
             }), {
                 speedLimit: this.rg.level.speed.limit
             }));
@@ -1788,7 +1791,7 @@ var Game = function () {
             this.rg.groups.onRoad.add(this.rg.objects.roadSign.group);
 
             if (this.rg.level.weather) {
-                this.rg.objects.weather = new __WEBPACK_IMPORTED_MODULE_9__classes_Weather__["a" /* default */]({
+                this.rg.objects.weather = new __WEBPACK_IMPORTED_MODULE_10__classes_Weather__["a" /* default */]({
                     game: this.game,
                     weather: this.rg.level.weather,
                     road: this.rg.objects.road,
@@ -1807,8 +1810,8 @@ var Game = function () {
             // ui
             this.rg.objects.score = new __WEBPACK_IMPORTED_MODULE_5__classes_Score__["a" /* default */]({
                 game: this.game,
-                x: __WEBPACK_IMPORTED_MODULE_11__constants__["_6" /* UI_OFFSET */],
-                y: __WEBPACK_IMPORTED_MODULE_11__constants__["_6" /* UI_OFFSET */],
+                x: __WEBPACK_IMPORTED_MODULE_12__constants__["_6" /* UI_OFFSET */],
+                y: __WEBPACK_IMPORTED_MODULE_12__constants__["_6" /* UI_OFFSET */],
                 goal: this.rg.level.goal
             });
 
@@ -1819,16 +1822,17 @@ var Game = function () {
 
             this.rg.objects.radar = new __WEBPACK_IMPORTED_MODULE_3__classes_Radar__["a" /* default */](_extends({
                 game: this.game,
-                x: __WEBPACK_IMPORTED_MODULE_11__constants__["_6" /* UI_OFFSET */],
-                y: this.game.height - __WEBPACK_IMPORTED_MODULE_11__constants__["_6" /* UI_OFFSET */],
-                width: this.rg.objects.road.roadOffsetLeft - __WEBPACK_IMPORTED_MODULE_11__constants__["_6" /* UI_OFFSET */] * 2
+                x: __WEBPACK_IMPORTED_MODULE_12__constants__["_6" /* UI_OFFSET */],
+                y: this.game.height - __WEBPACK_IMPORTED_MODULE_12__constants__["_6" /* UI_OFFSET */],
+                width: this.rg.objects.road.roadOffsetLeft - __WEBPACK_IMPORTED_MODULE_12__constants__["_6" /* UI_OFFSET */] * 2
             }, this.rg.level.radar, {
                 speedLimit: this.rg.level.speed.limit
             }));
 
             // screens
             this.rg.screens.startLevel = new __WEBPACK_IMPORTED_MODULE_7__classes_screens_StartLevel__["a" /* default */]({
-                game: this.game
+                game: this.game,
+                height: 270
             });
             this.rg.screens.startLevel.show({
                 levelNumber: __WEBPACK_IMPORTED_MODULE_0__classes_Level__["a" /* default */].getLevelNumber(this.rg.level.id),
@@ -1837,10 +1841,17 @@ var Game = function () {
             });
 
             this.rg.screens.endLevel = new __WEBPACK_IMPORTED_MODULE_8__classes_screens_EndLevel__["a" /* default */]({
+                game: this.game,
+                height: 4 * this.game.height / 5
+            });
+
+            this.rg.objects.pause = new __WEBPACK_IMPORTED_MODULE_9__classes_screens_PauseLevel__["a" /* default */]({
                 game: this.game
             });
 
             // events
+            this.game.onPause.add(this.handlePause, this);
+            this.game.onResume.add(this.handlePause, this);
             this.game.input.onDown.add(this.handleTap, this);
             this.rg.input.keys.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         }
@@ -1903,7 +1914,7 @@ var Game = function () {
 
             // input
             if (this.rg.input.keys.space.justDown) {
-                if (this.rg.objects.radar.mode === __WEBPACK_IMPORTED_MODULE_11__constants__["Y" /* RADAR_MODE_FINE */]) {
+                if (this.rg.objects.radar.mode === __WEBPACK_IMPORTED_MODULE_12__constants__["Y" /* RADAR_MODE_FINE */]) {
                     this.handleFine();
                 }
             }
@@ -1932,6 +1943,8 @@ var Game = function () {
     }, {
         key: 'shutdown',
         value: function shutdown() {
+            this.game.onPause.remove(this.handlePause, this);
+            this.game.onResume.remove(this.handlePause, this);
             this.game.input.onDown.remove(this.handleTap, this);
             this.game.input.keyboard.removeKey(Phaser.Keyboard.SPACEBAR);
         }
@@ -1945,23 +1958,25 @@ var Game = function () {
                     if (pointer.targetObject.sprite.name.startsWith('car')) {
                         this.handleClickCar(pointer.targetObject.sprite.rg);
                         handled = true;
-                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_11__constants__["I" /* I18N_UI_BUTTON_FINE */]) {
-                        if (this.rg.objects.radar.mode === __WEBPACK_IMPORTED_MODULE_11__constants__["Y" /* RADAR_MODE_FINE */]) {
+                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_12__constants__["I" /* I18N_UI_BUTTON_FINE */]) {
+                        if (this.rg.objects.radar.mode === __WEBPACK_IMPORTED_MODULE_12__constants__["Y" /* RADAR_MODE_FINE */]) {
                             this.handleFine();
                             handled = true;
                         }
-                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_11__constants__["K" /* I18N_UI_BUTTON_PLAY */]) {
+                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_12__constants__["K" /* I18N_UI_BUTTON_PLAY */]) {
                         this.startLevel();
                         handled = true;
-                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_11__constants__["L" /* I18N_UI_BUTTON_QUIT */]) {
+                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_12__constants__["L" /* I18N_UI_BUTTON_QUIT */]) {
                         this.handleClickQuit();
+                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_12__constants__["P" /* I18N_UI_PAUSE */]) {
+                        this.handlePause();
                     }
                 } else {
-                    if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_11__constants__["L" /* I18N_UI_BUTTON_QUIT */]) {
+                    if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_12__constants__["L" /* I18N_UI_BUTTON_QUIT */]) {
                         this.handleClickQuit();
-                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_11__constants__["J" /* I18N_UI_BUTTON_NEXT */]) {
+                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_12__constants__["J" /* I18N_UI_BUTTON_NEXT */]) {
                         this.handleClickNext();
-                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_11__constants__["M" /* I18N_UI_BUTTON_REPLAY */]) {
+                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_12__constants__["M" /* I18N_UI_BUTTON_REPLAY */]) {
                         this.handleClickReplay();
                     }
                 }
@@ -1973,33 +1988,33 @@ var Game = function () {
     }, {
         key: 'handleClickField',
         value: function handleClickField() {
-            if (this.rg.objects.radar.mode !== __WEBPACK_IMPORTED_MODULE_11__constants__["X" /* RADAR_MODE_ERROR */]) {
-                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_11__constants__["W" /* RADAR_MODE_EMPTY */]);
+            if (this.rg.objects.radar.mode !== __WEBPACK_IMPORTED_MODULE_12__constants__["X" /* RADAR_MODE_ERROR */]) {
+                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_12__constants__["W" /* RADAR_MODE_EMPTY */]);
             }
         }
     }, {
         key: 'handleClickQuit',
         value: function handleClickQuit() {
-            this.state.start(__WEBPACK_IMPORTED_MODULE_11__constants__["_5" /* STATE_MENU */]);
+            this.state.start(__WEBPACK_IMPORTED_MODULE_12__constants__["_5" /* STATE_MENU */]);
         }
     }, {
         key: 'handleClickNext',
         value: function handleClickNext() {
-            this.state.start(__WEBPACK_IMPORTED_MODULE_11__constants__["_2" /* STATE_GAME */], true, false, __WEBPACK_IMPORTED_MODULE_0__classes_Level__["a" /* default */].getNextLevelById(this.rg.level.id));
+            this.state.start(__WEBPACK_IMPORTED_MODULE_12__constants__["_2" /* STATE_GAME */], true, false, __WEBPACK_IMPORTED_MODULE_0__classes_Level__["a" /* default */].getNextLevelById(this.rg.level.id));
         }
     }, {
         key: 'handleClickReplay',
         value: function handleClickReplay() {
-            this.state.start(__WEBPACK_IMPORTED_MODULE_11__constants__["_2" /* STATE_GAME */], true, false, __WEBPACK_IMPORTED_MODULE_0__classes_Level__["a" /* default */].getLevelById(this.rg.level.id));
+            this.state.start(__WEBPACK_IMPORTED_MODULE_12__constants__["_2" /* STATE_GAME */], true, false, __WEBPACK_IMPORTED_MODULE_0__classes_Level__["a" /* default */].getLevelById(this.rg.level.id));
         }
     }, {
         key: 'handleClickCar',
         value: function handleClickCar(car) {
-            if (this.rg.objects.radar.mode !== __WEBPACK_IMPORTED_MODULE_11__constants__["X" /* RADAR_MODE_ERROR */]) {
-                if (car.mode === __WEBPACK_IMPORTED_MODULE_11__constants__["c" /* CAR_MODE_FINED */]) {
-                    this.rg.objects.radar.setMode(car.isRogue ? __WEBPACK_IMPORTED_MODULE_11__constants__["_0" /* RADAR_MODE_ROGUE */] : __WEBPACK_IMPORTED_MODULE_11__constants__["T" /* RADAR_MODE_ALREADY_FINED */]);
+            if (this.rg.objects.radar.mode !== __WEBPACK_IMPORTED_MODULE_12__constants__["X" /* RADAR_MODE_ERROR */]) {
+                if (car.mode === __WEBPACK_IMPORTED_MODULE_12__constants__["c" /* CAR_MODE_FINED */]) {
+                    this.rg.objects.radar.setMode(car.isRogue ? __WEBPACK_IMPORTED_MODULE_12__constants__["_0" /* RADAR_MODE_ROGUE */] : __WEBPACK_IMPORTED_MODULE_12__constants__["T" /* RADAR_MODE_ALREADY_FINED */]);
                 } else {
-                    this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_11__constants__["U" /* RADAR_MODE_COMPUTING */], { car: car });
+                    this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_12__constants__["U" /* RADAR_MODE_COMPUTING */], { car: car });
                 }
             }
         }
@@ -2009,10 +2024,10 @@ var Game = function () {
             this.rg.groups.onRoad.removeChild(car.sprite);
 
             if (car === this.rg.objects.radar.currentCar) {
-                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_11__constants__["W" /* RADAR_MODE_EMPTY */]);
+                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_12__constants__["W" /* RADAR_MODE_EMPTY */]);
             }
-            if (!this.rg.levelEnded && car.mode !== __WEBPACK_IMPORTED_MODULE_11__constants__["c" /* CAR_MODE_FINED */] && !car.isRogue) {
-                var fine = Object(__WEBPACK_IMPORTED_MODULE_10__utils__["a" /* getFine */])(car.velocity.x);
+            if (!this.rg.levelEnded && car.mode !== __WEBPACK_IMPORTED_MODULE_12__constants__["c" /* CAR_MODE_FINED */] && !car.isRogue) {
+                var fine = Object(__WEBPACK_IMPORTED_MODULE_11__utils__["a" /* getFine */])(car.velocity.x);
                 if (fine !== 0) {
                     this.rg.stats.missed.count++;
                     this.rg.stats.missed.sum += fine;
@@ -2023,35 +2038,46 @@ var Game = function () {
         key: 'handleFine',
         value: function handleFine() {
             var car = this.rg.objects.radar.currentCar;
-            car.setMode(__WEBPACK_IMPORTED_MODULE_11__constants__["c" /* CAR_MODE_FINED */]);
+            car.setMode(__WEBPACK_IMPORTED_MODULE_12__constants__["c" /* CAR_MODE_FINED */]);
             if (car.isRogue) {
                 this.rg.stats.wrong.count++;
                 this.rg.stats.wrong.sum -= this.rg.objects.radar.currentFine;
                 this.rg.objects.score.updateValue(-this.rg.objects.radar.currentFine);
-                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_11__constants__["_0" /* RADAR_MODE_ROGUE */]);
+                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_12__constants__["_0" /* RADAR_MODE_ROGUE */]);
             } else {
                 this.rg.stats.fines.count++;
                 this.rg.stats.fines.sum += this.rg.objects.radar.currentFine;
                 this.rg.objects.score.updateValue(this.rg.objects.radar.currentFine);
-                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_11__constants__["Z" /* RADAR_MODE_FINED */]);
+                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_12__constants__["Z" /* RADAR_MODE_FINED */]);
             }
         }
     }, {
         key: 'handleFlash',
         value: function handleFlash(on) {
             if (on) {
-                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_11__constants__["X" /* RADAR_MODE_ERROR */]);
+                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_12__constants__["X" /* RADAR_MODE_ERROR */]);
             } else {
-                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_11__constants__["W" /* RADAR_MODE_EMPTY */]);
+                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_12__constants__["W" /* RADAR_MODE_EMPTY */]);
+            }
+        }
+    }, {
+        key: 'handlePause',
+        value: function handlePause() {
+            if (!this.rg.levelEnded) {
+                if (this.game.paused) {
+                    this.rg.objects.pause.revive();
+                } else {
+                    this.rg.objects.pause.kill();
+                }
             }
         }
     }, {
         key: 'checkLevelEnd',
         value: function checkLevelEnd() {
             if (this.rg.objects.timer.isExpired) {
-                this.endLevel(__WEBPACK_IMPORTED_MODULE_11__constants__["h" /* END_GAME_TIME_OUT */]);
+                this.endLevel(__WEBPACK_IMPORTED_MODULE_12__constants__["h" /* END_GAME_TIME_OUT */]);
             } else if (this.rg.objects.score.reachedGoal) {
-                this.endLevel(__WEBPACK_IMPORTED_MODULE_11__constants__["i" /* END_GAME_WIN */]);
+                this.endLevel(__WEBPACK_IMPORTED_MODULE_12__constants__["i" /* END_GAME_WIN */]);
             }
         }
     }, {
@@ -2233,21 +2259,21 @@ var Game = function () {
         key: 'getRandomCarSpeed',
         value: function getRandomCarSpeed(isRogue) {
             if (isRogue) {
-                var minDisallowedSpeed = this.rg.level.speed.limit + __WEBPACK_IMPORTED_MODULE_11__constants__["j" /* FINES */][1][0];
-                var maxDisallowedSpeed = this.rg.level.speed.limit + __WEBPACK_IMPORTED_MODULE_11__constants__["j" /* FINES */][__WEBPACK_IMPORTED_MODULE_11__constants__["j" /* FINES */].length - 1][0];
+                var minDisallowedSpeed = this.rg.level.speed.limit + __WEBPACK_IMPORTED_MODULE_12__constants__["j" /* FINES */][1][0];
+                var maxDisallowedSpeed = this.rg.level.speed.limit + __WEBPACK_IMPORTED_MODULE_12__constants__["j" /* FINES */][__WEBPACK_IMPORTED_MODULE_12__constants__["j" /* FINES */].length - 1][0];
                 return this.game.rnd.integerInRange(minDisallowedSpeed, maxDisallowedSpeed - 1);
             } else {
                 var _randomNumber = this.game.rnd.integerInRange(1, 100);
                 var _cummulativeProbability = 0;
-                for (var i = 0; i < __WEBPACK_IMPORTED_MODULE_11__constants__["j" /* FINES */].length; i++) {
-                    var _FINES$i = _slicedToArray(__WEBPACK_IMPORTED_MODULE_11__constants__["j" /* FINES */][i], 3),
+                for (var i = 0; i < __WEBPACK_IMPORTED_MODULE_12__constants__["j" /* FINES */].length; i++) {
+                    var _FINES$i = _slicedToArray(__WEBPACK_IMPORTED_MODULE_12__constants__["j" /* FINES */][i], 3),
                         speedExcess = _FINES$i[0],
                         fine = _FINES$i[1],
                         probability = _FINES$i[2];
 
                     _cummulativeProbability += probability;
                     if (_randomNumber <= _cummulativeProbability) {
-                        var prevSpeedExcess = (__WEBPACK_IMPORTED_MODULE_11__constants__["j" /* FINES */][i - 1] || [0])[0];
+                        var prevSpeedExcess = (__WEBPACK_IMPORTED_MODULE_12__constants__["j" /* FINES */][i - 1] || [0])[0];
                         return this.rg.level.speed.limit + this.game.rnd.integerInRange(prevSpeedExcess, speedExcess - 1);
                     }
                 }
@@ -2615,7 +2641,7 @@ var Radar = function () {
             height: RADAR_FINE_BUTTON_HEIGHT,
             bg: __WEBPACK_IMPORTED_MODULE_3__constants__["f" /* COLOR */].MAROON,
             text: this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["I" /* I18N_UI_BUTTON_FINE */]),
-            fontStyle: {
+            style: {
                 font: '24px Arial',
                 fontWeight: 'bold',
                 fill: '#fff'
@@ -2990,7 +3016,7 @@ var LevelTimer = function () {
             var secondsLeft = this.duration - this.secondsElapsed;
 
             if (secondsLeft < TIME_RUNNING_OUT) {
-                this.textTimer.fill = __WEBPACK_IMPORTED_MODULE_1__constants__["g" /* COLOR_HEX */].MAROON;
+                this.textTimer.fill = __WEBPACK_IMPORTED_MODULE_1__constants__["g" /* COLOR_HEX */].RED;
             }
 
             this.textTimer.setText(Object(__WEBPACK_IMPORTED_MODULE_0__utils__["c" /* getFormattedTime */])(secondsLeft));
@@ -3023,9 +3049,10 @@ var LevelTimer = function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__UIScreen__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__UIButton__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__constants__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__UIColumns__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__UIButton__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__constants__ = __webpack_require__(0);
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -3045,15 +3072,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+
 var StartLevel = function (_UIScreen) {
     _inherits(StartLevel, _UIScreen);
 
     function StartLevel(_ref) {
-        var game = _ref.game;
+        var game = _ref.game,
+            height = _ref.height;
 
         _classCallCheck(this, StartLevel);
 
-        var _this = _possibleConstructorReturn(this, (StartLevel.__proto__ || Object.getPrototypeOf(StartLevel)).call(this, { game: game }));
+        var _this = _possibleConstructorReturn(this, (StartLevel.__proto__ || Object.getPrototypeOf(StartLevel)).call(this, { game: game, height: height }));
 
         var verticalPadding = 20;
         var horizontalPadding = 40;
@@ -3065,45 +3094,46 @@ var StartLevel = function (_UIScreen) {
         _this.textTitle.anchor.set(0.5, 0);
         _this.contentGroup.add(_this.textTitle);
 
-        var rulesLineSpacing = Math.round(Math.max(20, _this.height / 20));
-        var rulesFontStyle = {
-            font: '16px "Press Start 2P", Arial'
-        };
-        var rulesY = _this.height / 2;
-        _this.textRulesLeft = _this.game.add.text(horizontalPadding, rulesY, '', rulesFontStyle);
-        _this.textRulesLeft.anchor.set(0, 0.5);
-        _this.textRulesLeft.lineSpacing = rulesLineSpacing;
-        _this.contentGroup.add(_this.textRulesLeft);
-
-        _this.textRulesRight = _this.game.add.text(0, rulesY, '', rulesFontStyle);
-        _this.textRulesRight.anchor.set(0, 0.5);
-        _this.textRulesRight.lineSpacing = rulesLineSpacing;
-        _this.contentGroup.add(_this.textRulesRight);
+        _this.rules = new __WEBPACK_IMPORTED_MODULE_1__UIColumns__["a" /* default */]({
+            game: _this.game,
+            x: horizontalPadding,
+            y: _this.height / 2 - 30,
+            style: {
+                font: '16px "Press Start 2P", Arial'
+            },
+            lineSpacing: Math.round(Math.max(20, _this.height / 20)),
+            columnSpacing: 2 * horizontalPadding
+        });
+        _this.contentGroup.add(_this.rules.group);
 
         var buttonsHeight = 40;
         var buttonsWidth = 140;
         var buttonsMargin = 40;
-        _this.playButton = new __WEBPACK_IMPORTED_MODULE_1__UIButton__["a" /* default */]({
+        _this.playButton = new __WEBPACK_IMPORTED_MODULE_2__UIButton__["a" /* default */]({
             game: _this.game,
-            name: __WEBPACK_IMPORTED_MODULE_3__constants__["K" /* I18N_UI_BUTTON_PLAY */],
+            name: __WEBPACK_IMPORTED_MODULE_4__constants__["K" /* I18N_UI_BUTTON_PLAY */],
             x: (_this.width - buttonsMargin) / 2 - buttonsWidth,
             y: _this.height - verticalPadding - buttonsHeight,
             width: buttonsWidth,
             height: buttonsHeight,
-            bg: __WEBPACK_IMPORTED_MODULE_3__constants__["f" /* COLOR */].GREEN,
-            text: _this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["K" /* I18N_UI_BUTTON_PLAY */])
+            bg: __WEBPACK_IMPORTED_MODULE_4__constants__["f" /* COLOR */].GREEN,
+            text: _this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_4__constants__["K" /* I18N_UI_BUTTON_PLAY */])
         });
         _this.contentGroup.add(_this.playButton.group);
 
-        _this.quitButton = new __WEBPACK_IMPORTED_MODULE_1__UIButton__["a" /* default */]({
+        _this.quitButton = new __WEBPACK_IMPORTED_MODULE_2__UIButton__["a" /* default */]({
             game: _this.game,
-            name: __WEBPACK_IMPORTED_MODULE_3__constants__["L" /* I18N_UI_BUTTON_QUIT */],
+            name: __WEBPACK_IMPORTED_MODULE_4__constants__["L" /* I18N_UI_BUTTON_QUIT */],
             x: (_this.width + buttonsMargin) / 2,
             y: _this.height - verticalPadding - buttonsHeight,
             width: buttonsWidth,
             height: buttonsHeight,
-            bg: __WEBPACK_IMPORTED_MODULE_3__constants__["f" /* COLOR */].MAROON,
-            text: _this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["L" /* I18N_UI_BUTTON_QUIT */])
+            bg: 0xffffff,
+            text: _this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_4__constants__["L" /* I18N_UI_BUTTON_QUIT */]),
+            style: {
+                font: buttonsHeight / 2 + 'px Arial',
+                fill: __WEBPACK_IMPORTED_MODULE_4__constants__["g" /* COLOR_HEX */].MAROON
+            }
         });
         _this.contentGroup.add(_this.quitButton.group);
         return _this;
@@ -3118,26 +3148,17 @@ var StartLevel = function (_UIScreen) {
                 goal = _ref2.goal,
                 series = _ref2.series;
 
-            this.textTitle.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["N" /* I18N_UI_LEVEL */]) + ' ' + levelNumber);
+            this.textTitle.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_4__constants__["N" /* I18N_UI_LEVEL */]) + ' ' + levelNumber);
 
-            var rulesList = [[__WEBPACK_IMPORTED_MODULE_3__constants__["D" /* I18N_RULES_GOAL */], Object(__WEBPACK_IMPORTED_MODULE_2__utils__["b" /* getFormattedCurrency */])(goal, this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["k" /* I18N_CURRENCY */]))], [__WEBPACK_IMPORTED_MODULE_3__constants__["C" /* I18N_RULES_AUTHORITIES */], series.join(', ')]];
+            var rulesList = [[[__WEBPACK_IMPORTED_MODULE_4__constants__["D" /* I18N_RULES_GOAL */]], [Object(__WEBPACK_IMPORTED_MODULE_3__utils__["b" /* getFormattedCurrency */])(goal, this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_4__constants__["k" /* I18N_CURRENCY */]))]], [[__WEBPACK_IMPORTED_MODULE_4__constants__["C" /* I18N_RULES_AUTHORITIES */]], [series.join(', '), __WEBPACK_IMPORTED_MODULE_4__constants__["g" /* COLOR_HEX */].RED]]];
 
-            this.textRulesLeft.setText(rulesList.map(function (_ref3) {
-                var _ref4 = _slicedToArray(_ref3, 1),
-                    label = _ref4[0];
+            this.rules.setText(rulesList.map(function (_ref3) {
+                var _ref4 = _slicedToArray(_ref3, 2),
+                    left = _ref4[0],
+                    right = _ref4[1];
 
-                return _this2.game.rg.i18n.getTranslation(label) + ':';
-            }).join("\n"));
-
-            this.textRulesRight.x = this.textRulesLeft.width + 2 * this.textRulesLeft.x;
-
-            this.textRulesRight.setText(rulesList.map(function (_ref5) {
-                var _ref6 = _slicedToArray(_ref5, 2),
-                    _ = _ref6[0],
-                    value = _ref6[1];
-
-                return value;
-            }).join("\n"));
+                return [[_this2.game.rg.i18n.getTranslation(left[0]) + ':', left[1]], right];
+            }));
 
             _get(StartLevel.prototype.__proto__ || Object.getPrototypeOf(StartLevel.prototype), 'handleOverlayTweenComplete', this).call(this);
         }
@@ -3153,10 +3174,102 @@ var StartLevel = function (_UIScreen) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var UIColumns = function () {
+    function UIColumns(_ref) {
+        var game = _ref.game,
+            x = _ref.x,
+            y = _ref.y,
+            _ref$style = _ref.style,
+            style = _ref$style === undefined ? {} : _ref$style,
+            lineSpacing = _ref.lineSpacing,
+            columnSpacing = _ref.columnSpacing;
+
+        _classCallCheck(this, UIColumns);
+
+        this.game = game;
+
+        this.group = this.game.add.group();
+        this.group.x = x;
+        this.group.y = y;
+
+        this.style = style;
+        this.lineSpacing = lineSpacing;
+        this.columnSpacing = columnSpacing;
+    }
+
+    _createClass(UIColumns, [{
+        key: "setText",
+        value: function setText(text) {
+            var _this = this;
+
+            this.group.removeAll();
+
+            var leftColumnWidth = 0;
+            var lineY = 0;
+
+            text.forEach(function (_ref2, i) {
+                var _ref3 = _slicedToArray(_ref2, 1),
+                    _ref3$ = _slicedToArray(_ref3[0], 2),
+                    textLeft = _ref3$[0],
+                    fillLeft = _ref3$[1];
+
+                var label = _this.createTextLine(0, lineY, textLeft, fillLeft);
+                if (label.width > leftColumnWidth) {
+                    leftColumnWidth = label.width;
+                }
+                lineY += label.height + _this.lineSpacing;
+                _this.group.addChild(label);
+            });
+
+            leftColumnWidth += this.columnSpacing;
+            lineY = 0;
+
+            text.forEach(function (_ref4, i) {
+                var _ref5 = _slicedToArray(_ref4, 2),
+                    _ = _ref5[0],
+                    _ref5$ = _slicedToArray(_ref5[1], 2),
+                    textRight = _ref5$[0],
+                    fillRight = _ref5$[1];
+
+                var label = _this.createTextLine(leftColumnWidth, lineY, textRight, fillRight);
+                lineY += label.height + _this.lineSpacing;
+                _this.group.addChild(label);
+            });
+        }
+    }, {
+        key: "createTextLine",
+        value: function createTextLine(x, y, text, fill) {
+            var currentFontStyles = _extends({}, this.style);
+            if (fill) {
+                currentFontStyles.fill = fill;
+            }
+            return this.game.add.text(x, y, text, currentFontStyles);
+        }
+    }]);
+
+    return UIColumns;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (UIColumns);
+
+/***/ }),
+/* 37 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__UIScreen__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__UIButton__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__constants__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__UIColumns__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__constants__ = __webpack_require__(0);
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -3176,15 +3289,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+
 var EndLevel = function (_UIScreen) {
     _inherits(EndLevel, _UIScreen);
 
     function EndLevel(_ref) {
-        var game = _ref.game;
+        var game = _ref.game,
+            height = _ref.height;
 
         _classCallCheck(this, EndLevel);
 
-        var _this = _possibleConstructorReturn(this, (EndLevel.__proto__ || Object.getPrototypeOf(EndLevel)).call(this, { game: game }));
+        var _this = _possibleConstructorReturn(this, (EndLevel.__proto__ || Object.getPrototypeOf(EndLevel)).call(this, { game: game, height: height }));
 
         var verticalPadding = 20;
         var horizontalPadding = 40;
@@ -3196,54 +3311,58 @@ var EndLevel = function (_UIScreen) {
         _this.textMode.anchor.set(0.5, 0);
         _this.contentGroup.add(_this.textMode);
 
-        var statsLineSpacing = Math.round(Math.min(10, _this.height / 43));
-        var statsFontStyle = {
-            font: '16px "Press Start 2P", Arial'
-        };
-        _this.textStatsLeft = _this.game.add.text(horizontalPadding, 2 * verticalPadding + _this.textMode.height, '', statsFontStyle);
-        _this.textStatsLeft.lineSpacing = statsLineSpacing;
-        _this.contentGroup.add(_this.textStatsLeft);
-
-        _this.textStatsRight = _this.game.add.text(0, 2 * verticalPadding + _this.textMode.height, '', statsFontStyle);
-        _this.textStatsRight.lineSpacing = statsLineSpacing;
-        _this.contentGroup.add(_this.textStatsRight);
+        _this.stats = new __WEBPACK_IMPORTED_MODULE_2__UIColumns__["a" /* default */]({
+            game: _this.game,
+            x: horizontalPadding,
+            y: _this.textMode.bottom + Math.max(verticalPadding, _this.height / 14),
+            style: {
+                font: '16px "Press Start 2P", Arial'
+            },
+            lineSpacing: Math.round(Math.max(10, _this.height / 27)),
+            columnSpacing: 2 * horizontalPadding
+        });
+        _this.contentGroup.add(_this.stats.group);
 
         var buttonsHeight = 40;
         var buttonsWidth = 140;
         var buttonsMargin = 40;
         _this.nextButton = new __WEBPACK_IMPORTED_MODULE_1__UIButton__["a" /* default */]({
             game: _this.game,
-            name: __WEBPACK_IMPORTED_MODULE_3__constants__["J" /* I18N_UI_BUTTON_NEXT */],
+            name: __WEBPACK_IMPORTED_MODULE_4__constants__["J" /* I18N_UI_BUTTON_NEXT */],
             x: (_this.width - buttonsMargin) / 2 - buttonsWidth,
             y: _this.height - verticalPadding - buttonsHeight,
             width: buttonsWidth,
             height: buttonsHeight,
-            bg: __WEBPACK_IMPORTED_MODULE_3__constants__["f" /* COLOR */].GREEN,
-            text: _this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["J" /* I18N_UI_BUTTON_NEXT */])
+            bg: __WEBPACK_IMPORTED_MODULE_4__constants__["f" /* COLOR */].GREEN,
+            text: _this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_4__constants__["J" /* I18N_UI_BUTTON_NEXT */])
         });
         _this.contentGroup.add(_this.nextButton.group);
 
         _this.replayButton = new __WEBPACK_IMPORTED_MODULE_1__UIButton__["a" /* default */]({
             game: _this.game,
-            name: __WEBPACK_IMPORTED_MODULE_3__constants__["M" /* I18N_UI_BUTTON_REPLAY */],
+            name: __WEBPACK_IMPORTED_MODULE_4__constants__["M" /* I18N_UI_BUTTON_REPLAY */],
             x: (_this.width - buttonsMargin) / 2 - buttonsWidth,
             y: _this.height - verticalPadding - buttonsHeight,
             width: buttonsWidth,
             height: buttonsHeight,
-            bg: __WEBPACK_IMPORTED_MODULE_3__constants__["f" /* COLOR */].GREEN,
-            text: _this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["M" /* I18N_UI_BUTTON_REPLAY */])
+            bg: __WEBPACK_IMPORTED_MODULE_4__constants__["f" /* COLOR */].GREEN,
+            text: _this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_4__constants__["M" /* I18N_UI_BUTTON_REPLAY */])
         });
         _this.contentGroup.add(_this.replayButton.group);
 
         _this.quitButton = new __WEBPACK_IMPORTED_MODULE_1__UIButton__["a" /* default */]({
             game: _this.game,
-            name: __WEBPACK_IMPORTED_MODULE_3__constants__["L" /* I18N_UI_BUTTON_QUIT */],
+            name: __WEBPACK_IMPORTED_MODULE_4__constants__["L" /* I18N_UI_BUTTON_QUIT */],
             x: (_this.width + buttonsMargin) / 2,
             y: _this.height - verticalPadding - buttonsHeight,
             width: buttonsWidth,
             height: buttonsHeight,
-            bg: __WEBPACK_IMPORTED_MODULE_3__constants__["f" /* COLOR */].MAROON,
-            text: _this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["L" /* I18N_UI_BUTTON_QUIT */])
+            bg: 0xffffff,
+            text: _this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_4__constants__["L" /* I18N_UI_BUTTON_QUIT */]),
+            style: {
+                font: buttonsHeight / 2 + 'px Arial',
+                fill: __WEBPACK_IMPORTED_MODULE_4__constants__["g" /* COLOR_HEX */].MAROON
+            }
         });
         _this.contentGroup.add(_this.quitButton.group);
         return _this;
@@ -3258,39 +3377,33 @@ var EndLevel = function (_UIScreen) {
                 stats = _ref2.stats,
                 nextLevel = _ref2.nextLevel;
 
-            this.textMode.fill = mode === __WEBPACK_IMPORTED_MODULE_3__constants__["i" /* END_GAME_WIN */] ? __WEBPACK_IMPORTED_MODULE_3__constants__["g" /* COLOR_HEX */].GREEN : __WEBPACK_IMPORTED_MODULE_3__constants__["g" /* COLOR_HEX */].MAROON;
-            this.textMode.setText(this.game.rg.i18n.getTranslation(mode === __WEBPACK_IMPORTED_MODULE_3__constants__["i" /* END_GAME_WIN */] ? __WEBPACK_IMPORTED_MODULE_3__constants__["m" /* I18N_END_WIN */] : __WEBPACK_IMPORTED_MODULE_3__constants__["l" /* I18N_END_LOOSE */]));
+            this.textMode.fill = mode === __WEBPACK_IMPORTED_MODULE_4__constants__["i" /* END_GAME_WIN */] ? __WEBPACK_IMPORTED_MODULE_4__constants__["g" /* COLOR_HEX */].GREEN : __WEBPACK_IMPORTED_MODULE_4__constants__["g" /* COLOR_HEX */].MAROON;
+            this.textMode.setText(this.game.rg.i18n.getTranslation(mode === __WEBPACK_IMPORTED_MODULE_4__constants__["i" /* END_GAME_WIN */] ? __WEBPACK_IMPORTED_MODULE_4__constants__["m" /* I18N_END_WIN */] : __WEBPACK_IMPORTED_MODULE_4__constants__["l" /* I18N_END_LOOSE */]));
 
-            var statsList = [[__WEBPACK_IMPORTED_MODULE_3__constants__["E" /* I18N_STATS_FINES */], stats.fines], [__WEBPACK_IMPORTED_MODULE_3__constants__["H" /* I18N_STATS_WRONG */], stats.wrong], [__WEBPACK_IMPORTED_MODULE_3__constants__["F" /* I18N_STATS_MISSED */], stats.missed]].map(function (_ref3) {
-                var _ref4 = _slicedToArray(_ref3, 2),
+            var statsList = [[__WEBPACK_IMPORTED_MODULE_4__constants__["E" /* I18N_STATS_FINES */], stats.fines], [__WEBPACK_IMPORTED_MODULE_4__constants__["H" /* I18N_STATS_WRONG */], stats.wrong, __WEBPACK_IMPORTED_MODULE_4__constants__["g" /* COLOR_HEX */].RED], [__WEBPACK_IMPORTED_MODULE_4__constants__["F" /* I18N_STATS_MISSED */], stats.missed]].map(function (_ref3) {
+                var _ref4 = _slicedToArray(_ref3, 3),
                     label = _ref4[0],
                     _ref4$ = _ref4[1],
                     count = _ref4$.count,
-                    sum = _ref4$.sum;
+                    sum = _ref4$.sum,
+                    fill = _ref4[2];
 
-                return [label, sum === 0 ? String(count) : count + ' (' + Object(__WEBPACK_IMPORTED_MODULE_2__utils__["b" /* getFormattedCurrency */])(sum, _this2.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["k" /* I18N_CURRENCY */])) + ')'];
+                return [label, sum === 0 ? String(count) : count + ' (' + Object(__WEBPACK_IMPORTED_MODULE_3__utils__["b" /* getFormattedCurrency */])(sum, _this2.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_4__constants__["k" /* I18N_CURRENCY */])) + ')', fill];
             });
 
-            if (mode === __WEBPACK_IMPORTED_MODULE_3__constants__["i" /* END_GAME_WIN */]) {
-                statsList.unshift([__WEBPACK_IMPORTED_MODULE_3__constants__["G" /* I18N_STATS_TIME */], String(Object(__WEBPACK_IMPORTED_MODULE_2__utils__["c" /* getFormattedTime */])(stats.time))]);
+            if (mode === __WEBPACK_IMPORTED_MODULE_4__constants__["i" /* END_GAME_WIN */]) {
+                statsList.unshift([__WEBPACK_IMPORTED_MODULE_4__constants__["G" /* I18N_STATS_TIME */], String(Object(__WEBPACK_IMPORTED_MODULE_3__utils__["c" /* getFormattedTime */])(stats.time))]);
             }
-            this.textStatsLeft.setText(statsList.map(function (_ref5) {
-                var _ref6 = _slicedToArray(_ref5, 1),
-                    label = _ref6[0];
+            this.stats.setText(statsList.map(function (_ref5) {
+                var _ref6 = _slicedToArray(_ref5, 3),
+                    label = _ref6[0],
+                    value = _ref6[1],
+                    fill = _ref6[2];
 
-                return _this2.game.rg.i18n.getTranslation(label) + ':';
-            }).join("\n"));
+                return [[_this2.game.rg.i18n.getTranslation(label) + ':', fill], [value, fill]];
+            }));
 
-            this.textStatsRight.x = this.textStatsLeft.width + 2 * this.textStatsLeft.x;
-            this.textStatsRight.setText(statsList.map(function (_ref7) {
-                var _ref8 = _slicedToArray(_ref7, 2),
-                    _ = _ref8[0],
-                    value = _ref8[1];
-
-                return value;
-            }).join("\n"));
-
-            if (mode === __WEBPACK_IMPORTED_MODULE_3__constants__["i" /* END_GAME_WIN */] && nextLevel !== null) {
+            if (mode === __WEBPACK_IMPORTED_MODULE_4__constants__["i" /* END_GAME_WIN */] && nextLevel !== null) {
                 this.nextButton.group.visible = true;
                 this.replayButton.group.visible = false;
             } else {
@@ -3308,7 +3421,7 @@ var EndLevel = function (_UIScreen) {
 /* harmony default export */ __webpack_exports__["a"] = (EndLevel);
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3464,6 +3577,65 @@ var Weather = function () {
 }();
 
 /* harmony default export */ __webpack_exports__["a"] = (Weather);
+
+/***/ }),
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__(0);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+var PauseLevel = function () {
+    function PauseLevel(_ref) {
+        var game = _ref.game;
+
+        _classCallCheck(this, PauseLevel);
+
+        this.game = game;
+
+        this.graphics = this.game.add.graphics();
+        this.graphics.name = __WEBPACK_IMPORTED_MODULE_0__constants__["P" /* I18N_UI_PAUSE */];
+        this.graphics.drawRect(0, 0, this.game.width, this.game.height);
+        this.graphics.inputEnabled = true;
+
+        this.text = this.game.add.text(this.game.width / 2, this.game.height / 2, this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_0__constants__["P" /* I18N_UI_PAUSE */]), {
+            font: '28px "Press Start 2P", Arial',
+            fill: '#fff'
+        });
+        this.text.anchor.set(0.5);
+        this.text.setShadow(4, 4, 'rgba(0, 0, 0, .8)', 0);
+        this.graphics.addChild(this.text);
+
+        // initially dead
+        this.kill();
+    }
+
+    _createClass(PauseLevel, [{
+        key: 'revive',
+        value: function revive() {
+            this.graphics.revive();
+        }
+    }, {
+        key: 'kill',
+        value: function kill() {
+            this.graphics.kill();
+        }
+    }]);
+
+    return PauseLevel;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (PauseLevel);
 
 /***/ })
 /******/ ]);

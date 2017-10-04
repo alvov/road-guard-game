@@ -37,7 +37,7 @@ class LevelTimer {
         const secondsLeft = this.duration - this.secondsElapsed;
 
         if (secondsLeft < TIME_RUNNING_OUT) {
-            this.textTimer.fill = COLOR_HEX.MAROON;
+            this.textTimer.fill = COLOR_HEX.RED;
         }
 
         this.textTimer.setText(getFormattedTime(secondsLeft));
