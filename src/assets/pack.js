@@ -51,56 +51,25 @@ const pack = {
         },
         {
             type: 'spritesheet',
+            key: 'car03',
+            url: require('./images/car03.png'),
+            frameWidth: 152,
+            frameHeight: 103
+        },
+        {
+            type: 'spritesheet',
+            key: 'car04',
+            url: require('./images/car04.png'),
+            frameWidth: 156,
+            frameHeight: 136
+        },
+        {
+            type: 'spritesheet',
             key: 'rogueSigns',
             url: require('./images/rogueSigns.png'),
             frameWidth: 11,
             frameHeight: 12
         },
-        // {
-        //     type: 'audio',
-        //     key: 'theme',
-        //     urls: require('./audio/theme.mp3')
-        // },
-        // {
-        //     type: 'audio',
-        //     key: 'punch01',
-        //     urls: require('./audio/punch01.mp3')
-        // },
-        // {
-        //     type: 'audio',
-        //     key: 'punch02',
-        //     urls: require('./audio/punch02.mp3')
-        // },
-        // {
-        //     type: 'audio',
-        //     key: 'applause',
-        //     urls: require('./audio/applause.mp3')
-        // },
-        // {
-        //     type: 'audio',
-        //     key: 'boo',
-        //     urls: require('./audio/boo.mp3')
-        // },
-        // {
-        //     type: 'audio',
-        //     key: 'croud',
-        //     urls: require('./audio/croud.mp3')
-        // },
-        // {
-        //     type: 'audio',
-        //     key: 'scream03',
-        //     urls: require('./audio/scream03.mp3')
-        // },
-        // {
-        //     type: 'audio',
-        //     key: 'truck',
-        //     urls: require('./audio/truck.mp3')
-        // },
-        // {
-        //     type: 'audio',
-        //     key: 'pick',
-        //     urls: require('./audio/pick.mp3')
-        // }
     ],
 };
 

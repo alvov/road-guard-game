@@ -15,7 +15,8 @@ export const COLOR_HEX = {
     GRASS: '#517F30',
     SKY: '#87CEFA',
     CAR_WINDOWS: '#778899',
-    CAR_LIGHTS: '#FCFF9F',
+    CAR_LIGHTS_DAY1: '#FCFF9F',
+    CAR_LIGHTS_DAY2: '#F2FCFF',
     MAIN: '#312162',
 };
 
@@ -89,6 +90,10 @@ export const CAR_COLORS = [
     COLOR.STEEL,
     COLOR.MIDNIGHT_BLUE,
     COLOR.FLORAL_WHITE,
+];
+export const CAR_LIGHTS_DAY_COLORS = [
+    COLOR.CAR_LIGHTS_DAY1,
+    COLOR.CAR_LIGHTS_DAY2,
 ];
 export const CAR_ALLOWED_PLATE_LETTERS = [
     'A', 'B', 'C', 'E', 'H', 'K', 'M', 'O', 'P', 'T', 'X'

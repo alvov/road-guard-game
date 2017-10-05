@@ -1,6 +1,4 @@
-?   graphics more cars (sedan, suv)
 ?   graphics cars shadow
-?   graphics cars separate lights
 ?   graphics day times
 ?   graphics start menu levels
 ?   graphics pattern
@@ -26,6 +24,8 @@
 +   graphics car colors
 +   graphics grass
 +   graphics road lines
++   graphics more cars (sedan, suv)
++   graphics cars separate lights
 +   more levels
 +   localstorage levels
 +   common fines

@@ -3,7 +3,7 @@ import {
     CAR_COLORS,
     CAR_ALLOWED_PLATE_LETTERS,
     CAR_MODE_NORMAL, CAR_MODE_FINED,
-    COLOR,
+    COLOR, CAR_LIGHTS_DAY_COLORS,
 } from '../constants';
 
 const CAR_STEERING_DURATION = 600;
@@ -26,6 +26,9 @@ class Car {
 
         this.detailsSprite = this.game.add.sprite(-this.sprite.width / 2, -this.sprite.height, spriteKey, 1);
         this.sprite.addChild(this.detailsSprite);
+
+        this.lightsSprite = this.game.add.sprite(-this.sprite.width / 2, -this.sprite.height, spriteKey, 2);
+        this.sprite.addChild(this.lightsSprite);
 
         this.rogueSignsPosition = rogueSignsPosition;
         this.rogueSignSprite = this.game.add.sprite(0, 0, 'rogueSigns');
@@ -152,6 +155,7 @@ class Car {
         this.position.set(x, y);
         this.roadLane = roadLane;
         this.velocity.x = speed;
+        this.lightsSprite.tint = this.game.rnd.pick(CAR_LIGHTS_DAY_COLORS);
         this.color = this.generateBodyColor();
         this.sprite.tint = this.color;
         this.sprite.revive();
