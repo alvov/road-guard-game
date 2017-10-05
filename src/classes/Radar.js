@@ -199,15 +199,13 @@ class Radar {
                 break;
             }
             case RADAR_MODE_COMPUTING: {
-                if (this.mode !== RADAR_MODE_COMPUTING || this.currentCar !== props.car) {
-                    this.currentCar = props.car;
+                this.currentCar = props.car;
 
-                    this.mainText.setText(this.game.rg.i18n.getTranslation(I18N_RADAR_WAIT));
-                    this.progressBar.graphics.visible = true;
+                this.mainText.setText(this.game.rg.i18n.getTranslation(I18N_RADAR_WAIT));
+                this.progressBar.graphics.visible = true;
 
-                    this.computingTimer.add(this.computingTimerDuration, this.handleCompleteComputing, this);
-                    this.computingTimer.start();
-                }
+                this.computingTimer.add(this.computingTimerDuration, this.handleCompleteComputing, this);
+                this.computingTimer.start();
                 break;
             }
             case RADAR_MODE_FINED: {

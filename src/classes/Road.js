@@ -39,6 +39,8 @@ class Road {
             { x: this.roadOffsetLeft, y: this.game.height },
         ]);
         this.roadGraphics.endFill();
+
+        this.drawRoadMarking();
     }
 
     getProjection({ x, y }) {
@@ -54,6 +56,50 @@ class Road {
 
     getLaneCenter(index) {
         return this.laneWidth * (0.5 + index);
+    }
+
+    drawRoadMarking() {
+        const roadMarkingWidth = this.laneWidth / 15;
+        const roadMarkingWidthHalf = roadMarkingWidth / 2;
+        const roadMarkingLength = roadMarkingWidth * 10;
+        const roadMarkingGap = 3 * roadMarkingLength;
+        const roadMarkingGroup = this.game.add.group();
+        for (let i = 1; i < this.lanes; i++) {
+            const roadMarkingY = i * this.laneWidth;
+            let roadMarkingX = 0;
+            while (roadMarkingX < this.length) {
+                const topPointProjection = this.getProjection({ x: roadMarkingX, y: roadMarkingY });
+                const bottomPointProjection = this.getProjection({
+                    x: roadMarkingX + roadMarkingLength * topPointProjection.scale, y: roadMarkingY
+                });
+
+                const stroke = this.game.add.graphics();
+                stroke.beginFill(0xffffff, 0.8);
+                stroke.drawPolygon([
+                    {
+                        x: topPointProjection.x - roadMarkingWidthHalf * topPointProjection.scale,
+                        y: topPointProjection.y,
+                    },
+                    {
+                        x: topPointProjection.x + roadMarkingWidthHalf * topPointProjection.scale,
+                        y: topPointProjection.y,
+                    },
+                    {
+                        x: bottomPointProjection.x + roadMarkingWidthHalf * bottomPointProjection.scale,
+                        y: bottomPointProjection.y,
+                    },
+                    {
+                        x: bottomPointProjection.x - roadMarkingWidthHalf * bottomPointProjection.scale,
+                        y: bottomPointProjection.y,
+                    },
+                ]);
+                stroke.endFill();
+                roadMarkingGroup.add(stroke);
+                roadMarkingX += (roadMarkingLength + roadMarkingGap) * bottomPointProjection.scale;
+            }
+        }
+        roadMarkingGroup.cacheAsBitmap = true;
+        this.group.add(roadMarkingGroup);
     }
 }
 

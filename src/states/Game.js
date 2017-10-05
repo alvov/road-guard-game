@@ -332,7 +332,10 @@ class Game {
         if (this.rg.objects.radar.mode !== RADAR_MODE_ERROR) {
             if (car.mode === CAR_MODE_FINED) {
                 this.rg.objects.radar.setMode(car.isRogue ? RADAR_MODE_ROGUE : RADAR_MODE_ALREADY_FINED);
-            } else {
+            } else if (
+                this.rg.objects.radar.mode !== RADAR_MODE_COMPUTING ||
+                this.rg.objects.radar.currentCar !== car
+            ) {
                 this.rg.objects.radar.setMode(RADAR_MODE_COMPUTING, { car });
             }
         }
@@ -345,7 +348,7 @@ class Game {
             this.rg.objects.radar.setMode(RADAR_MODE_EMPTY);
         }
         if (!this.rg.levelEnded && car.mode !== CAR_MODE_FINED && !car.isRogue) {
-            const fine = getFine(car.velocity.x);
+            const fine = getFine(car.velocity.x, this.rg.level.speed.limit);
             if (fine !== 0) {
                 this.rg.stats.missed.count++;
                 this.rg.stats.missed.sum += fine;

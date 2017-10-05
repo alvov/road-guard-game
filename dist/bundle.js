@@ -2005,7 +2005,7 @@ var Game = function () {
             if (this.rg.objects.radar.mode !== __WEBPACK_IMPORTED_MODULE_12__constants__["X" /* RADAR_MODE_ERROR */]) {
                 if (car.mode === __WEBPACK_IMPORTED_MODULE_12__constants__["c" /* CAR_MODE_FINED */]) {
                     this.rg.objects.radar.setMode(car.isRogue ? __WEBPACK_IMPORTED_MODULE_12__constants__["_0" /* RADAR_MODE_ROGUE */] : __WEBPACK_IMPORTED_MODULE_12__constants__["T" /* RADAR_MODE_ALREADY_FINED */]);
-                } else {
+                } else if (this.rg.objects.radar.mode !== __WEBPACK_IMPORTED_MODULE_12__constants__["U" /* RADAR_MODE_COMPUTING */] || this.rg.objects.radar.currentCar !== car) {
                     this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_12__constants__["U" /* RADAR_MODE_COMPUTING */], { car: car });
                 }
             }
@@ -2019,7 +2019,7 @@ var Game = function () {
                 this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_12__constants__["W" /* RADAR_MODE_EMPTY */]);
             }
             if (!this.rg.levelEnded && car.mode !== __WEBPACK_IMPORTED_MODULE_12__constants__["c" /* CAR_MODE_FINED */] && !car.isRogue) {
-                var fine = Object(__WEBPACK_IMPORTED_MODULE_11__utils__["a" /* getFine */])(car.velocity.x);
+                var fine = Object(__WEBPACK_IMPORTED_MODULE_11__utils__["a" /* getFine */])(car.velocity.x, this.rg.level.speed.limit);
                 if (fine !== 0) {
                     this.rg.stats.missed.count++;
                     this.rg.stats.missed.sum += fine;
@@ -2500,6 +2500,8 @@ var Road = function () {
         this.roadGraphics.beginFill(__WEBPACK_IMPORTED_MODULE_0__constants__["f" /* COLOR */].ROAD);
         this.roadGraphics.drawPolygon([this.topLeft, { x: this.roadOffsetLeft + this.roadWidthTop, y: this.topLeft.y }, { x: this.roadOffsetLeft + this.roadWidthBottom, y: this.game.height }, { x: this.roadOffsetLeft, y: this.game.height }]);
         this.roadGraphics.endFill();
+
+        this.drawRoadMarking();
     }
 
     _createClass(Road, [{
@@ -2520,6 +2522,46 @@ var Road = function () {
         key: 'getLaneCenter',
         value: function getLaneCenter(index) {
             return this.laneWidth * (0.5 + index);
+        }
+    }, {
+        key: 'drawRoadMarking',
+        value: function drawRoadMarking() {
+            var roadMarkingWidth = this.laneWidth / 15;
+            var roadMarkingWidthHalf = roadMarkingWidth / 2;
+            var roadMarkingLength = roadMarkingWidth * 10;
+            var roadMarkingGap = 3 * roadMarkingLength;
+            var roadMarkingGroup = this.game.add.group();
+            for (var i = 1; i < this.lanes; i++) {
+                var roadMarkingY = i * this.laneWidth;
+                var roadMarkingX = 0;
+                while (roadMarkingX < this.length) {
+                    var topPointProjection = this.getProjection({ x: roadMarkingX, y: roadMarkingY });
+                    var bottomPointProjection = this.getProjection({
+                        x: roadMarkingX + roadMarkingLength * topPointProjection.scale, y: roadMarkingY
+                    });
+
+                    var stroke = this.game.add.graphics();
+                    stroke.beginFill(0xffffff, 0.8);
+                    stroke.drawPolygon([{
+                        x: topPointProjection.x - roadMarkingWidthHalf * topPointProjection.scale,
+                        y: topPointProjection.y
+                    }, {
+                        x: topPointProjection.x + roadMarkingWidthHalf * topPointProjection.scale,
+                        y: topPointProjection.y
+                    }, {
+                        x: bottomPointProjection.x + roadMarkingWidthHalf * bottomPointProjection.scale,
+                        y: bottomPointProjection.y
+                    }, {
+                        x: bottomPointProjection.x - roadMarkingWidthHalf * bottomPointProjection.scale,
+                        y: bottomPointProjection.y
+                    }]);
+                    stroke.endFill();
+                    roadMarkingGroup.add(stroke);
+                    roadMarkingX += (roadMarkingLength + roadMarkingGap) * bottomPointProjection.scale;
+                }
+            }
+            roadMarkingGroup.cacheAsBitmap = true;
+            this.group.add(roadMarkingGroup);
         }
     }]);
 
@@ -2726,15 +2768,13 @@ var Radar = function () {
                     }
                 case __WEBPACK_IMPORTED_MODULE_3__constants__["U" /* RADAR_MODE_COMPUTING */]:
                     {
-                        if (this.mode !== __WEBPACK_IMPORTED_MODULE_3__constants__["U" /* RADAR_MODE_COMPUTING */] || this.currentCar !== props.car) {
-                            this.currentCar = props.car;
+                        this.currentCar = props.car;
 
-                            this.mainText.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["B" /* I18N_RADAR_WAIT */]));
-                            this.progressBar.graphics.visible = true;
+                        this.mainText.setText(this.game.rg.i18n.getTranslation(__WEBPACK_IMPORTED_MODULE_3__constants__["B" /* I18N_RADAR_WAIT */]));
+                        this.progressBar.graphics.visible = true;
 
-                            this.computingTimer.add(this.computingTimerDuration, this.handleCompleteComputing, this);
-                            this.computingTimer.start();
-                        }
+                        this.computingTimer.add(this.computingTimerDuration, this.handleCompleteComputing, this);
+                        this.computingTimer.start();
                         break;
                     }
                 case __WEBPACK_IMPORTED_MODULE_3__constants__["Z" /* RADAR_MODE_FINED */]:
