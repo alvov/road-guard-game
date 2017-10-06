@@ -13,10 +13,13 @@ export const COLOR_HEX = {
     RADAR_SCREEN_RED: '#DDAAAA',
     ROAD: '#45454A',
     GRASS: '#517F30',
-    SKY: '#87CEFA',
+    SKY1: '#87CEFA',
+    SKY2: '#FFBF63',
+    SKY3: '#FF729D',
+    SKY4: '#5255bc',
     CAR_WINDOWS: '#778899',
-    CAR_LIGHTS_DAY1: '#FCFF9F',
-    CAR_LIGHTS_DAY2: '#F2FCFF',
+    CAR_LIGHTS1: '#FCFF9F',
+    CAR_LIGHTS2: '#F2FCFF',
     MAIN: '#312162',
 };
 
@@ -24,6 +27,26 @@ export const COLOR = Object.keys(COLOR_HEX).reduce((result, colorKey) => {
     result[colorKey] = Phaser.Color.hexToRGB(COLOR_HEX[colorKey]);
     return result;
 }, {});
+
+export const SKY_COLORS = [
+    [COLOR.SKY1, 1],
+    [COLOR.SKY2, 0.8],
+    [COLOR.SKY3, 0.6],
+    [COLOR.SKY4, 0.4],
+    [0, 0],
+];
+
+export const CAR_COLORS = [
+    COLOR.SPACE_GREY,
+    COLOR.MAROON,
+    COLOR.STEEL,
+    COLOR.MIDNIGHT_BLUE,
+    COLOR.FLORAL_WHITE,
+];
+export const CAR_LIGHTS_COLORS = [
+    COLOR.CAR_LIGHTS1,
+    COLOR.CAR_LIGHTS2,
+];
 
 export const STATE_BOOT = 'boot';
 export const STATE_LOADING = 'loading';
@@ -84,17 +107,6 @@ export const I18N_RULES_GOAL = 'rulesGoal';
 export const I18N_RULES_AUTHORITIES = 'rulesAuth';
 
 export const CAR_RELATIVE_WIDTH = 200;
-export const CAR_COLORS = [
-    COLOR.SPACE_GREY,
-    COLOR.MAROON,
-    COLOR.STEEL,
-    COLOR.MIDNIGHT_BLUE,
-    COLOR.FLORAL_WHITE,
-];
-export const CAR_LIGHTS_DAY_COLORS = [
-    COLOR.CAR_LIGHTS_DAY1,
-    COLOR.CAR_LIGHTS_DAY2,
-];
 export const CAR_ALLOWED_PLATE_LETTERS = [
     'A', 'B', 'C', 'E', 'H', 'K', 'M', 'O', 'P', 'T', 'X'
 ];

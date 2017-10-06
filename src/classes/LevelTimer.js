@@ -32,6 +32,10 @@ class LevelTimer {
         return this.secondsElapsed >= this.duration;
     }
 
+    get elapsedPercent() {
+        return Math.min(1, this.timer.seconds / this.duration);
+    }
+
     updateTimer() {
         this.secondsElapsed++;
         const secondsLeft = this.duration - this.secondsElapsed;

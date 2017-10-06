@@ -68,14 +68,17 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_7", function() { return UI_OFFSET; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_8", function() { return UI_OFFSET; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return COLOR_HEX; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return COLOR; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_2", function() { return STATE_BOOT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_5", function() { return STATE_LOADING; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_6", function() { return STATE_MENU; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_4", function() { return STATE_HOW_TO; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_3", function() { return STATE_GAME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_2", function() { return SKY_COLORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return CAR_COLORS; });
+/* unused harmony export CAR_LIGHTS_COLORS */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_3", function() { return STATE_BOOT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_6", function() { return STATE_LOADING; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_7", function() { return STATE_MENU; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_5", function() { return STATE_HOW_TO; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_4", function() { return STATE_GAME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "T", function() { return LANG_RU; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "S", function() { return LANG_EN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return END_GAME_TIME_OUT; });
@@ -124,12 +127,10 @@
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "E", function() { return I18N_RULES_GOAL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "D", function() { return I18N_RULES_AUTHORITIES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return CAR_RELATIVE_WIDTH; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return CAR_COLORS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return CAR_LIGHTS_DAY_COLORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CAR_ALLOWED_PLATE_LETTERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return FINES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_8", function() { return WEATHER_FOG; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_9", function() { return WEATHER_THUNDER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_9", function() { return WEATHER_FOG; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_10", function() { return WEATHER_THUNDER; });
 var UI_OFFSET = 10;
 
 var COLOR_HEX = {
@@ -145,10 +146,13 @@ var COLOR_HEX = {
     RADAR_SCREEN_RED: '#DDAAAA',
     ROAD: '#45454A',
     GRASS: '#517F30',
-    SKY: '#87CEFA',
+    SKY1: '#87CEFA',
+    SKY2: '#FFBF63',
+    SKY3: '#FF729D',
+    SKY4: '#5255bc',
     CAR_WINDOWS: '#778899',
-    CAR_LIGHTS_DAY1: '#FCFF9F',
-    CAR_LIGHTS_DAY2: '#F2FCFF',
+    CAR_LIGHTS1: '#FCFF9F',
+    CAR_LIGHTS2: '#F2FCFF',
     MAIN: '#312162'
 };
 
@@ -156,6 +160,11 @@ var COLOR = Object.keys(COLOR_HEX).reduce(function (result, colorKey) {
     result[colorKey] = Phaser.Color.hexToRGB(COLOR_HEX[colorKey]);
     return result;
 }, {});
+
+var SKY_COLORS = [[COLOR.SKY1, 1], [COLOR.SKY2, 0.8], [COLOR.SKY3, 0.6], [COLOR.SKY4, 0.4], [0, 0]];
+
+var CAR_COLORS = [COLOR.SPACE_GREY, COLOR.MAROON, COLOR.STEEL, COLOR.MIDNIGHT_BLUE, COLOR.FLORAL_WHITE];
+var CAR_LIGHTS_COLORS = [COLOR.CAR_LIGHTS1, COLOR.CAR_LIGHTS2];
 
 var STATE_BOOT = 'boot';
 var STATE_LOADING = 'loading';
@@ -216,8 +225,6 @@ var I18N_RULES_GOAL = 'rulesGoal';
 var I18N_RULES_AUTHORITIES = 'rulesAuth';
 
 var CAR_RELATIVE_WIDTH = 200;
-var CAR_COLORS = [COLOR.SPACE_GREY, COLOR.MAROON, COLOR.STEEL, COLOR.MIDNIGHT_BLUE, COLOR.FLORAL_WHITE];
-var CAR_LIGHTS_DAY_COLORS = [COLOR.CAR_LIGHTS_DAY1, COLOR.CAR_LIGHTS_DAY2];
 var CAR_ALLOWED_PLATE_LETTERS = ['A', 'B', 'C', 'E', 'H', 'K', 'M', 'O', 'P', 'T', 'X'];
 
 var FINES = [[20, 0, 50], [40, 500, 30], [60, 1500, 10], [80, 2500, 8], [100, 5000, 2]];
@@ -233,6 +240,7 @@ var WEATHER_THUNDER = 'thunder';
 /* harmony export (immutable) */ __webpack_exports__["c"] = getFormattedTime;
 /* harmony export (immutable) */ __webpack_exports__["b"] = getFormattedCurrency;
 /* harmony export (immutable) */ __webpack_exports__["a"] = getFine;
+/* harmony export (immutable) */ __webpack_exports__["d"] = interpolateColor;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__(0);
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
@@ -268,6 +276,16 @@ function getFine(speed, speedLimit) {
         }
     }
     return result;
+}
+
+function interpolateColor(color1, color2, percent) {
+    var src1 = Phaser.Color.getRGB(color1);
+    var src2 = Phaser.Color.getRGB(color2);
+    var r = (src2.red - src1.red) * percent + src1.red;
+    var g = (src2.green - src1.green) * percent + src1.green;
+    var b = (src2.blue - src1.blue) * percent + src1.blue;
+
+    return Phaser.Color.getColor(r, g, b);
 }
 
 /***/ }),
@@ -334,6 +352,7 @@ var Car = function () {
         this.roadLane = null;
         this.color = null;
         this.isRogue = false;
+        this.dayTime = null;
 
         this.rogueFinedTimer = this.game.time.create(false);
 
@@ -355,12 +374,17 @@ var Car = function () {
         value: function update(_ref2) {
             var x = _ref2.x,
                 y = _ref2.y,
-                scale = _ref2.scale;
+                scale = _ref2.scale,
+                dayTime = _ref2.dayTime;
 
             this.sprite.position.set(x, y);
             this.sprite.scale.set(scale);
             if (this.rogueFinedTimer.running) {
                 this.sprite.tint = Math.floor(this.rogueFinedTimer.ms / CAR_ROGUE_FINED_BLINK_DURATION) % 2 ? this.color : __WEBPACK_IMPORTED_MODULE_1__constants__["g" /* COLOR */].RED;
+            }
+            if (dayTime !== undefined && dayTime !== this.dayTime) {
+                this.dayTime = dayTime;
+                this.setTint();
             }
         }
     }, {
@@ -419,15 +443,31 @@ var Car = function () {
             }
         }
     }, {
+        key: 'setTint',
+        value: function setTint() {
+            var _this = this;
+
+            var greyShade = this.dayTime * 255;
+            var greyTint = Phaser.Color.getColor(greyShade, greyShade, greyShade);
+            var spriteTintRGB = Phaser.Color.getRGB(this.color);
+            this.sprite.tint = Phaser.Color.RGBArrayToHex([spriteTintRGB.r, spriteTintRGB.g, spriteTintRGB.b].map(function (c) {
+                return c * _this.dayTime / 255;
+            }));
+            this.detailsSprite.tint = greyTint;
+            this.plateNumber.plateGraphics.tint = greyTint;
+        }
+    }, {
         key: 'revive',
         value: function revive(_ref3) {
             var x = _ref3.x,
                 y = _ref3.y,
                 roadLane = _ref3.roadLane,
                 speed = _ref3.speed,
-                isRogue = _ref3.isRogue;
+                isRogue = _ref3.isRogue,
+                dayTime = _ref3.dayTime;
 
             this.setMode(__WEBPACK_IMPORTED_MODULE_1__constants__["e" /* CAR_MODE_NORMAL */]);
+            this.dayTime = dayTime;
 
             this.isRogue = isRogue;
 
@@ -450,9 +490,14 @@ var Car = function () {
             this.position.set(x, y);
             this.roadLane = roadLane;
             this.velocity.x = speed;
-            this.lightsSprite.tint = this.game.rnd.pick(__WEBPACK_IMPORTED_MODULE_1__constants__["c" /* CAR_LIGHTS_DAY_COLORS */]);
+            this.lightsSprite.tint = this.game.rnd.pick(__WEBPACK_IMPORTED_MODULE_1__constants__["CAR_LIGHTS_DAY_COLORS"]);
+
             this.color = this.generateBodyColor();
-            this.sprite.tint = this.color;
+            if (this.dayTime !== undefined) {
+                this.setTint();
+            } else {
+                this.sprite.tint = this.color;
+            }
             this.sprite.revive();
         }
     }, {
@@ -1016,13 +1061,13 @@ function initGame() {
         renderer: Phaser.CANVAS
     });
 
-    game.state.add(__WEBPACK_IMPORTED_MODULE_6__constants__["_2" /* STATE_BOOT */], __WEBPACK_IMPORTED_MODULE_1__states_Boot__["a" /* default */]);
-    game.state.add(__WEBPACK_IMPORTED_MODULE_6__constants__["_5" /* STATE_LOADING */], __WEBPACK_IMPORTED_MODULE_2__states_Loading__["a" /* default */]);
-    game.state.add(__WEBPACK_IMPORTED_MODULE_6__constants__["_6" /* STATE_MENU */], __WEBPACK_IMPORTED_MODULE_3__states_StartMenu__["a" /* default */]);
-    game.state.add(__WEBPACK_IMPORTED_MODULE_6__constants__["_4" /* STATE_HOW_TO */], __WEBPACK_IMPORTED_MODULE_4__states_HowTo__["a" /* default */]);
-    game.state.add(__WEBPACK_IMPORTED_MODULE_6__constants__["_3" /* STATE_GAME */], __WEBPACK_IMPORTED_MODULE_5__states_Game__["a" /* default */]);
+    game.state.add(__WEBPACK_IMPORTED_MODULE_6__constants__["_3" /* STATE_BOOT */], __WEBPACK_IMPORTED_MODULE_1__states_Boot__["a" /* default */]);
+    game.state.add(__WEBPACK_IMPORTED_MODULE_6__constants__["_6" /* STATE_LOADING */], __WEBPACK_IMPORTED_MODULE_2__states_Loading__["a" /* default */]);
+    game.state.add(__WEBPACK_IMPORTED_MODULE_6__constants__["_7" /* STATE_MENU */], __WEBPACK_IMPORTED_MODULE_3__states_StartMenu__["a" /* default */]);
+    game.state.add(__WEBPACK_IMPORTED_MODULE_6__constants__["_5" /* STATE_HOW_TO */], __WEBPACK_IMPORTED_MODULE_4__states_HowTo__["a" /* default */]);
+    game.state.add(__WEBPACK_IMPORTED_MODULE_6__constants__["_4" /* STATE_GAME */], __WEBPACK_IMPORTED_MODULE_5__states_Game__["a" /* default */]);
 
-    game.state.start(__WEBPACK_IMPORTED_MODULE_6__constants__["_2" /* STATE_BOOT */]);
+    game.state.start(__WEBPACK_IMPORTED_MODULE_6__constants__["_3" /* STATE_BOOT */]);
 }
 
 window.rgResizeBody = function rgResizeBody() {
@@ -1091,9 +1136,9 @@ var Boot = function () {
                 game: this.game
             });
 
-            this.state.start(__WEBPACK_IMPORTED_MODULE_2__constants__["_5" /* STATE_LOADING */], true, false, {
+            this.state.start(__WEBPACK_IMPORTED_MODULE_2__constants__["_6" /* STATE_LOADING */], true, false, {
                 assets: [['pack', 'initial', null, __WEBPACK_IMPORTED_MODULE_0__assets_pack__["a" /* default */]]],
-                nextState: [__WEBPACK_IMPORTED_MODULE_2__constants__["_6" /* STATE_MENU */]]
+                nextState: [__WEBPACK_IMPORTED_MODULE_2__constants__["_7" /* STATE_MENU */]]
             });
         }
     }, {
@@ -1410,7 +1455,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             lanes: 3,
             laneWidth: 100
         },
-        weather: __WEBPACK_IMPORTED_MODULE_0__constants__["_9" /* WEATHER_THUNDER */],
+        weather: __WEBPACK_IMPORTED_MODULE_0__constants__["_10" /* WEATHER_THUNDER */],
         radar: {
             computing: 1000 // ms
         },
@@ -1434,7 +1479,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             lanes: 3,
             laneWidth: 100
         },
-        weather: __WEBPACK_IMPORTED_MODULE_0__constants__["_8" /* WEATHER_FOG */],
+        weather: __WEBPACK_IMPORTED_MODULE_0__constants__["_9" /* WEATHER_FOG */],
         radar: {
             computing: 900 // ms
         },
@@ -1647,15 +1692,15 @@ var StartMenu = function () {
         value: function handleClickPlay() {
             var levelNumber = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
-            this.state.start(__WEBPACK_IMPORTED_MODULE_2__constants__["_5" /* STATE_LOADING */], true, false, {
+            this.state.start(__WEBPACK_IMPORTED_MODULE_2__constants__["_6" /* STATE_LOADING */], true, false, {
                 assets: [['pack', 'game', null, __WEBPACK_IMPORTED_MODULE_1__assets_pack_js__["a" /* default */]]],
-                nextState: [__WEBPACK_IMPORTED_MODULE_2__constants__["_3" /* STATE_GAME */], __WEBPACK_IMPORTED_MODULE_0__classes_Level__["a" /* default */].getLevelByNumber(levelNumber)]
+                nextState: [__WEBPACK_IMPORTED_MODULE_2__constants__["_4" /* STATE_GAME */], __WEBPACK_IMPORTED_MODULE_0__classes_Level__["a" /* default */].getLevelByNumber(levelNumber)]
             });
         }
     }, {
         key: 'handleClickHowTo',
         value: function handleClickHowTo() {
-            this.state.start(__WEBPACK_IMPORTED_MODULE_2__constants__["_4" /* STATE_HOW_TO */], true, false);
+            this.state.start(__WEBPACK_IMPORTED_MODULE_2__constants__["_5" /* STATE_HOW_TO */], true, false);
         }
     }, {
         key: 'handleClickLang',
@@ -1680,9 +1725,9 @@ var StartMenu = function () {
                 item.position.set(menuOffsetLeft, i * menuVerticalSpacing + menuOffset);
             });
 
-            this.langButton.position.set(__WEBPACK_IMPORTED_MODULE_2__constants__["_7" /* UI_OFFSET */], 0);
+            this.langButton.position.set(__WEBPACK_IMPORTED_MODULE_2__constants__["_8" /* UI_OFFSET */], 0);
 
-            this.versionText.position.set(this.game.width - __WEBPACK_IMPORTED_MODULE_2__constants__["_7" /* UI_OFFSET */], this.game.height - __WEBPACK_IMPORTED_MODULE_2__constants__["_7" /* UI_OFFSET */]);
+            this.versionText.position.set(this.game.width - __WEBPACK_IMPORTED_MODULE_2__constants__["_8" /* UI_OFFSET */], this.game.height - __WEBPACK_IMPORTED_MODULE_2__constants__["_8" /* UI_OFFSET */]);
         }
     }]);
 
@@ -1754,7 +1799,7 @@ var HowTo = function () {
         value: function handleClickBack() {
             if (this.back.getBounds().contains(this.game.input.x, this.game.input.y)) {
                 this.game.input.onDown.remove(this.handleClickBack, this);
-                this.state.start(__WEBPACK_IMPORTED_MODULE_0__constants__["_6" /* STATE_MENU */], true, false);
+                this.state.start(__WEBPACK_IMPORTED_MODULE_0__constants__["_7" /* STATE_MENU */], true, false);
                 return true;
             }
         }
@@ -1781,8 +1826,9 @@ var HowTo = function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__classes_screens_EndLevel__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__classes_screens_PauseLevel__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__classes_Weather__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__utils__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__constants__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__classes_Sky__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__utils__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__constants__ = __webpack_require__(0);
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1792,6 +1838,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 
 
 
@@ -1820,6 +1867,7 @@ var Game = function () {
                 level: level,
                 levelStarted: false,
                 levelEnded: false,
+                dayTime: level.dayTime,
                 stats: {
                     fines: {
                         count: 0,
@@ -1839,6 +1887,7 @@ var Game = function () {
                     count: (level.road.end - level.road.start) / level.speed.limit / level.cars.frequency
                 },
                 objects: {
+                    sky: null,
                     road: null,
                     roadSign: null,
                     weather: null,
@@ -1871,11 +1920,15 @@ var Game = function () {
     }, {
         key: 'create',
         value: function create() {
-            // background
-            this.game.stage.backgroundColor = __WEBPACK_IMPORTED_MODULE_12__constants__["h" /* COLOR_HEX */].SKY;
-
             // background group
             this.rg.groups.bg = this.game.add.group();
+
+            this.rg.objects.sky = new __WEBPACK_IMPORTED_MODULE_11__classes_Sky__["a" /* default */]({
+                game: this.game,
+                height: this.game.height / 5,
+                dayTime: this.rg.dayTime
+            });
+            this.rg.groups.bg.add(this.rg.objects.sky.graphics);
 
             // cars behind the road
             this.rg.groups.behindRoad = this.game.add.group();
@@ -1883,12 +1936,14 @@ var Game = function () {
             // road
             this.rg.objects.road = new __WEBPACK_IMPORTED_MODULE_2__classes_Road__["a" /* default */](_extends({
                 game: this.game
-            }, this.rg.level.road));
+            }, this.rg.level.road, {
+                height: this.game.height - this.rg.objects.sky.height
+            }));
 
             this.rg.groups.onRoad = this.game.add.group();
 
             var roadSignX = this.rg.objects.road.length / 2;
-            var roadSignY = -__WEBPACK_IMPORTED_MODULE_12__constants__["_7" /* UI_OFFSET */];
+            var roadSignY = -__WEBPACK_IMPORTED_MODULE_13__constants__["_8" /* UI_OFFSET */];
             this.rg.objects.roadSign = new __WEBPACK_IMPORTED_MODULE_4__classes_RoadSign__["a" /* default */](_extends({
                 game: this.game,
                 position: {
@@ -1897,7 +1952,7 @@ var Game = function () {
                 }
             }, this.rg.objects.road.getProjection({
                 x: this.rg.objects.road.length / 2,
-                y: -__WEBPACK_IMPORTED_MODULE_12__constants__["_7" /* UI_OFFSET */]
+                y: -__WEBPACK_IMPORTED_MODULE_13__constants__["_8" /* UI_OFFSET */]
             }), {
                 speedLimit: this.rg.level.speed.limit
             }));
@@ -1924,8 +1979,8 @@ var Game = function () {
             // ui
             this.rg.objects.score = new __WEBPACK_IMPORTED_MODULE_5__classes_Score__["a" /* default */]({
                 game: this.game,
-                x: __WEBPACK_IMPORTED_MODULE_12__constants__["_7" /* UI_OFFSET */],
-                y: __WEBPACK_IMPORTED_MODULE_12__constants__["_7" /* UI_OFFSET */],
+                x: __WEBPACK_IMPORTED_MODULE_13__constants__["_8" /* UI_OFFSET */],
+                y: __WEBPACK_IMPORTED_MODULE_13__constants__["_8" /* UI_OFFSET */],
                 goal: this.rg.level.goal
             });
 
@@ -1936,9 +1991,9 @@ var Game = function () {
 
             this.rg.objects.radar = new __WEBPACK_IMPORTED_MODULE_3__classes_Radar__["a" /* default */](_extends({
                 game: this.game,
-                x: __WEBPACK_IMPORTED_MODULE_12__constants__["_7" /* UI_OFFSET */],
-                y: this.game.height - __WEBPACK_IMPORTED_MODULE_12__constants__["_7" /* UI_OFFSET */],
-                width: this.rg.objects.road.roadOffsetLeft - __WEBPACK_IMPORTED_MODULE_12__constants__["_7" /* UI_OFFSET */] * 2
+                x: __WEBPACK_IMPORTED_MODULE_13__constants__["_8" /* UI_OFFSET */],
+                y: this.game.height - __WEBPACK_IMPORTED_MODULE_13__constants__["_8" /* UI_OFFSET */],
+                width: this.rg.objects.road.roadOffsetLeft - __WEBPACK_IMPORTED_MODULE_13__constants__["_8" /* UI_OFFSET */] * 2
             }, this.rg.level.radar, {
                 speedLimit: this.rg.level.speed.limit
             }));
@@ -1974,6 +2029,19 @@ var Game = function () {
         value: function update() {
             if (!this.rg.levelStarted) {
                 return;
+            }
+
+            // update day time
+            if (this.rg.dayTime !== undefined) {
+                this.rg.dayTime = this.rg.levelEnded ? 0 : this.game.math.roundTo(this.rg.level.dayTime * (1 - this.rg.objects.timer.elapsedPercent), -2);
+                // apply threshold
+                this.rg.dayTime = Math.max(0.1, this.rg.dayTime);
+
+                // update sky
+                this.rg.objects.sky.update({ dayTime: this.rg.dayTime });
+                // update road
+                this.rg.objects.road.update({ dayTime: this.rg.dayTime });
+                this.rg.objects.roadSign.update({ dayTime: this.rg.dayTime });
             }
 
             // update road objects starting from the closest to the player
@@ -2028,7 +2096,7 @@ var Game = function () {
 
             // input
             if (this.rg.input.keys.space.justDown) {
-                if (this.rg.objects.radar.mode === __WEBPACK_IMPORTED_MODULE_12__constants__["Z" /* RADAR_MODE_FINE */]) {
+                if (this.rg.objects.radar.mode === __WEBPACK_IMPORTED_MODULE_13__constants__["Z" /* RADAR_MODE_FINE */]) {
                     this.handleFine();
                 }
             }
@@ -2043,7 +2111,9 @@ var Game = function () {
 
             car.preUpdate();
 
-            car.update(this.rg.objects.road.getProjection(car.position));
+            car.update(_extends({}, this.rg.objects.road.getProjection(car.position), {
+                dayTime: this.rg.dayTime
+            }));
         }
     }, {
         key: 'render',
@@ -2072,25 +2142,25 @@ var Game = function () {
                     if (pointer.targetObject.sprite.name.startsWith('car')) {
                         this.handleClickCar(pointer.targetObject.sprite.rg);
                         handled = true;
-                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_12__constants__["J" /* I18N_UI_BUTTON_FINE */]) {
-                        if (this.rg.objects.radar.mode === __WEBPACK_IMPORTED_MODULE_12__constants__["Z" /* RADAR_MODE_FINE */]) {
+                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_13__constants__["J" /* I18N_UI_BUTTON_FINE */]) {
+                        if (this.rg.objects.radar.mode === __WEBPACK_IMPORTED_MODULE_13__constants__["Z" /* RADAR_MODE_FINE */]) {
                             this.handleFine();
                             handled = true;
                         }
-                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_12__constants__["L" /* I18N_UI_BUTTON_PLAY */]) {
+                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_13__constants__["L" /* I18N_UI_BUTTON_PLAY */]) {
                         this.startLevel();
                         handled = true;
-                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_12__constants__["M" /* I18N_UI_BUTTON_QUIT */]) {
+                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_13__constants__["M" /* I18N_UI_BUTTON_QUIT */]) {
                         this.handleClickQuit();
-                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_12__constants__["Q" /* I18N_UI_PAUSE */]) {
+                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_13__constants__["Q" /* I18N_UI_PAUSE */]) {
                         this.handlePause();
                     }
                 } else {
-                    if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_12__constants__["M" /* I18N_UI_BUTTON_QUIT */]) {
+                    if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_13__constants__["M" /* I18N_UI_BUTTON_QUIT */]) {
                         this.handleClickQuit();
-                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_12__constants__["K" /* I18N_UI_BUTTON_NEXT */]) {
+                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_13__constants__["K" /* I18N_UI_BUTTON_NEXT */]) {
                         this.handleClickNext();
-                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_12__constants__["N" /* I18N_UI_BUTTON_REPLAY */]) {
+                    } else if (pointer.targetObject.sprite.name === __WEBPACK_IMPORTED_MODULE_13__constants__["N" /* I18N_UI_BUTTON_REPLAY */]) {
                         this.handleClickReplay();
                     }
                 }
@@ -2102,33 +2172,33 @@ var Game = function () {
     }, {
         key: 'handleClickField',
         value: function handleClickField() {
-            if (this.rg.objects.radar.mode !== __WEBPACK_IMPORTED_MODULE_12__constants__["Y" /* RADAR_MODE_ERROR */]) {
-                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_12__constants__["X" /* RADAR_MODE_EMPTY */]);
+            if (this.rg.objects.radar.mode !== __WEBPACK_IMPORTED_MODULE_13__constants__["Y" /* RADAR_MODE_ERROR */]) {
+                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_13__constants__["X" /* RADAR_MODE_EMPTY */]);
             }
         }
     }, {
         key: 'handleClickQuit',
         value: function handleClickQuit() {
-            this.state.start(__WEBPACK_IMPORTED_MODULE_12__constants__["_6" /* STATE_MENU */]);
+            this.state.start(__WEBPACK_IMPORTED_MODULE_13__constants__["_7" /* STATE_MENU */]);
         }
     }, {
         key: 'handleClickNext',
         value: function handleClickNext() {
-            this.state.start(__WEBPACK_IMPORTED_MODULE_12__constants__["_3" /* STATE_GAME */], true, false, __WEBPACK_IMPORTED_MODULE_0__classes_Level__["a" /* default */].getNextLevelById(this.rg.level.id));
+            this.state.start(__WEBPACK_IMPORTED_MODULE_13__constants__["_4" /* STATE_GAME */], true, false, __WEBPACK_IMPORTED_MODULE_0__classes_Level__["a" /* default */].getNextLevelById(this.rg.level.id));
         }
     }, {
         key: 'handleClickReplay',
         value: function handleClickReplay() {
-            this.state.start(__WEBPACK_IMPORTED_MODULE_12__constants__["_3" /* STATE_GAME */], true, false, __WEBPACK_IMPORTED_MODULE_0__classes_Level__["a" /* default */].getLevelById(this.rg.level.id));
+            this.state.start(__WEBPACK_IMPORTED_MODULE_13__constants__["_4" /* STATE_GAME */], true, false, __WEBPACK_IMPORTED_MODULE_0__classes_Level__["a" /* default */].getLevelById(this.rg.level.id));
         }
     }, {
         key: 'handleClickCar',
         value: function handleClickCar(car) {
-            if (this.rg.objects.radar.mode !== __WEBPACK_IMPORTED_MODULE_12__constants__["Y" /* RADAR_MODE_ERROR */]) {
-                if (car.mode === __WEBPACK_IMPORTED_MODULE_12__constants__["d" /* CAR_MODE_FINED */]) {
-                    this.rg.objects.radar.setMode(car.isRogue ? __WEBPACK_IMPORTED_MODULE_12__constants__["_1" /* RADAR_MODE_ROGUE */] : __WEBPACK_IMPORTED_MODULE_12__constants__["U" /* RADAR_MODE_ALREADY_FINED */]);
-                } else if (this.rg.objects.radar.mode !== __WEBPACK_IMPORTED_MODULE_12__constants__["V" /* RADAR_MODE_COMPUTING */] || this.rg.objects.radar.currentCar !== car) {
-                    this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_12__constants__["V" /* RADAR_MODE_COMPUTING */], { car: car });
+            if (this.rg.objects.radar.mode !== __WEBPACK_IMPORTED_MODULE_13__constants__["Y" /* RADAR_MODE_ERROR */]) {
+                if (car.mode === __WEBPACK_IMPORTED_MODULE_13__constants__["d" /* CAR_MODE_FINED */]) {
+                    this.rg.objects.radar.setMode(car.isRogue ? __WEBPACK_IMPORTED_MODULE_13__constants__["_1" /* RADAR_MODE_ROGUE */] : __WEBPACK_IMPORTED_MODULE_13__constants__["U" /* RADAR_MODE_ALREADY_FINED */]);
+                } else if (this.rg.objects.radar.mode !== __WEBPACK_IMPORTED_MODULE_13__constants__["V" /* RADAR_MODE_COMPUTING */] || this.rg.objects.radar.currentCar !== car) {
+                    this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_13__constants__["V" /* RADAR_MODE_COMPUTING */], { car: car });
                 }
             }
         }
@@ -2138,10 +2208,10 @@ var Game = function () {
             this.rg.groups.onRoad.removeChild(car.sprite);
 
             if (car === this.rg.objects.radar.currentCar) {
-                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_12__constants__["X" /* RADAR_MODE_EMPTY */]);
+                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_13__constants__["X" /* RADAR_MODE_EMPTY */]);
             }
-            if (!this.rg.levelEnded && car.mode !== __WEBPACK_IMPORTED_MODULE_12__constants__["d" /* CAR_MODE_FINED */] && !car.isRogue) {
-                var fine = Object(__WEBPACK_IMPORTED_MODULE_11__utils__["a" /* getFine */])(car.velocity.x, this.rg.level.speed.limit);
+            if (!this.rg.levelEnded && car.mode !== __WEBPACK_IMPORTED_MODULE_13__constants__["d" /* CAR_MODE_FINED */] && !car.isRogue) {
+                var fine = Object(__WEBPACK_IMPORTED_MODULE_12__utils__["a" /* getFine */])(car.velocity.x, this.rg.level.speed.limit);
                 if (fine !== 0) {
                     this.rg.stats.missed.count++;
                     this.rg.stats.missed.sum += fine;
@@ -2152,26 +2222,26 @@ var Game = function () {
         key: 'handleFine',
         value: function handleFine() {
             var car = this.rg.objects.radar.currentCar;
-            car.setMode(__WEBPACK_IMPORTED_MODULE_12__constants__["d" /* CAR_MODE_FINED */]);
+            car.setMode(__WEBPACK_IMPORTED_MODULE_13__constants__["d" /* CAR_MODE_FINED */]);
             if (car.isRogue) {
                 this.rg.stats.wrong.count++;
                 this.rg.stats.wrong.sum -= this.rg.objects.radar.currentFine;
                 this.rg.objects.score.updateValue(-this.rg.objects.radar.currentFine);
-                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_12__constants__["_1" /* RADAR_MODE_ROGUE */]);
+                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_13__constants__["_1" /* RADAR_MODE_ROGUE */]);
             } else {
                 this.rg.stats.fines.count++;
                 this.rg.stats.fines.sum += this.rg.objects.radar.currentFine;
                 this.rg.objects.score.updateValue(this.rg.objects.radar.currentFine);
-                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_12__constants__["_0" /* RADAR_MODE_FINED */]);
+                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_13__constants__["_0" /* RADAR_MODE_FINED */]);
             }
         }
     }, {
         key: 'handleFlash',
         value: function handleFlash(on) {
             if (on) {
-                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_12__constants__["Y" /* RADAR_MODE_ERROR */]);
+                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_13__constants__["Y" /* RADAR_MODE_ERROR */]);
             } else {
-                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_12__constants__["X" /* RADAR_MODE_EMPTY */]);
+                this.rg.objects.radar.setMode(__WEBPACK_IMPORTED_MODULE_13__constants__["X" /* RADAR_MODE_EMPTY */]);
             }
         }
     }, {
@@ -2189,9 +2259,9 @@ var Game = function () {
         key: 'checkLevelEnd',
         value: function checkLevelEnd() {
             if (this.rg.objects.timer.isExpired) {
-                this.endLevel(__WEBPACK_IMPORTED_MODULE_12__constants__["i" /* END_GAME_TIME_OUT */]);
+                this.endLevel(__WEBPACK_IMPORTED_MODULE_13__constants__["i" /* END_GAME_TIME_OUT */]);
             } else if (this.rg.objects.score.reachedGoal) {
-                this.endLevel(__WEBPACK_IMPORTED_MODULE_12__constants__["j" /* END_GAME_WIN */]);
+                this.endLevel(__WEBPACK_IMPORTED_MODULE_13__constants__["j" /* END_GAME_WIN */]);
             }
         }
     }, {
@@ -2281,7 +2351,8 @@ var Game = function () {
                     y: this.rg.objects.road.getLaneCenter(roadLane),
                     roadLane: roadLane,
                     speed: speed,
-                    isRogue: isRogue
+                    isRogue: isRogue,
+                    dayTime: this.rg.dayTime
                 });
                 this.rg.groups.behindRoad.addAt(deadCar.sprite, 0);
                 return true;
@@ -2374,21 +2445,21 @@ var Game = function () {
         key: 'getRandomCarSpeed',
         value: function getRandomCarSpeed(isRogue) {
             if (isRogue) {
-                var minDisallowedSpeed = this.rg.level.speed.limit + __WEBPACK_IMPORTED_MODULE_12__constants__["k" /* FINES */][1][0];
-                var maxDisallowedSpeed = this.rg.level.speed.limit + __WEBPACK_IMPORTED_MODULE_12__constants__["k" /* FINES */][__WEBPACK_IMPORTED_MODULE_12__constants__["k" /* FINES */].length - 1][0];
+                var minDisallowedSpeed = this.rg.level.speed.limit + __WEBPACK_IMPORTED_MODULE_13__constants__["k" /* FINES */][1][0];
+                var maxDisallowedSpeed = this.rg.level.speed.limit + __WEBPACK_IMPORTED_MODULE_13__constants__["k" /* FINES */][__WEBPACK_IMPORTED_MODULE_13__constants__["k" /* FINES */].length - 1][0];
                 return this.game.rnd.integerInRange(minDisallowedSpeed, maxDisallowedSpeed - 1);
             } else {
                 var _randomNumber = this.game.rnd.integerInRange(1, 100);
                 var _cummulativeProbability = 0;
-                for (var i = 0; i < __WEBPACK_IMPORTED_MODULE_12__constants__["k" /* FINES */].length; i++) {
-                    var _FINES$i = _slicedToArray(__WEBPACK_IMPORTED_MODULE_12__constants__["k" /* FINES */][i], 3),
+                for (var i = 0; i < __WEBPACK_IMPORTED_MODULE_13__constants__["k" /* FINES */].length; i++) {
+                    var _FINES$i = _slicedToArray(__WEBPACK_IMPORTED_MODULE_13__constants__["k" /* FINES */][i], 3),
                         speedExcess = _FINES$i[0],
                         fine = _FINES$i[1],
                         probability = _FINES$i[2];
 
                     _cummulativeProbability += probability;
                     if (_randomNumber <= _cummulativeProbability) {
-                        var prevSpeedExcess = (__WEBPACK_IMPORTED_MODULE_12__constants__["k" /* FINES */][i - 1] || [0])[0];
+                        var prevSpeedExcess = (__WEBPACK_IMPORTED_MODULE_13__constants__["k" /* FINES */][i - 1] || [0])[0];
                         return this.rg.level.speed.limit + this.game.rnd.integerInRange(prevSpeedExcess, speedExcess - 1);
                     }
                 }
@@ -2522,9 +2593,9 @@ var PlateNumber = function () {
 
             this.text.setText(this.getText('.'));
             // white dots stand for spaces
-            this.text.addColor('#fff', 1);
+            this.text.addColor('rgba(255,255,255,0)', 1);
             this.text.addColor('#000', 2);
-            this.text.addColor('#fff', 5);
+            this.text.addColor('rgba(255,255,255,0)', 5);
             this.text.addColor('#000', 6);
             this.text.updateCache();
         }
@@ -2679,7 +2750,8 @@ var Road = function () {
         var game = _ref.game,
             length = _ref.length,
             lanes = _ref.lanes,
-            laneWidth = _ref.laneWidth;
+            laneWidth = _ref.laneWidth,
+            height = _ref.height;
 
         _classCallCheck(this, Road);
 
@@ -2688,12 +2760,13 @@ var Road = function () {
         this.lanes = lanes;
         this.laneWidth = laneWidth;
         this.width = this.laneWidth * this.lanes;
+        this.dayTime = null;
 
         this.group = this.game.add.group();
 
-        this.groundHeight = this.game.height * 4 / 5;
-        var groundTile = this.game.add.tileSprite(0, this.game.height - this.groundHeight, this.game.width, this.groundHeight, 'ground');
-        this.group.add(groundTile);
+        this.groundHeight = height;
+        this.groundTile = this.game.add.tileSprite(0, this.game.height - this.groundHeight, this.game.width, this.groundHeight, 'ground');
+        this.group.add(this.groundTile);
 
         this.roadWidthTop = this.game.width / 3;
         this.roadOffsetLeft = (this.game.width - this.roadWidthTop) / 2;
@@ -2711,10 +2784,23 @@ var Road = function () {
     }
 
     _createClass(Road, [{
+        key: 'update',
+        value: function update(_ref2) {
+            var dayTime = _ref2.dayTime;
+
+            if (dayTime !== this.dayTime) {
+                this.dayTime = dayTime;
+                var greyShade = this.dayTime * 255;
+                var tint = Phaser.Color.getColor(greyShade, greyShade, greyShade);
+                this.roadGraphics.tint = tint;
+                this.groundTile.tint = tint;
+            }
+        }
+    }, {
         key: 'getProjection',
-        value: function getProjection(_ref2) {
-            var x = _ref2.x,
-                y = _ref2.y;
+        value: function getProjection(_ref3) {
+            var x = _ref3.x,
+                y = _ref3.y;
 
             var ratioX = x / this.length;
             var relativeY = this.roadWidthTop - y / this.width * this.roadWidthTop;
@@ -2812,7 +2898,7 @@ var Radar = function () {
 
         this.game = game;
         this.width = width;
-        this.height = RADAR_SCREEN_HEIGHT + RADAR_FINE_BUTTON_HEIGHT + 4 * __WEBPACK_IMPORTED_MODULE_3__constants__["_7" /* UI_OFFSET */];
+        this.height = RADAR_SCREEN_HEIGHT + RADAR_FINE_BUTTON_HEIGHT + 4 * __WEBPACK_IMPORTED_MODULE_3__constants__["_8" /* UI_OFFSET */];
         this.speedLimit = speedLimit;
 
         this.radarGroup = this.game.add.group();
@@ -2826,13 +2912,13 @@ var Radar = function () {
         this.radarGroup.add(this.body);
 
         this.screenGroup = this.game.add.group();
-        this.screenGroup.x = __WEBPACK_IMPORTED_MODULE_3__constants__["_7" /* UI_OFFSET */];
-        this.screenGroup.y = 2 * __WEBPACK_IMPORTED_MODULE_3__constants__["_7" /* UI_OFFSET */];
+        this.screenGroup.x = __WEBPACK_IMPORTED_MODULE_3__constants__["_8" /* UI_OFFSET */];
+        this.screenGroup.y = 2 * __WEBPACK_IMPORTED_MODULE_3__constants__["_8" /* UI_OFFSET */];
         this.radarGroup.add(this.screenGroup);
 
         this.screen = this.game.add.graphics();
         this.screenGroup.add(this.screen);
-        this.screenWidth = this.width - 2 * __WEBPACK_IMPORTED_MODULE_3__constants__["_7" /* UI_OFFSET */];
+        this.screenWidth = this.width - 2 * __WEBPACK_IMPORTED_MODULE_3__constants__["_8" /* UI_OFFSET */];
 
         this.mainText = this.game.add.text(this.screenWidth / 2, RADAR_SCREEN_HEIGHT / 2 + 5, '', {
             align: 'center',
@@ -2877,7 +2963,7 @@ var Radar = function () {
             game: this.game,
             name: __WEBPACK_IMPORTED_MODULE_3__constants__["J" /* I18N_UI_BUTTON_FINE */],
             x: (this.width - fineButtonWidth) / 2,
-            y: this.height - RADAR_FINE_BUTTON_HEIGHT - __WEBPACK_IMPORTED_MODULE_3__constants__["_7" /* UI_OFFSET */],
+            y: this.height - RADAR_FINE_BUTTON_HEIGHT - __WEBPACK_IMPORTED_MODULE_3__constants__["_8" /* UI_OFFSET */],
             width: fineButtonWidth,
             height: RADAR_FINE_BUTTON_HEIGHT,
             bg: __WEBPACK_IMPORTED_MODULE_3__constants__["g" /* COLOR */].MAROON,
@@ -3072,36 +3158,56 @@ var Radar = function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var RoadSign = function RoadSign(_ref) {
-    var game = _ref.game,
-        x = _ref.x,
-        y = _ref.y,
-        position = _ref.position,
-        speedLimit = _ref.speedLimit;
+var RoadSign = function () {
+    function RoadSign(_ref) {
+        var game = _ref.game,
+            x = _ref.x,
+            y = _ref.y,
+            position = _ref.position,
+            speedLimit = _ref.speedLimit;
 
-    _classCallCheck(this, RoadSign);
+        _classCallCheck(this, RoadSign);
 
-    this.group = game.add.group();
-    this.group.x = x;
-    this.group.y = y;
-    this.group.rg = this;
+        this.group = game.add.group();
+        this.group.x = x;
+        this.group.y = y;
+        this.group.rg = this;
 
-    this.position = new Phaser.Point(position.x, position.y);
+        this.position = new Phaser.Point(position.x, position.y);
+        this.dayTime = null;
 
-    this.signSprite = game.add.sprite(0, 0, 'roadSign');
-    this.signSprite.anchor.set(0.5, 1);
-    this.group.add(this.signSprite);
+        this.signSprite = game.add.sprite(0, 0, 'roadSign');
+        this.signSprite.anchor.set(0.5, 1);
+        this.group.add(this.signSprite);
 
-    this.speedLimitText = game.add.text(0, -this.signSprite.height + this.signSprite.width / 2 + 3, speedLimit, {
-        align: 'center'
-    });
-    this.speedLimitText.font = 'Arial';
-    this.speedLimitText.fontSize = 30;
-    this.speedLimitText.anchor.set(0.5, 0.5);
-    this.group.add(this.speedLimitText);
-};
+        this.speedLimitText = game.add.text(0, -this.signSprite.height + this.signSprite.width / 2 + 3, speedLimit, {
+            align: 'center'
+        });
+        this.speedLimitText.font = 'Arial';
+        this.speedLimitText.fontSize = 30;
+        this.speedLimitText.anchor.set(0.5, 0.5);
+        this.group.add(this.speedLimitText);
+    }
+
+    _createClass(RoadSign, [{
+        key: 'update',
+        value: function update(_ref2) {
+            var dayTime = _ref2.dayTime;
+
+            if (dayTime !== this.dayTime) {
+                this.dayTime = dayTime;
+                var greyShade = this.dayTime * 255;
+                this.signSprite.tint = Phaser.Color.getColor(greyShade, greyShade, greyShade);
+            }
+        }
+    }]);
+
+    return RoadSign;
+}();
 
 /* harmony default export */ __webpack_exports__["a"] = (RoadSign);
 
@@ -3225,9 +3331,9 @@ var LevelTimer = function () {
     function LevelTimer(_ref) {
         var game = _ref.game,
             _ref$x = _ref.x,
-            x = _ref$x === undefined ? game.width - __WEBPACK_IMPORTED_MODULE_1__constants__["_7" /* UI_OFFSET */] : _ref$x,
+            x = _ref$x === undefined ? game.width - __WEBPACK_IMPORTED_MODULE_1__constants__["_8" /* UI_OFFSET */] : _ref$x,
             _ref$y = _ref.y,
-            y = _ref$y === undefined ? __WEBPACK_IMPORTED_MODULE_1__constants__["_7" /* UI_OFFSET */] : _ref$y,
+            y = _ref$y === undefined ? __WEBPACK_IMPORTED_MODULE_1__constants__["_8" /* UI_OFFSET */] : _ref$y,
             duration = _ref.duration;
 
         _classCallCheck(this, LevelTimer);
@@ -3274,6 +3380,11 @@ var LevelTimer = function () {
         key: 'isExpired',
         get: function get() {
             return this.secondsElapsed >= this.duration;
+        }
+    }, {
+        key: 'elapsedPercent',
+        get: function get() {
+            return Math.min(1, this.timer.seconds / this.duration);
         }
     }]);
 
@@ -3661,21 +3772,21 @@ var Weather = function () {
         this.onFlash = onFlash;
         this.isFlash = false;
         this.flashTimers = [];
-        this.rainSky = null;
+        this.rainSkyCurtain = null;
 
         this.curtains = [];
 
-        if (this.weather === __WEBPACK_IMPORTED_MODULE_0__constants__["_8" /* WEATHER_FOG */]) {
+        if (this.weather === __WEBPACK_IMPORTED_MODULE_0__constants__["_9" /* WEATHER_FOG */]) {
             var x = 0;
             while (x < this.road.length) {
                 var curtain = this.createFogCurtain(x);
                 this.curtains.push(curtain);
                 x += FOG_FREQUENCY;
             }
-        } else if (this.weather === __WEBPACK_IMPORTED_MODULE_0__constants__["_9" /* WEATHER_THUNDER */]) {
-            this.rainSky = this.game.add.graphics();
+        } else if (this.weather === __WEBPACK_IMPORTED_MODULE_0__constants__["_10" /* WEATHER_THUNDER */]) {
+            this.rainSkyCurtain = this.game.add.graphics();
             this.drawRainSky();
-            bgGroup.add(this.rainSky);
+            bgGroup.add(this.rainSkyCurtain);
 
             var _x = 0;
             while (_x <= this.road.length) {
@@ -3705,7 +3816,7 @@ var Weather = function () {
         key: 'handleFlashStart',
         value: function handleFlashStart() {
             if (!this.isFlash) {
-                this.drawRainSky(__WEBPACK_IMPORTED_MODULE_0__constants__["g" /* COLOR */].FLORAL_WHITE);
+                this.drawRainSky(__WEBPACK_IMPORTED_MODULE_0__constants__["g" /* COLOR */].FLORAL_WHITE, 1);
             }
             this.isFlash = true;
             this.onFlash(true);
@@ -3750,17 +3861,18 @@ var Weather = function () {
         key: 'drawRainSky',
         value: function drawRainSky() {
             var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : __WEBPACK_IMPORTED_MODULE_0__constants__["g" /* COLOR */].STEEL;
+            var alpha = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.8;
 
-            this.rainSky.beginFill(color);
-            this.rainSky.drawRect(0, 0, this.game.width, this.road.topLeft.y);
-            this.rainSky.endFill();
+            this.rainSkyCurtain.beginFill(color, alpha);
+            this.rainSkyCurtain.drawRect(0, 0, this.game.width, this.road.topLeft.y);
+            this.rainSkyCurtain.endFill();
         }
     }, {
         key: 'startFlashTimers',
         value: function startFlashTimers() {
             var _this = this;
 
-            if (this.weather === __WEBPACK_IMPORTED_MODULE_0__constants__["_9" /* WEATHER_THUNDER */]) {
+            if (this.weather === __WEBPACK_IMPORTED_MODULE_0__constants__["_10" /* WEATHER_THUNDER */]) {
                 this.flashTimers = FLASH_TIMING.map(function (_ref4) {
                     var _ref5 = _slicedToArray(_ref4, 2),
                         period = _ref5[0],
@@ -3779,6 +3891,88 @@ var Weather = function () {
 }();
 
 /* harmony default export */ __webpack_exports__["a"] = (Weather);
+
+/***/ }),
+/* 44 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils__ = __webpack_require__(1);
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+
+var Sky = function () {
+    function Sky(_ref) {
+        var game = _ref.game,
+            height = _ref.height,
+            dayTime = _ref.dayTime;
+
+        _classCallCheck(this, Sky);
+
+        this.game = game;
+        this.height = height;
+        this.dayTime = dayTime;
+
+        this.graphics = this.game.add.graphics();
+        this.drawSky(this.dayTime);
+    }
+
+    _createClass(Sky, [{
+        key: 'update',
+        value: function update(_ref2) {
+            var dayTime = _ref2.dayTime;
+
+            if (dayTime !== this.dayTime) {
+                this.dayTime = dayTime;
+                this.drawSky(this.dayTime);
+            }
+        }
+    }, {
+        key: 'drawSky',
+        value: function drawSky() {
+            var dayTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var color = Sky.getSkyColorByDayTime(dayTime);
+            this.graphics.beginFill(color);
+            this.graphics.drawRect(0, 0, this.game.width, this.height);
+            this.graphics.endFill();
+        }
+    }], [{
+        key: 'getSkyColorByDayTime',
+        value: function getSkyColorByDayTime(dayTime) {
+            var startColor = void 0;
+            var endColor = void 0;
+            var colorStep = void 0;
+            if (dayTime === 0) {
+                return 0;
+            }
+            for (var i = 1; i < __WEBPACK_IMPORTED_MODULE_0__constants__["_2" /* SKY_COLORS */].length; i++) {
+                var _SKY_COLORS$i = _slicedToArray(__WEBPACK_IMPORTED_MODULE_0__constants__["_2" /* SKY_COLORS */][i], 2),
+                    color = _SKY_COLORS$i[0],
+                    period = _SKY_COLORS$i[1];
+
+                if (dayTime > period) {
+                    startColor = __WEBPACK_IMPORTED_MODULE_0__constants__["_2" /* SKY_COLORS */][i - 1][0];
+                    endColor = color;
+                    colorStep = (dayTime - __WEBPACK_IMPORTED_MODULE_0__constants__["_2" /* SKY_COLORS */][i - 1][1]) / (period - __WEBPACK_IMPORTED_MODULE_0__constants__["_2" /* SKY_COLORS */][i - 1][1]);
+                    return Object(__WEBPACK_IMPORTED_MODULE_1__utils__["d" /* interpolateColor */])(startColor, endColor, colorStep);
+                }
+            }
+            return __WEBPACK_IMPORTED_MODULE_0__constants__["_2" /* SKY_COLORS */][0][0];
+        }
+    }]);
+
+    return Sky;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Sky);
 
 /***/ })
 /******/ ]);

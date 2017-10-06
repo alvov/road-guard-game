@@ -4,24 +4,25 @@ import {
 } from '../constants';
 
 class Road {
-    constructor({ game, length, lanes, laneWidth, }) {
+    constructor({ game, length, lanes, laneWidth, height, }) {
         this.game = game;
         this.length = length;
         this.lanes = lanes;
         this.laneWidth = laneWidth;
         this.width = this.laneWidth * this.lanes;
+        this.dayTime = null;
 
         this.group = this.game.add.group();
 
-        this.groundHeight = this.game.height * 4 / 5;
-        const groundTile = this.game.add.tileSprite(
+        this.groundHeight = height;
+        this.groundTile = this.game.add.tileSprite(
             0,
             this.game.height - this.groundHeight,
             this.game.width,
             this.groundHeight,
             'ground'
         );
-        this.group.add(groundTile);
+        this.group.add(this.groundTile);
 
         this.roadWidthTop = this.game.width / 3;
         this.roadOffsetLeft = (this.game.width - this.roadWidthTop) / 2;
@@ -41,6 +42,16 @@ class Road {
         this.roadGraphics.endFill();
 
         this.drawRoadMarking();
+    }
+
+    update({ dayTime, }) {
+        if (dayTime !== this.dayTime) {
+            this.dayTime = dayTime;
+            const greyShade = this.dayTime * 255;
+            const tint = Phaser.Color.getColor(greyShade, greyShade, greyShade);
+            this.roadGraphics.tint = tint;
+            this.groundTile.tint = tint;
+        }
     }
 
     getProjection({ x, y }) {

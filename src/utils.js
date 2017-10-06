@@ -29,3 +29,13 @@ export function getFine(speed, speedLimit) {
     }
     return result;
 }
+
+export function interpolateColor(color1, color2, percent) {
+    const src1 = Phaser.Color.getRGB(color1);
+    const src2 = Phaser.Color.getRGB(color2);
+    const r = ((src2.red - src1.red) * percent) + src1.red;
+    const g = ((src2.green - src1.green) * percent) + src1.green;
+    const b = ((src2.blue - src1.blue) * percent) + src1.blue;
+
+    return Phaser.Color.getColor(r, g, b);
+}

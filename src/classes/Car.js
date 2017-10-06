@@ -42,6 +42,7 @@ class Car {
         this.roadLane = null;
         this.color = null;
         this.isRogue = false;
+        this.dayTime = null;
 
         this.rogueFinedTimer = this.game.time.create(false);
 
@@ -62,13 +63,17 @@ class Car {
         );
     }
 
-    update({ x, y, scale }) {
+    update({ x, y, scale, dayTime, }) {
         this.sprite.position.set(x, y);
         this.sprite.scale.set(scale);
         if (this.rogueFinedTimer.running) {
             this.sprite.tint = Math.floor(this.rogueFinedTimer.ms / CAR_ROGUE_FINED_BLINK_DURATION) % 2 ?
                 this.color :
                 COLOR.RED;
+        }
+        if (dayTime !== undefined && dayTime !== this.dayTime) {
+            this.dayTime = dayTime;
+            this.setTint()
         }
     }
 
@@ -131,8 +136,21 @@ class Car {
         }
     }
 
-    revive({ x, y, roadLane, speed, isRogue }) {
+    setTint() {
+        const greyShade = this.dayTime * 255;
+        const greyTint = Phaser.Color.getColor(greyShade, greyShade, greyShade);
+        const spriteTintRGB = Phaser.Color.getRGB(this.color);
+        this.sprite.tint = Phaser.Color.RGBArrayToHex(
+            [spriteTintRGB.r,spriteTintRGB.g,spriteTintRGB.b,]
+                .map(c => c * this.dayTime / 255)
+        );
+        this.detailsSprite.tint = greyTint;
+        this.plateNumber.plateGraphics.tint = greyTint;
+    }
+
+    revive({ x, y, roadLane, speed, isRogue, dayTime, }) {
         this.setMode(CAR_MODE_NORMAL);
+        this.dayTime = dayTime;
 
         this.isRogue = isRogue;
 
@@ -156,8 +174,13 @@ class Car {
         this.roadLane = roadLane;
         this.velocity.x = speed;
         this.lightsSprite.tint = this.game.rnd.pick(CAR_LIGHTS_DAY_COLORS);
+
         this.color = this.generateBodyColor();
-        this.sprite.tint = this.color;
+        if (this.dayTime !== undefined) {
+            this.setTint();
+        } else {
+            this.sprite.tint = this.color;
+        }
         this.sprite.revive();
     }
 

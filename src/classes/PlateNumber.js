@@ -44,9 +44,9 @@ class PlateNumber {
 
         this.text.setText(this.getText('.'));
         // white dots stand for spaces
-        this.text.addColor('#fff', 1);
+        this.text.addColor('rgba(255,255,255,0)', 1);
         this.text.addColor('#000', 2);
-        this.text.addColor('#fff', 5);
+        this.text.addColor('rgba(255,255,255,0)', 5);
         this.text.addColor('#000', 6);
         this.text.updateCache();
     }

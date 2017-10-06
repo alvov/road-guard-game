@@ -9,6 +9,7 @@ import StartLevel from '../classes/screens/StartLevel';
 import EndLevel from '../classes/screens/EndLevel';
 import PauseLevel from '../classes/screens/PauseLevel';
 import Weather from '../classes/Weather';
+import Sky from '../classes/Sky';
 
 import { getFine, } from '../utils';
 import {
@@ -22,7 +23,7 @@ import {
     RADAR_MODE_FINED,
     END_GAME_TIME_OUT, END_GAME_WIN, I18N_UI_BUTTON_QUIT, STATE_MENU, I18N_UI_BUTTON_NEXT, STATE_GAME,
     I18N_UI_BUTTON_REPLAY, I18N_UI_BUTTON_FINE,
-    COLOR_HEX, I18N_UI_BUTTON_PLAY, RADAR_MODE_ERROR,
+    I18N_UI_BUTTON_PLAY, RADAR_MODE_ERROR,
     FINES, I18N_UI_PAUSE,
 } from '../constants';
 
@@ -32,6 +33,7 @@ class Game {
             level,
             levelStarted: false,
             levelEnded: false,
+            dayTime: level.dayTime,
             stats: {
                 fines: {
                     count: 0,
@@ -51,6 +53,7 @@ class Game {
                 count: (level.road.end - level.road.start) / level.speed.limit / level.cars.frequency
             },
             objects: {
+                sky: null,
                 road: null,
                 roadSign: null,
                 weather: null,
@@ -82,11 +85,15 @@ class Game {
     }
 
     create() {
-        // background
-        this.game.stage.backgroundColor = COLOR_HEX.SKY;
-
         // background group
         this.rg.groups.bg = this.game.add.group();
+
+        this.rg.objects.sky = new Sky({
+            game: this.game,
+            height: this.game.height / 5,
+            dayTime: this.rg.dayTime,
+        });
+        this.rg.groups.bg.add(this.rg.objects.sky.graphics);
 
         // cars behind the road
         this.rg.groups.behindRoad = this.game.add.group();
@@ -95,6 +102,7 @@ class Game {
         this.rg.objects.road = new Road({
             game: this.game,
             ...this.rg.level.road,
+            height: this.game.height - this.rg.objects.sky.height,
         });
 
         this.rg.groups.onRoad = this.game.add.group();
@@ -187,6 +195,24 @@ class Game {
             return;
         }
 
+        // update day time
+        if (this.rg.dayTime !== undefined) {
+            this.rg.dayTime = this.rg.levelEnded ?
+                0:
+                this.game.math.roundTo(
+                    this.rg.level.dayTime * (1 - this.rg.objects.timer.elapsedPercent),
+                    -2,
+                );
+            // apply threshold
+            this.rg.dayTime = Math.max(0.1, this.rg.dayTime);
+
+            // update sky
+            this.rg.objects.sky.update({ dayTime: this.rg.dayTime, });
+            // update road
+            this.rg.objects.road.update({ dayTime: this.rg.dayTime, });
+            this.rg.objects.roadSign.update({ dayTime: this.rg.dayTime, });
+        }
+
         // update road objects starting from the closest to the player
         for (let i = this.rg.groups.onRoad.length - 1; i >= 0; i--) {
             const sprite = this.rg.groups.onRoad.getChildAt(i);
@@ -256,7 +282,10 @@ class Game {
 
         car.preUpdate();
 
-        car.update(this.rg.objects.road.getProjection(car.position));
+        car.update({
+            ...this.rg.objects.road.getProjection(car.position),
+            dayTime: this.rg.dayTime,
+        });
     }
 
     render() {
@@ -469,6 +498,7 @@ class Game {
                 roadLane,
                 speed,
                 isRogue,
+                dayTime: this.rg.dayTime,
             });
             this.rg.groups.behindRoad.addAt(deadCar.sprite, 0);
             return true;

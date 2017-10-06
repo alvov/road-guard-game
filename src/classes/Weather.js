@@ -30,7 +30,7 @@ class Weather {
         this.onFlash = onFlash;
         this.isFlash = false;
         this.flashTimers = [];
-        this.rainSky = null;
+        this.rainSkyCurtain = null;
 
         this.curtains = [];
 
@@ -42,9 +42,9 @@ class Weather {
                 x += FOG_FREQUENCY;
             }
         } else if (this.weather === WEATHER_THUNDER) {
-            this.rainSky = this.game.add.graphics();
+            this.rainSkyCurtain = this.game.add.graphics();
             this.drawRainSky();
-            bgGroup.add(this.rainSky);
+            bgGroup.add(this.rainSkyCurtain);
 
             let x = 0;
             while (x <= this.road.length) {
@@ -69,7 +69,7 @@ class Weather {
 
     handleFlashStart() {
         if (!this.isFlash) {
-            this.drawRainSky(COLOR.FLORAL_WHITE);
+            this.drawRainSky(COLOR.FLORAL_WHITE, 1);
         }
         this.isFlash = true;
         this.onFlash(true);
@@ -127,10 +127,10 @@ class Weather {
         return curtain;
     }
 
-    drawRainSky(color = COLOR.STEEL) {
-        this.rainSky.beginFill(color);
-        this.rainSky.drawRect(0, 0, this.game.width, this.road.topLeft.y);
-        this.rainSky.endFill();
+    drawRainSky(color = COLOR.STEEL, alpha = 0.8) {
+        this.rainSkyCurtain.beginFill(color, alpha);
+        this.rainSkyCurtain.drawRect(0, 0, this.game.width, this.road.topLeft.y);
+        this.rainSkyCurtain.endFill();
     }
 
     startFlashTimers() {

@@ -1,5 +1,3 @@
-?   graphics cars shadow
-?   graphics day times
 ?   graphics start menu levels
 ?   graphics pattern
 ?   sound
@@ -26,6 +24,7 @@
 +   graphics road lines
 +   graphics more cars (sedan, suv)
 +   graphics cars separate lights
++   graphics day times
 +   more levels
 +   localstorage levels
 +   common fines
@@ -35,3 +34,4 @@
 +   acceleration for changing lanes
 -   controls screen
 -   UIScreen max height
+-   graphics cars shadow
