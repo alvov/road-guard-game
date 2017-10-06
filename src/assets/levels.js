@@ -32,7 +32,7 @@ export default {
         duration: 3 * 60, // s
         goal: 30000,
         speed: {
-            limit: 50,
+            limit: 60,
         },
         road: {
             start: -100,
@@ -46,7 +46,7 @@ export default {
             computing: 1000, // ms
         },
         cars: {
-            frequency: 2, // s
+            frequency: 1.8, // s
             series: ['AAA', 'AMP',],
             rogue: 0.1,
         },
@@ -54,9 +54,9 @@ export default {
     level3: {
         id: 'level3',
         duration: 3 * 60, // s
-        goal: 40000,
+        goal: 50000,
         speed: {
-            limit: 60,
+            limit: 80,
         },
         road: {
             start: -100,
@@ -70,8 +70,32 @@ export default {
             computing: 900, // ms
         },
         cars: {
-            frequency: 2, // s
-            series: ['AAA', 'AMP', 'EKX',],
+            frequency: 1.3, // s
+            series: ['AMP', 'EKX',],
+            rogue: 0.15,
+        },
+    },
+    level4: {
+        id: 'level4',
+        duration: 3 * 60, // s
+        goal: 60000,
+        speed: {
+            limit: 100,
+        },
+        road: {
+            start: -100,
+            end: 1200,
+            length: 800,
+            lanes: 3,
+            laneWidth: 100,
+        },
+        dayTime: 0.85,
+        radar: {
+            computing: 900, // ms
+        },
+        cars: {
+            frequency: 1.1, // s
+            series: ['AAA', 'AMP', 'EKX'],
             rogue: 0.15,
         },
     },

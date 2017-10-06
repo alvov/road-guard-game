@@ -3,7 +3,7 @@ import {
     CAR_COLORS,
     CAR_ALLOWED_PLATE_LETTERS,
     CAR_MODE_NORMAL, CAR_MODE_FINED,
-    COLOR, CAR_LIGHTS_DAY_COLORS,
+    COLOR, CAR_LIGHTS_COLORS,
 } from '../constants';
 
 const CAR_STEERING_DURATION = 600;
@@ -144,6 +144,7 @@ class Car {
             [spriteTintRGB.r,spriteTintRGB.g,spriteTintRGB.b,]
                 .map(c => c * this.dayTime / 255)
         );
+        this.rogueSignSprite.tint = greyTint;
         this.detailsSprite.tint = greyTint;
         this.plateNumber.plateGraphics.tint = greyTint;
     }
@@ -173,7 +174,7 @@ class Car {
         this.position.set(x, y);
         this.roadLane = roadLane;
         this.velocity.x = speed;
-        this.lightsSprite.tint = this.game.rnd.pick(CAR_LIGHTS_DAY_COLORS);
+        this.lightsSprite.tint = this.game.rnd.pick(CAR_LIGHTS_COLORS);
 
         this.color = this.generateBodyColor();
         if (this.dayTime !== undefined) {

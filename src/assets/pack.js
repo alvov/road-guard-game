@@ -9,10 +9,10 @@ const pack = {
         },
         {
             type: 'spritesheet',
-            key: 'startMenu',
-            url: require('./images/startMenu.png'),
-            frameWidth: 205,
-            frameHeight: 600
+            key: 'levels',
+            url: require('./images/levels.png'),
+            frameWidth: 100,
+            frameHeight: 100
         },
     ],
     game: [

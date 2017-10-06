@@ -9,10 +9,6 @@ export default {
         en: '<   Back',
         ru: '<   Назад'
     },
-    [cnst.I18N_MENU_START]: {
-        en: 'Start',
-        ru: 'Начать'
-    },
     [cnst.I18N_MENU_HOW_TO]: {
         en: 'How to play',
         ru: 'Как играть'

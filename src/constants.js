@@ -74,7 +74,6 @@ export const RADAR_MODE_ERROR = 'error';
 
 export const I18N_GAME_TITLE = 'gameTitle';
 export const I18N_MENU_BACK = 'menuBack';
-export const I18N_MENU_START = 'menuStart';
 export const I18N_MENU_HOW_TO = 'menuHowTo';
 export const I18N_HOW_TO_GOAL = 'howToGoal';
 export const I18N_HOW_TO_FINE = 'howToFine';

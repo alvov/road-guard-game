@@ -21,7 +21,7 @@ class RoadSign {
             }
         );
         this.speedLimitText.font = 'Arial';
-        this.speedLimitText.fontSize = 30;
+        this.speedLimitText.fontSize = speedLimit > 99 ? 24 : 30;
         this.speedLimitText.anchor.set(0.5, 0.5);
         this.group.add(this.speedLimitText);
     }

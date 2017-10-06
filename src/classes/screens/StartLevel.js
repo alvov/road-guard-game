@@ -43,7 +43,7 @@ class StartLevel extends UIScreen {
                 font: '16px "Press Start 2P", Arial',
             },
             lineSpacing: Math.round(Math.max(20, this.height / 20)),
-            columnSpacing: 2 * horizontalPadding,
+            columnSpacing: horizontalPadding,
         });
         this.contentGroup.add(this.rules.group);
 

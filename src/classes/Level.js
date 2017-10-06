@@ -5,6 +5,7 @@ const LS_KEY = '_rgml';
 class Level {
     constructor() {
         this.lsAvailable = Level.lsAvailable();
+        this.count = Object.keys(levels).length;
     }
 
     get maxLevel() {

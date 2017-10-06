@@ -6,28 +6,22 @@ import {
 
 class HowTo {
     preload() {
-        this.game.stage.backgroundColor = '#fff';
+        this.game.stage.backgroundColor = COLOR_HEX.MAIN;
     }
 
     create() {
         const horizontalOffset = this.game.width / 15;
-
-        this.bgSprite = this.game.add.sprite(
-            this.game.width,
-            0,
-            'startMenu'
-        );
-        this.bgSprite.anchor.set(1, 0);
-        this.bgSprite.scale.set(this.game.height / this.bgSprite.height);
 
         this.back = this.game.add.text(
             horizontalOffset,
             this.game.height / 15,
             this.game.rg.i18n.getTranslation(I18N_MENU_BACK),
             {
-                fill: COLOR_HEX.MAIN
+                fill: '#fff',
             }
         );
+        this.back.inputEnabled = true;
+        this.back.input.useHandCursor = true;
 
         const textGroup = this.game.add.group();
         let verticalOffset = 0;
@@ -48,9 +42,9 @@ class HowTo {
                 `${i + 1}. ${this.game.rg.i18n.getTranslation(text)}`,
                 {
                     font: `${fontSize}px Arial`,
-                    fill: COLOR_HEX.MAIN,
+                    fill: '#fff',
                     wordWrap: true,
-                    wordWrapWidth: this.game.width - horizontalOffset * 2
+                    wordWrapWidth: this.game.width - horizontalOffset * 2,
                 }
             );
             verticalOffset += textObject.height + spacing;

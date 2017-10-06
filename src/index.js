@@ -61,3 +61,5 @@ window.rgResizeBody = function rgResizeBody() {
 
     return [containerNode.clientWidth, containerNode.clientHeight];
 };
+
+document.body.style.backgroundImage = `url(${require('./assets/images/pattern.png')})`;
