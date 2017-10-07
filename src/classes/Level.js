@@ -11,8 +11,8 @@ class Level {
     get maxLevel() {
         if (this.lsAvailable) {
             const maxLevel = window.localStorage.getItem(LS_KEY);
-            if (maxLevel) {
-                return Number(maxLevel);
+            if (!isNaN(Number(maxLevel))) {
+                return Math.max(1, Math.min(this.count, maxLevel));
             }
         }
         return 1;

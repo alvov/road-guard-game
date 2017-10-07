@@ -539,8 +539,8 @@ var Level = function () {
         get: function get() {
             if (this.lsAvailable) {
                 var maxLevel = window.localStorage.getItem(LS_KEY);
-                if (maxLevel) {
-                    return Number(maxLevel);
+                if (!isNaN(Number(maxLevel))) {
+                    return Math.max(1, Math.min(this.count, maxLevel));
                 }
             }
             return 1;
@@ -719,7 +719,7 @@ var pack = {
     }, {
         type: 'spritesheet',
         key: 'levels',
-        url: __webpack_require__(13),
+        url: __webpack_require__(50),
         frameWidth: 100,
         frameHeight: 100
     }],
@@ -1080,7 +1080,7 @@ window.rgResizeBody = function rgResizeBody() {
     return [containerNode.clientWidth, containerNode.clientHeight];
 };
 
-document.body.style.backgroundImage = 'url(' + __webpack_require__(45) + ')';
+document.body.style.backgroundImage = 'url(' + __webpack_require__(51) + ')';
 
 /***/ }),
 /* 10 */
@@ -1175,12 +1175,7 @@ var Boot = function () {
 module.exports = __webpack_require__.p + "assets/66dd3dd498c059b331146e5fe01f17dd.png";
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "assets/1556f8c110cb211e45185e04767590d7.png";
-
-/***/ }),
+/* 13 */,
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1320,7 +1315,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     en: 'How to play',
     ru: 'Как играть'
 }), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["r" /* I18N_HOW_TO_GOAL */], {
-    en: 'Reach the needed amount of issued fines (in rubles) before your shift is over.',
+    en: 'Reach the needed amount of issued fines (in rubles) before your shift ends.',
     ru: 'Выполните норму по выписанным штрафам, пока не закончилась ваша смена.'
 }), _defineProperty(_cnst$I18N_GAME_TITLE, __WEBPACK_IMPORTED_MODULE_0__constants_js__["q" /* I18N_HOW_TO_FINE */], {
     en: 'Choose a car on the road and press \'Fine!\' if its speed is higher than allowed.',
@@ -3977,7 +3972,18 @@ var Sky = function () {
 /* harmony default export */ __webpack_exports__["a"] = (Sky);
 
 /***/ }),
-/* 45 */
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/1556f8c110cb211e45185e04767590d7.png";
+
+/***/ }),
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/15a300a93c7c5b6cdeb6ce10aba12236.png";

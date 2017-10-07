@@ -14,7 +14,7 @@ export default {
         ru: 'Как играть'
     },
     [cnst.I18N_HOW_TO_GOAL]: {
-        en: 'Reach the needed amount of issued fines (in rubles) before your shift is over.',
+        en: 'Reach the needed amount of issued fines (in rubles) before your shift ends.',
         ru: 'Выполните норму по выписанным штрафам, пока не закончилась ваша смена.'
     },
     [cnst.I18N_HOW_TO_FINE]: {

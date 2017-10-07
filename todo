@@ -1,7 +1,5 @@
 ?   music
 ?   minification
-?   readme
-?   screenshots
 + M orientation screen
 + M pre-level screen
 + M try FINE button
@@ -31,6 +29,8 @@
 +   multicolor stats/rules
 +   pause screen
 +   acceleration for changing lanes
++   screenshots
++   readme
 -   controls screen
 -   UIScreen max height
 -   graphics cars shadow
