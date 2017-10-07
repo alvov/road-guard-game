@@ -23,7 +23,10 @@ module.exports = {
                             'env',
                             {
                                 targets: {
-                                    browsers: ['last 2 versions']
+                                    browsers: [
+                                        '> 1%',
+                                        'last 2 versions'
+                                    ]
                                 },
                                 modules: false
                             }
@@ -53,7 +56,7 @@ module.exports = {
         ]
     },
     plugins: [
-    //     new webpack.optimize.UglifyJsPlugin(),
-        new ExtractTextPlugin('[name].css')
+        new ExtractTextPlugin('[name].css'),
+        new webpack.optimize.UglifyJsPlugin(),
     ]
 };

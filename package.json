@@ -11,7 +11,7 @@
     "start": "http-server -c-1",
     "build": "npm run build:assets && npm run build:vendor",
     "build:assets": "rm -rf dist/assets && webpack",
-    "build:vendor": "cp node_modules/phaser-ce/build/custom/phaser-no-physics.js dist/phaser.js && cp node_modules/webfontloader/webfontloader.js dist/webfontloader.js",
+    "build:vendor": "cp node_modules/phaser-ce/build/custom/phaser-no-physics.min.js dist/phaser.js && cp node_modules/webfontloader/webfontloader.js dist/webfontloader.js",
     "watch": "webpack --watch"
   },
   "author": "alvov",
